@@ -124,7 +124,7 @@
 <script>
 	import dividLine from '@/components/line.vue';
 	// import taobaoApi from '@/common/js/simple-tbapi.js';
-	import share from '@/common/js/simple-share.js'
+	//import share from '@/common/js/simple-share.js'
 	import {
 		getUserinit
 	} from '@/api/user'
