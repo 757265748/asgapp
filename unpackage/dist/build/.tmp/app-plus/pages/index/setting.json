@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "divid-line": "/components/line",
+    "nav-bar": "/components/nav-bar"
+  }
+}

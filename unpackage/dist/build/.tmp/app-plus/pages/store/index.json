@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "titleNView": {
+    "type": "transparent"
+  },
+  "bounce": "none",
+  "usingComponents": {
+    "divid-line": "/components/line",
+    "scroll-index": "/components/scroll-index"
+  }
+}

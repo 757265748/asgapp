@@ -1,0 +1,20 @@
+{
+	"name":"taobaologin",
+	"id": "taobaologin",
+	"version": "1.0.0",
+	"description": "安卓淘宝登录插件",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{  
+                    "type":"module", 
+                    "name":"taobaologin",  
+                    "class": "com.html5app.uni_html5app_taobao.Taobao_login"  
+                   }],
+			"integrateType": "aar",
+			"minSdkVersion": "16",
+			"hooksClass": "com.html5app.uni_html5app_taobao.Taobao_init"	
+		}
+	}
+   
+}

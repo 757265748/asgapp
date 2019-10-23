@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "titleNView": {
+    "type": "transparent"
+  },
+  "usingComponents": {
+    "view-tabbar": "/components/uni-tabbar"
+  }
+}

@@ -1,0 +1,1 @@
+<import src="/components/uni-tabbar.vue.wxml" /><template name="86b4fabc"><view class="_view M86b4fabc content"><template current="1" data="{{...$root['0'], ...$root[$kk+'86b4fabc-0'],$root}}" is="b739ed4a"></template></view></template>

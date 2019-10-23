@@ -1,0 +1,2 @@
+<import src="./new-phone.vue.wxml" />
+    <template is="082b8aa0" data="{{ ...$root['0'], $root }}"/>

@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-icon": "/components/uni-icon",
+    "nav-bar": "/components/nav-bar",
+    "divid-line": "/components/line"
+  }
+}

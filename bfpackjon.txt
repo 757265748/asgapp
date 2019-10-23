@@ -1,0 +1,240 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				 
+			}
+		},
+		{
+			"path": "pages/store/index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/store/store",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/store/circle",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/store/customer",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/store/shopcar",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+
+		{
+			"path": "pages/chat/index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/chat/chat",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/chat/friend-circle",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/chat/group",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/chat/mail-list",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/school/school",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/school/index",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/school/pub-ma",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/school/recommend",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/school/school-knowlege",
+			"style": {
+
+			}
+		},
+		{
+			"path": "pages/index/user",
+			"style": {
+			}
+		},
+		{
+			"path": "pages/index/login",
+			"style": {
+			}
+		},
+		{
+			"path": "pages/common/good",
+			"style": {
+				//   
+			}
+		},
+		{
+			"path": "pages/common/goods-detail",
+			"style": {}
+		},{
+			"path": "pages/common/good-item",
+			"style": {}
+		},
+		{
+			"path": "pages/common/web-view",
+			"style": {}
+		},
+		{
+			"path": "pages/common/search",
+			"style": {}
+		},
+		{
+			"path": "pages/index/setting",
+			"style": {}
+		},
+		{
+			"path": "pages/index/change-name",
+			"style": {}
+		},
+		{
+			"path": "pages/index/change-phone",
+			"style": {}
+		},
+		{
+			"path": "pages/index/new-phone",
+			"style": {}
+		},
+		{
+			"path":"pages/index/total-revenue",
+			"style":{}
+		},
+		{
+			"path":"pages/common/search-detail",
+			"style":{}
+		},
+		{
+			"path":"pages/index/collection",
+			"style":{}
+		},
+		{
+			"path":"pages/index/bindzfb",
+			"style":{}
+		},
+		{
+			"path":"pages/index/cash-withdrawal",
+			"style":{}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#ff0000",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "./static/bar/home.png",
+				"selectedIconPath": "./static/bar/selecthome.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/store/store",
+				"iconPath": "static/bar/store.png",
+				"selectedIconPath": "static/bar/selectstore.png",
+				"text": "商城"
+			},
+			{
+				"pagePath": "pages/chat/chat",
+				"iconPath": "static/bar/lts.png",
+				"selectedIconPath": "static/bar/selcetlts.png",
+				"text": "聊天"
+			},
+// 			{
+// 				"pagePath": "pages/school/school",
+// 				"iconPath": "static/bar/sch.png",
+// 				"selectedIconPath": "static/bar/selectsch.png",
+// 				"text": "学院"
+// 			},
+			{
+				"pagePath": "pages/index/user",
+				"iconPath": "static/bar/user.png",
+				"selectedIconPath": "static/bar/selectuser.png",
+				"text": "个人"
+			}
+		]
+	}
+}

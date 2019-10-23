@@ -1,0 +1,1 @@
+<view class="content data-v-6d649c0f"><image class="logo data-v-6d649c0f" src="../../static/logo.png"></image><view class="data-v-6d649c0f"><text class="title data-v-6d649c0f">{{title}}</text></view><view-tabbar class="tabbar data-v-6d649c0f" vue-id="1" current="3" tabs="{{tabs}}" bind:__l="__l"></view-tabbar></view>

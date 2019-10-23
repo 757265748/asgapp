@@ -1,0 +1,14 @@
+.content.data-v-4d002525 {
+  position: relative;
+  width: calc(100% - 20px);
+  padding: 0 10px;
+  margin-top: 110rpx;
+  height: 100%;
+}
+.content .no-collection.data-v-4d002525 {
+  margin-top: 200px;
+  text-align: center;
+  font-size: 16px;
+  color: #ccc;
+}
+

@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-icon": "/components/uni-icon",
+    "product-list": "/components/product-list",
+    "uni-collapse": "/components/other/uni-collapse/uni-collapse",
+    "uni-collapse-item": "/components/other/uni-collapse-item/uni-collapse-item",
+    "uni-list": "/components/other/uni-list/uni-list",
+    "uni-list-item": "/components/other/uni-list-item/uni-list-item"
+  }
+}

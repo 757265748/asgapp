@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/product-list"],{"120b":function(t,e,n){"use strict";var o=function(){var t=this,e=t.$createElement;t._self._c},c=[];n.d(e,"a",function(){return o}),n.d(e,"b",function(){return c})},"1f2f":function(t,e,n){},"8cab":function(t,e,n){"use strict";n.r(e);var o=n("c4b5"),c=n.n(o);for(var u in o)"default"!==u&&function(t){n.d(e,t,function(){return o[t]})}(u);e["default"]=c.a},c398:function(t,e,n){"use strict";n.r(e);var o=n("120b"),c=n("8cab");for(var u in c)"default"!==u&&function(t){n.d(e,t,function(){return c[t]})}(u);n("e8eb");var i=n("2877"),a=Object(i["a"])(c["default"],o["a"],o["b"],!1,null,"2eb9816f",null);e["default"]=a.exports},c4b5:function(t,e,n){"use strict";(function(t,o){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var c=n("8c24"),u={props:{productList:[Array,Object],table:{type:String,default:"yhq_goods"},isShow:{type:[Boolean,String],default:!1}},data:function(){return{renderImage:!0}},methods:{godetail:function(e){t.navigateTo({url:"/pages/common/goods-detail?id=".concat(e,"&table=").concat(this.table)})},cancle:function(e){var n=this;console.log(o("需要取消的ID",this.productList[e].num_iid," at components\\product-list.vue:55")),(0,c.deleteCollection)({phone:this.getUser(),num_iid:this.productList[e].num_iid}).then(function(o){t.showToast({title:"已取消"}),n.productList.splice(e,1)})},getUser:function(){try{var e=t.getStorageSync("user");return e.phone}catch(n){}}}};e.default=u}).call(this,n("6e42")["default"],n("0de9")["default"])},e8eb:function(t,e,n){"use strict";var o=n("1f2f"),c=n.n(o);c.a}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/product-list-create-component',
+    {
+        'components/product-list-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('6e42')['createComponent'](__webpack_require__("c398"))
+        })
+    },
+    [['components/product-list-create-component']]
+]);                

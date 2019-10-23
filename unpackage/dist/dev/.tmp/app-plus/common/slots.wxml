@@ -1,0 +1,18 @@
+<import src="/components/line.vue.wxml" />
+<import src="/components/uni-icon.vue.wxml" />
+<import src="/components/tab-control.vue.wxml" />
+<import src="/components/order-list.vue.wxml" />
+<import src="/components/scroll-index.vue.wxml" />
+<import src="/components/nav-bar.vue.wxml" />
+<import src="/components/uni-segmented-control.vue.wxml" />
+<import src="/pages/common/board-order.vue.wxml" />
+<import src="/components/product-list.vue.wxml" />
+<import src="/components/uni-tabbar.vue.wxml" />
+<import src="/components/tag.vue.wxml" />
+<import src="/components/uni-load-more.vue.wxml" />
+<import src="/components/good-list-row.vue.wxml" />
+<import src="/components/good-list.vue.wxml" />
+<import src="/components/go-top.vue.wxml" />
+<import src="/common/slots.wxml" />
+<import src="/components/other/uni-badge/uni-badge.vue.wxml" />
+

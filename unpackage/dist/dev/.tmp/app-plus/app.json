@@ -1,0 +1,89 @@
+{
+  "pages": [
+    "pages/index/user",
+    "pages/index/login",
+    "pages/index/board",
+    "pages/index/index",
+    "pages/store/index",
+    "pages/store/store",
+    "pages/store/circle",
+    "pages/store/customer",
+    "pages/store/shopcar",
+    "pages/chat/index",
+    "pages/chat/chat",
+    "pages/chat/friend-circle",
+    "pages/chat/group",
+    "pages/chat/mail-list",
+    "pages/school/school",
+    "pages/school/index",
+    "pages/school/pub-ma",
+    "pages/school/recommend",
+    "pages/school/school-knowlege",
+    "pages/index/user",
+    "pages/index/login",
+    "pages/common/good",
+    "pages/common/goods-detail",
+    "pages/common/goods2-detail",
+    "pages/common/good-item",
+    "pages/common/web-view",
+    "pages/common/search",
+    "pages/index/setting",
+    "pages/index/change-name",
+    "pages/index/change-phone",
+    "pages/index/new-phone",
+    "pages/index/total-revenue",
+    "pages/common/search-detail",
+    "pages/index/collection",
+    "pages/index/bindzfb",
+    "pages/index/cash-withdrawal",
+    "pages/index/order",
+    "pages/index/sub-detail"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "backgroundColorTop": "#F4F5F6",
+    "backgroundColorBottom": "#F4F5F6"
+  },
+  "usingComponents": {},
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#ff0000",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "selectedIconPath": "static/bar/selecthome.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/common/search",
+        "iconPath": "static/bar/search.png",
+        "selectedIconPath": "static/bar/sesearch.png",
+        "text": "搜索"
+      },
+      {
+        "pagePath": "pages/store/index",
+        "iconPath": "static/bar/store.png",
+        "selectedIconPath": "static/bar/selectstore.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/index/user",
+        "iconPath": "static/bar/user.png",
+        "selectedIconPath": "static/bar/selectuser.png",
+        "text": "个人"
+      }
+    ]
+  },
+  "nvueCompiler": "weex",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "爱淘客",
+  "compilerVersion": "2.2.2"
+}

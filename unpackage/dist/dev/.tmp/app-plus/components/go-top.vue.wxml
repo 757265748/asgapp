@@ -1,0 +1,1 @@
+<import src="/components/uni-icon.vue.wxml" /><template name="57ee0870"><view class="_view data-v-6b85e0f6 gotop" bindtap="handleProxy" data-eventid="{{'57ee0870-0'}}" data-comkey="{{$k}}"><template type="gotop" size="30" color="#FF4040" data="{{...$root['0'], ...$root[$kk+'57ee0870-0'],$root}}" is="1f216e94"></template></view></template>

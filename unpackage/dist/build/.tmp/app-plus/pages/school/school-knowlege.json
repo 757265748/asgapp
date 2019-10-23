@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "view-tabbar": "/components/uni-tabbar"
+  }
+}

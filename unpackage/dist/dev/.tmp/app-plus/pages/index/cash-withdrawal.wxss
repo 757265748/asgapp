@@ -1,0 +1,75 @@
+.content.data-v-2659b3c3 {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+}
+.container.data-v-2659b3c3 {
+  margin-top: 108rpx;
+  width: 100%;
+  padding: 10px 0;
+  background: #fff;
+}
+.container .paddings.data-v-2659b3c3 {
+  padding: 10px !important;
+}
+.container .item.data-v-2659b3c3 {
+  width: calc(100% - 20px);
+  padding: 0 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  border-bottom: 1px solid #F8F8F8;
+}
+.container .rmb.data-v-2659b3c3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.container .txmoney.data-v-2659b3c3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+.container .msg.data-v-2659b3c3 {
+  width: 80%;
+}
+.container .tx.data-v-2659b3c3 {
+  width: 20%;
+}
+.container .change.data-v-2659b3c3 {
+  width: 20%;
+}
+.container .phone.data-v-2659b3c3 {
+  margin-left: 10px;
+}
+.container .red-txt.data-v-2659b3c3 {
+  color: #FF1213;
+}
+.container .gray-txt.data-v-2659b3c3 {
+  padding: 10px;
+  background: #EEEEEE;
+}
+.container .bt.data-v-2659b3c3 {
+  margin: 10px auto 0 auto;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 20px;
+  background: #FF0000;
+}
+

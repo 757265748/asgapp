@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-icon": "/components/uni-icon",
+    "product-list": "/components/product-list"
+  }
+}

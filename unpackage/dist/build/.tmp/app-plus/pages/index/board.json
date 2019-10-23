@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-segmented-control": "/components/tab-control"
+  }
+}

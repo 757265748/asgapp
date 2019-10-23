@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "divid-line": "/components/line",
+    "scroll-index": "/components/scroll-index"
+  }
+}

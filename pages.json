@@ -1,0 +1,372 @@
+{
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// {
+		// 	"path": "pages/index/index1",
+		// 	"style": {
+		// 		"app-plus": {
+		// 			"titleNView": {
+		// 				"type": "transparent"
+		// 			},
+		// 			"bounce": "none"
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/index/b"
+		// },
+		{
+			"path": "pages/index/user",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/index/login",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/board",
+			"style": {
+				"navigationBarTitleText":"订单明细",
+				"navigationBarBackgroundColor":"#F9263E",
+				"navigationBarTextStyle":"white"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle":"custom"
+				// "navigationBarTextStyle": "black",
+				// "navigationBarBackgroundColor": "#F8F8F8",
+				// "navigationBarTitleText": "首页",
+				// "backgroundColor": "#F8F8F8",
+				// "backgroundColorTop": "#F4F5F6",
+				// "backgroundColorBottom": "#F4F5F6"
+			}
+		},
+		{
+			"path": "pages/store/index",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/store/store",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/store/circle",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/store/customer",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/store/shopcar",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/chat/index",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/chat/chat",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/chat/friend-circle",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/chat/group",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/chat/mail-list",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/school/school",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/school/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/school/pub-ma",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/school/recommend",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/school/school-knowlege",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/user",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/login",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/common/good",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/common/goods-detail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/common/goods2-detail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/common/good-item",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/common/web-view",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/common/search",
+			"style": {
+				"navigationStyle":"custom"
+				// "navigationBarTextStyle": "black",
+				// "navigationBarBackgroundColor": "#F8F8F8",
+				// "navigationBarTitleText": "搜索",
+				// "backgroundColor": "#F8F8F8",
+				// "backgroundColorTop": "#F4F5F6",
+				// "backgroundColorBottom": "#F4F5F6"
+			}
+		},
+		{
+			"path": "pages/index/setting",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/change-name",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/change-phone",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/new-phone",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/total-revenue",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/common/search-detail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/collection",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/bindzfb",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/cash-withdrawal",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/index/order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"navigationBarBackgroundColor":"#F9263E",
+				"navigationBarTextStyle":"white",
+				"backgroundColor": "#F8F8F8",
+				"backgroundColorTop": "#F4F5F6",
+				"backgroundColorBottom": "#F4F5F6"
+			}
+		},
+		{
+			"path": "pages/index/sub-detail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	// "globalStyle": {
+	// 	"navigationStyle": "custom"
+	// 	"navigationBarTextStyle": "black"
+	// },
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"backgroundColorTop": "#F4F5F6",
+		"backgroundColorBottom": "#F4F5F6"
+	},
+	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#ff0000",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"selectedIconPath": "static/bar/selecthome.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/common/search",
+				"iconPath": "static/bar/search.png",
+				"selectedIconPath": "static/bar/sesearch.png",
+				"text": "搜索"
+			},
+			// 			{
+			// 				"pagePath": "pages/chat/chat",
+			// 				"iconPath": "static/bar/lts.png",
+			// 				"selectedIconPath": "static/bar/selcetlts.png",
+			// 				"text": "聊天"
+			// 			},
+			// {
+			// 	"pagePath": "pages/school/school",
+			// 	"iconPath": "static/bar/sch.png",
+			// 	"selectedIconPath": "static/bar/selectsch.png",
+			// 	"text": "学院"
+			// },
+			{
+				"pagePath": "pages/store/index",
+				"iconPath": "static/bar/store.png",
+				"selectedIconPath": "static/bar/selectstore.png",
+				"text": "商城"
+			},
+			{
+				"pagePath": "pages/index/user",
+				"iconPath": "static/bar/user.png",
+				"selectedIconPath": "static/bar/selectuser.png",
+				"text": "个人"
+			}
+		]
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
+	}
+}

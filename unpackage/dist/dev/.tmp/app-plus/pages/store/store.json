@@ -1,0 +1,8 @@
+{
+  "usingComponents": {},
+  "navigationStyle": "custom",
+  "titleNView": {
+    "type": "transparent"
+  },
+  "bounce": "none"
+}

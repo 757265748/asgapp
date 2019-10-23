@@ -1,0 +1,40 @@
+.content {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  margin-top: 72px;
+  background: #EEEEEE;
+  overflow: hidden;
+  z-index: 999;
+}
+.list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #000000;
+  border-right: none;
+  border-top: none;
+  background: #fff;
+  border-radius: 2rpx;
+}
+.list-text {
+  border-right: 1px solid #000000;
+  text-align: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+

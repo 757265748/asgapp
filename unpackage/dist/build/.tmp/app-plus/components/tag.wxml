@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['onTap',['$0'],['tag']]]]]}}" style="margin-top:10px;" bindtap="__e"><text class="search-tag" style="{{'color:'+(color)+';'}}">{{tag}}</text></view>
