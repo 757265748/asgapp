@@ -49,8 +49,8 @@
 
 <script>
 	import uniSegmentedControl from '@/components/uni-segmented-control.vue';
-	import taobaoApi from '../../common/js/simple-tbapi.js';
-	import share from '../../common/js/simple-share.js';
+	// import taobaoApi from '../../common/js/simple-tbapi.js';
+	// import share from '../../common/js/simple-share.js';
 	import {
 		order,
 		getRelationId,
