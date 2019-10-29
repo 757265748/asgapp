@@ -1,0 +1,2 @@
+webpackJsonp([21],{bGVE:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i={render:function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("欢迎来到爱省购后台管理系统")])},staticRenderFns:[]};var r=n("VU/8")({},i,!1,function(e){n("bip6")},"data-v-0a6ab984",null);t.default=r.exports},bip6:function(e,t){}});
+//# sourceMappingURL=21.ecf262b1dddc262b4c5e.js.map
