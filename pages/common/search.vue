@@ -1,18 +1,18 @@
 <template>
 	<view class="content">
 		<!-- <nav-bar title="搜索" color="#ffffff" background="#ff0000" ></nav-bar> -->
-		<view class="search-container">
+		<!-- <view class="search-container">
 			<view class="title">搜索</view>
-		</view>
-		<view class="search-box">
+		</view> -->
+		<!-- <view class="search-box" style="background-color: #FC1F3F;color: white;">
 			<view class="wrap">
 				<view class="placeholder">
-					<uni-icon type="search" color="#b5b5b5" size="18"></uni-icon>
-					<input @confirm='submit' placeholder="搜索商品关键字" @input='_getinput' :value="value" />
+					<uni-icon type="search" color="#b5b5b5" size="28"></uni-icon>
+					<input @confirm='submit' placeholder="搜索商品关键字" @input='_getinput' style="background-color: white;" focus="true" :value="value" />
 				</view>
 				<uni-icon @click="clear" v-if="isShow" type="clear" color="#b5b5b5" size="18"></uni-icon>
 			</view>
-		</view>
+		</view> -->
 		<view class="container">
 			<view class="search-title">大家都在搜</view>
 			<view class="all-search-wrap">
@@ -21,7 +21,8 @@
 			<view class="history">
 				<view class="history-title">
 					<view class="search-title">搜索历史</view>
-					<uni-icon type="delete" size="14" color="#ccc" @click="clearsearch"></uni-icon>
+					<view @click="clearsearch"><a href="#">清空历史记录</a></view>
+					<!-- <uni-icon type="delete" size="14" color="#ccc" @click="clearsearch"></uni-icon> -->
 				</view>
 				<view class="all-search-wrap">
 					<tag-item :tag="tag" @onchange="onTap" v-for="(tag, hindex) in tags" :key="hindex"></tag-item>
@@ -38,16 +39,26 @@
 			return {
 				value: '',
 				isShow: false,
-				hottags: ["母婴", "美妆", "家电", "数码", "羊毛衫"],
-				tags: ["母婴", "美妆", "家电", "数码", "羊毛衫"],
+				hottags: ["母婴", "美妆", "家电", "数码", "羊毛衫","女装","百货","鞋包","男装","运动"],
+				tags: [],
 			}
 		},
 		components: {
 			navBar,
 			tagItem
 		},
+		onShow() {
+			this.tags = uni.getStorageSync('historysearch') || [];
+		},
 		onLoad() {
 			this.tags = uni.getStorageSync('historysearch') || [];
+		},
+		onNavigationBarSearchInputChanged(e){
+			this.getinput(e);
+			console.log(e);
+		},
+		onNavigationBarSearchInputConfirmed(e){
+			this.onTap(e.text);
 		},
 		methods: {
 			clearsearch() {
@@ -89,6 +100,14 @@
 					this.tags.unshift(this.value);
 				}
 				uni.setStorageSync('historysearch', this.tags);
+			},
+			getinput(e){
+				this.value = e.text;
+				if (this.value) {
+					this.isShow = true
+				} else {
+					this.isShow = false
+				}
 			},
 			_getinput(e) {
 				this.value = e.detail.value.trim();
@@ -182,6 +201,7 @@
 		align-items: center;
 		justify-content: flex-start;
 		margin-top: 30rpx;
+		flex-wrap: wrap;
 	}
 
 	.search-tag {
@@ -203,7 +223,6 @@
 			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
-			margin-right: 80rpx;
 		}
 	}
 </style>

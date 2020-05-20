@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar",
+    "product-list": "/components/product-list",
+    "uni-load-more": "/components/uni-load-more",
+    "media-list": "/components/mediaList"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "发圈",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "uni-grid": "/components/uni-grid",
+    "uni-popup": "/components/uni-popup"
+  }
+}

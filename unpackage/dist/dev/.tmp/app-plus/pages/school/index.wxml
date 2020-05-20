@@ -1,2 +1,1 @@
-<import src="./index.vue.wxml" />
-    <template is="80df614a" data="{{ ...$root['0'], $root }}"/>
+<view class="content"><image class="logo" src="../../static/logo.png"></image><view><text class="title">{{title}}</text></view><view-tabbar vue-id="0b45c9d4-1" current="0" tabs="{{tabs}}" bind:__l="__l"></view-tabbar></view>

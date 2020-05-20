@@ -1,0 +1,77 @@
+
+.adorn_l{
+	margin-left: -.5rem;
+	margin-top: -.5rem;
+}
+.adorn_r{
+	margin-right: -.5rem;
+	margin-top: -.5rem;
+}
+.adorn_l,
+.adorn_r {
+	width: 1rem;
+	height: 1rem;
+	background-color: #333;
+	border-radius: 1rem;
+}
+.adorn{
+	background-color: #fff;
+}
+.flex_1 {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+}
+.body .content .item {
+	padding: 20rpx;
+	border-bottom: 1rpx solid #efeeee;
+}
+.between {
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.tx_money {
+	font-weight: bold;
+}
+.body .title {
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	background-color: #f1f1f1;
+	padding: 20rpx;
+	border-top-left-radius: 1rem;
+	border-top-right-radius: 1rem;
+}
+.body .content {
+	background-color: #fff;
+}
+.head .title,
+.body .title {
+	font-weight: bold;
+}
+.head view {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	margin: 20rpx;
+}
+.head {
+	background-color: #333;
+	color: #fff;
+}
+.money {
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #DFB667;
+}
+.page {
+	background-color: #333;
+}
+

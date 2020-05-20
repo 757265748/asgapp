@@ -8,7 +8,7 @@
 				<image class="logo" mode="aspectFit" :src="logo"></image>
 				<view class="txt">{{good.title}}</view>
 			</view>
-			<view class="shop-desc"  >
+			<view class="shop-desc">
 				<!-- <view class="price-wrap" v-if="!isgood"> -->
 				<view class="price-wrap">
 					<view class="price">
@@ -20,8 +20,8 @@
 				</view>
 				<view class="coupon-wrap">
 					<view class="num">{{good.volume}}人已购</view>
-					<view v-if="!isgood" class="value">{{good.youhuiquan}}元券</view>
-					<view v-else class="value">{{good.youhuiquan}}元</view>
+					<view v-if="!isgood" class="value">{{good.youhuiquan||0}}元券</view>
+					<view v-else class="value">{{good.youhuiquan||0}}元</view>
 				</view>
 			</view>
 		</view>
@@ -35,18 +35,21 @@
 			isgood: {
 				type: Boolean,
 				default: false
-			}
+			},
+			SEGoods:Array
 		},
 		created() {
-			// console.log('是否是商城', this.isgood);
+			console.log('是否是商城', this.isgood);
+			console.log(JSON.stringify(this.SEGoods));
 		},
 		onLoad() {
 			// console.log(this.good.volume);
-			// console.log(JSON.stringify(this.good));
+			console.log(JSON.stringify(this.SEGoods));
 		},
 		computed: {
 			jhj(){
-				return (this.good.zk_final_price-this.good.youhuiquan).toFixed();
+				console.log(JSON.stringify(this.good));
+				return (this.good.zk_final_price-this.good.youhuiquan).toFixed(2);
 			},
 			fontSize() {
 				return `${this.size}px`

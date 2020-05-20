@@ -1,58 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-    <head>
-        <meta charset="UTF-8" />
-        <script>
-            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
-                CSS.supports('top: constant(a)'))
-            document.write(
-                '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
-                (coverSupport ? ', viewport-fit=cover' : '') + '" />')
-        </script>
-        <title>View</title>
-        <style>
-            * {
-                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-                -webkit-tap-highlight-color: transparent;
-            }
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      var __UniViewStartTime__ = Date.now();
+      document.addEventListener('DOMContentLoaded', function() {
+          document.documentElement.style.fontSize = document.documentElement.clientWidth / 20 + 'px'
+      })
+      var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+        CSS.supports('top: constant(a)'))
+      document.write(
+        '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+        (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+    </script>
+    <title>View</title>
+    <link rel="stylesheet" href="view.css" />
+  </head>
 
-            input[type="search"i]::-webkit-search-cancel-button {
-                display: none;
-            }
-        </style>
-        <script>
-            var __wxConfig = {"debug":false,"appname":"爱淘客","entryPagePath":"pages/index/user.html","page":{"pages/index/user.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/login.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/board.html":{"window":{"usingComponents":{},"navigationBarTitleText":"订单明细","navigationBarBackgroundColor":"#F9263E","navigationBarTextStyle":"white"}},"pages/index/index.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/store/index.html":{"window":{"usingComponents":{},"navigationStyle":"custom","titleNView":{"type":"transparent"},"bounce":"none"}},"pages/store/store.html":{"window":{"usingComponents":{},"navigationStyle":"custom","titleNView":{"type":"transparent"},"bounce":"none"}},"pages/store/circle.html":{"window":{"usingComponents":{},"navigationStyle":"custom","titleNView":{"type":"transparent"},"bounce":"none"}},"pages/store/customer.html":{"window":{"usingComponents":{},"navigationStyle":"custom","titleNView":{"type":"transparent"},"bounce":"none"}},"pages/store/shopcar.html":{"window":{"usingComponents":{},"navigationStyle":"custom","titleNView":{"type":"transparent"},"bounce":"none"}},"pages/chat/index.html":{"window":{"usingComponents":{},"navigationStyle":"custom","titleNView":{"type":"transparent"}}},"pages/chat/chat.html":{"window":{"usingComponents":{},"navigationStyle":"custom","titleNView":{"type":"transparent"}}},"pages/chat/friend-circle.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/chat/group.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/chat/mail-list.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/school/school.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/school/index.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/school/pub-ma.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/school/recommend.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/school/school-knowlege.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/common/good.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/common/goods-detail.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/common/goods2-detail.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/common/good-item.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/common/web-view.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/common/search.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/setting.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/change-name.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/change-phone.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/new-phone.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/total-revenue.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/common/search-detail.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/collection.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/bindzfb.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/cash-withdrawal.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}},"pages/index/order.html":{"window":{"usingComponents":{},"navigationBarTitleText":"我的订单","navigationBarBackgroundColor":"#F9263E","navigationBarTextStyle":"white","backgroundColor":"#F8F8F8","backgroundColorTop":"#F4F5F6","backgroundColorBottom":"#F4F5F6"}},"pages/index/sub-detail.html":{"window":{"usingComponents":{},"navigationStyle":"custom"}}},"global":{"window":{"navigationBarTextStyle":"black","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8","backgroundColorTop":"#F4F5F6","backgroundColorBottom":"#F4F5F6"}},"tabBar":{"color":"#333","selectedColor":"#ff0000","backgroundColor":"#ffffff","borderStyle":"black","list":[{"pagePath":"pages/index/index.html","selectedIconPath":"static/bar/selecthome.png","text":"首页"},{"pagePath":"pages/common/search.html","iconPath":"static/bar/search.png","selectedIconPath":"static/bar/sesearch.png","text":"搜索"},{"pagePath":"pages/store/index.html","iconPath":"static/bar/store.png","selectedIconPath":"static/bar/selectstore.png","text":"商城"},{"pagePath":"pages/index/user.html","iconPath":"static/bar/user.png","selectedIconPath":"static/bar/selectuser.png","text":"个人"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/index/user","pages/index/login","pages/index/board","pages/index/index","pages/store/index","pages/store/store","pages/store/circle","pages/store/customer","pages/store/shopcar","pages/chat/index","pages/chat/chat","pages/chat/friend-circle","pages/chat/group","pages/chat/mail-list","pages/school/school","pages/school/index","pages/school/pub-ma","pages/school/recommend","pages/school/school-knowlege","pages/index/user","pages/index/login","pages/common/good","pages/common/goods-detail","pages/common/goods2-detail","pages/common/good-item","pages/common/web-view","pages/common/search","pages/index/setting","pages/index/change-name","pages/index/change-phone","pages/index/new-phone","pages/index/total-revenue","pages/common/search-detail","pages/index/collection","pages/index/bindzfb","pages/index/cash-withdrawal","pages/index/order","pages/index/sub-detail"],"usingComponents":{},"nvueCompiler":"weex","renderer":"auto","splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"compilerVersion":"2.2.2"}
-        </script>
-        <script>
-            var __id__ = '';
-            window.__dispatchGenerateFunc__ = function(page) {
-                __id__ = page;
-                document.title = page;
-                // window.history.pushState('', '', page);
-                var wxss = page.replace('.html', '.wxss')
-                if (
-                    typeof __wxAppCode__ !== 'undefined' &&
-                    __wxAppCode__.hasOwnProperty(wxss)
-                ) {
-                    var setCssToHead = __wxAppCode__[wxss]
-                    typeof setCssToHead === 'function' && setCssToHead()
-                    document.dispatchEvent(new CustomEvent("generateFuncReady", {
-                        detail: {
-                            generateFunc: $gwx(page.replace('.html', '.wxml'))
-                        }
-                    }));
-                } else {
-                    plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
-                }
-            };
-        </script>
-        <script src="__uniappes6.js"></script>
-        <script src="uniapp://ready"></script>
-    </head>
-
-    <body>
-        <div></div>
-    </body>
+  <body>
+    <div id="app"></div>
+    <script src="__uniappes6.js"></script>
+    <script src="view.umd.min.js"></script>
+    <script src="app-view.js"></script>
+  </body>
 
 </html>

@@ -1,0 +1,18 @@
+
+.yj.data-v-bba93b6c {
+	font-size: 20rpx;
+	color: #FF0000;
+}
+.price-wrap.data-v-bba93b6c{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+

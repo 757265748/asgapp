@@ -1,4 +1,16 @@
 {
-  "usingComponents": {},
-  "navigationStyle": "custom"
+  "titleNView": {
+    "titleColor": "#fff",
+    "searchInput": {
+      "backgroundColor": "#fff",
+      "borderRadius": "6px",
+      "placeholder": "请输入你要搜索的商品",
+      "autoFocus": true
+    }
+  },
+  "usingComponents": {
+    "uni-icon": "/components/uni-icon",
+    "nav-bar": "/components/nav-bar",
+    "tag-item": "/components/tag"
+  }
 }

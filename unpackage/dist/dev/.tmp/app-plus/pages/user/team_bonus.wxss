@@ -1,0 +1,18 @@
+
+.body{
+	margin: 20rpx 0;
+	padding: 20rpx;
+}
+.head .money{
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 40rpx;
+}
+.body,
+.head{
+	background-color: white;
+}
+.page{
+	background-color: #F1F1F1;
+}
+

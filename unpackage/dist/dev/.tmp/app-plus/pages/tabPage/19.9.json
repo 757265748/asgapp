@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "19.9元",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "media-list": "/components/mediaList",
+    "uni-load-more": "/components/uni-load-more"
+  }
+}

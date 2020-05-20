@@ -1,8 +1,14 @@
 {
-  "usingComponents": {},
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "双11会场",
+  "navigationBarBackgroundColor": "#FC1F3F",
+  "navigationBarTextStyle": "white",
   "titleNView": {
     "type": "transparent"
   },
-  "bounce": "none"
+  "bounce": "none",
+  "usingComponents": {
+    "divid-line": "/components/line",
+    "product-list": "/components/product-list",
+    "uni-load-more": "/components/uni-load-more"
+  }
 }

@@ -108,8 +108,12 @@
 			loginout() {
 				try {
 					uni.removeStorageSync('user');
-					uni.reLaunch({
-						url: '/pages/index/index'
+					uni.removeStorageSync('tbsqFlag');
+					// uni.reLaunch({
+					// 	url: '/pages/index/index'
+					// })
+					uni.switchTab({
+						url:'/pages/index/index'
 					})
 				} catch (e) {
 					// error

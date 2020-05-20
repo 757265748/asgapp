@@ -1,11 +1,18 @@
 {
     "name" : "爱淘客",
-    "appid" : "__UNI__DA30788",
+    "appid" : "__UNI__133D546",
     "description" : "",
-    "versionName" : "1.0.0",
+    "versionName" : "1.1.9",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
+        //沉浸式导航栏
+        "launchwebview" : {
+            "statusbar" : {
+                "background" : "#333"
+            }
+        },
+        // "renderer": "native", //App端纯原生渲染模式
         /* 5+App特有相关 */
         "modules" : {
             "Contacts" : {},
@@ -17,10 +24,15 @@
             "Statistic" : {},
             "VideoPlayer" : {},
             "Share" : {},
-            "OAuth" : {}
+            "OAuth" : {},
+            "Push" : {}
         },
         /* 模块配置 */
         "distribute" : {
+            "google" : {
+                "schemes" : [ "egshuj" ]
+            },
+            //...  
             /* 应用发布信息 */
             "android" : {
                 /* android打包配置 */
@@ -56,7 +68,7 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
                     "<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>"
                 ],
-                "schemes" : [ "taobao" ]
+                "schemes" : [ "egshuj" ]
             },
             "ios" : {
                 "urltypes" : [
@@ -67,7 +79,12 @@
                     }
                 ],
                 "urlschemewhitelist" : [ "taobao", "tianmao", "tbopen", "tmall" ],
-                "idfa" : false
+                "idfa" : false,
+                "capabilities" : {
+                    "entitlements" : {
+                        "com.apple.developer.associated-domains" : [ "applinks:egshuj.openinstall.io" ]
+                    }
+                }
             },
             "sdkConfigs" : {
                 "speech" : {
@@ -76,51 +93,76 @@
                 "share" : {
                     "weixin" : {
                         "appid" : "wxbb1a562e2efa5ba7"
+                    },
+                    "qq" : {
+                        "appid" : "101818282"
                     }
                 },
                 "oauth" : {
                     "weixin" : {
                         "appid" : "wxbb1a562e2efa5ba7",
                         "appsecret" : "668901d6c814673b44d33828bbd1214f"
+                    },
+                    "qq" : {
+                        "appid" : "101818282"
                     }
                 },
                 "payment" : {
                     "weixin" : {
                         "appid" : "wxbb1a562e2efa5ba7"
                     }
+                },
+                "ad" : {},
+                "push" : {
+                    "unipush" : {}
                 }
             }
         },
         "nativePlugins" : {
-            "taobaologin" : {
+            "openinstall-plugin" : {
+                "APP_KEY" : "egshuj",
                 "__plugin_info__" : {
-                    "name" : "taobaologin",
-                    "description" : "安卓淘宝登录插件",
-                    "platforms" : "Android",
+                    "name" : "openinstall-uniapp-plugin",
+                    "description" : "uni-app集成openinstall SDK插件",
+                    "platforms" : "Android,iOS",
                     "url" : "",
                     "android_package_name" : "",
                     "ios_bundle_id" : "",
                     "isCloud" : false,
                     "bought" : -1,
                     "pid" : "",
-                    "parameters" : {}
+                    "parameters" : {
+                        "APP_KEY" : {
+                            "des" : "openinstall为应用生成的appkey",
+                            "key" : "com.openinstall.APP_KEY",
+                            "value" : ""
+                        }
+                    }
                 }
             },
-            "JHM-BaichuanPlugin" : {
+            "dahui-alibaichuan" : {
+                "baichuan_appkey" : "27788224",
                 "__plugin_info__" : {
-                    "name" : "BaichuanPlugin",
+                    "name" : "dahui-alibaichuan",
                     "description" : "阿里百川插件",
-                    "platforms" : "iOS",
+                    "platforms" : "Android,iOS",
                     "url" : "",
                     "android_package_name" : "",
                     "ios_bundle_id" : "",
                     "isCloud" : false,
                     "bought" : -1,
                     "pid" : "",
-                    "parameters" : {}
+                    "parameters" : {
+                        "baichuan_appkey" : {
+                            "des" : "百川appkey",
+                            "key" : "baichuan_appkey",
+                            "value" : ""
+                        }
+                    }
                 }
             }
-        }
+        },
+        "usingComponents" : false
     },
     "mp-toutiao" : {
         "usingComponents" : true

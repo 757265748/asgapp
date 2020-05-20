@@ -1,0 +1,149 @@
+
+.bold{
+	font-weight: bold;
+}
+.fkbs{
+	color: #62D189;
+}
+.ygsr{
+	color: #DFB667;
+}
+.explain{
+	border-radius: 1rem;
+	background-color: #E8E8E8;
+	width: 1.2rem;
+	height: 1.2rem;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	margin-left: 5rpx;
+}
+.day .content .values,
+.month .content .values{
+	margin: 10rpx;
+}
+.day .content .title view,
+.day .content .values view,
+.month .content .title view,
+.month .content .values view{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+}
+.month .content 
+.flex_1{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+}
+.day .content,
+.month .content {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	text-align: center;
+	border-radius: 30rpx;
+	background-color: #fff;
+	margin-top: 20rpx;
+}
+.day,
+.month {
+	margin: 20rpx 20rpx;
+	color: #888888;
+}
+.head .tx {
+	background-color: transparent;
+	color: #fff;
+	border: 1px solid #E9CEA1;
+}
+.text{
+	width: 180rpx;
+	text-align: center;
+}
+.btn1 {
+	border-radius: 1rem;
+	background-color: #E9CEA1;
+	width: 180rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	color: #000;
+	text-align: center;
+}
+.head .money {
+	font-weight: bold;
+	/* font-size: 1.05rem; */
+}
+.head view {
+	margin: 5rpx;
+}
+.head {
+	background-color: #333;
+	color: #fff;
+}
+.head {
+	padding: 20rpx 40rpx;
+}
+.between {
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.uni-tab-bar-loading {
+	text-align: center;
+	font-size: 28rpx;
+	color: #999;
+}
+.page {
+	overflow: hidden;
+}
+/* css重写 */
+.uni-tab-bar .swiper-box {
+	height: calc(100%-120px) !important;
+}
+.uni-tab-bar .active {
+	-webkit-animation: none !important;
+	        animation: none !important;
+	-webkit-transform: none !important;
+	-webkit-animation-fill-mode: none !important;
+	animation-fill-mode: none !important
+}
+.uni-swiper-tab {
+	height: 80rpx;
+	line-height: 70rpx;
+}
+/*  */
+.headTab,
+.headTab_1 {
+	padding: 20rpx 0;
+}
+/* .tab-bar{
+	position: fixed;
+} */
+/* .tab-bar
+.headTab,
+.headTab_1 {
+	position: fixed;
+} */
+.headTab {
+	background-color: #333;
+}
+.headTab_1 {
+	background-color: #EEEFF1;
+	box-sizing: border-box;
+}
+.headTab .segmented-control view {
+	color: white;
+}
+.uni-tab-bar .active {
+	color: #AA7623;
+}
+.swiper-box {
+	background-color: #EEEFF1;
+}
+

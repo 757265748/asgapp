@@ -2,13 +2,17 @@
 	<!-- 整页布局滚动 -->
 	<scroll-view scroll-y @scroll="_screensticky" lower-threshold=100 :scroll-top="globScrollTop" class="list"
 	 @scrolltolower='onloadmore' v-if="productgood">
-		<!-- 轮播图 --><!-- lazy-load mode="aspectFit" -->
+		<!-- 轮播图 -->
+		<!-- lazy-load mode="aspectFit" -->
 		<!-- <swiper class="swiper-box" circular autoplay indicator-active-color="#fff" indicator-dots interval="5000" :duration="duration">
 			<swiper-item class="item" v-for="(item, bannerindex)  in productgood.banner" v-if="productgood.banner.length > 0"
 			 :key="bannerindex">
 				<image class="swiper-img" :src="item.src"></image>
 				
 			</swiper-item>
+		</swiper> -->
+		<!-- <swiper indicator-dots="true">
+			<swiper-item v-for="(img, key) in imgUrls" :key="key"><image :src="img" /></swiper-item>
 		</swiper> -->
 		<!-- 首页20个大类分区 -->
 		<!-- <view class="classification-container" v-if="current == 0">
@@ -38,11 +42,11 @@
 		<!-- 滚动公告栏首页 -->
 		<view class="uni-swiper-msg" v-if="current == 0">
 			<view class="uni-swiper-msg-icon">
-				<image src="../../static/logo.png" mode="widthFix"></image>
+				<!-- <image src="../../static/logo.png" mode="widthFix"></image> -->
 			</view>
 			<swiper vertical="true" autoplay="true" circular="true" interval="3000">
 				<swiper-item v-for="(item, msgindex) in productgood.msg" :key="msgindex">
-					<view @tap="godetail(item.id)">{{item.title}}</view>
+					<view @tap="godetail(item.num_iid)">{{item.title}}</view>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -77,21 +81,28 @@
 		</view>
 		<!-- <view  :class="['screen-wrap', {'_sticky':!isAndroid}]"> -->
 		<view :class="['screen-wrap', {'_sticky':!isAndroid}]">
-			<view :class="{on :active==0}" @tap="screentap('0')">默认</view>
-			<view :class="{on :active==1}" @tap="screentap('1')">销量</view>
-			<view :class="{on :active==2}" @tap="screentap('2')">最新</view>
-			<view class='jg-wrap' @tap="screentap('3')">
-				<text :class="{on :active==3}">价格</text>
+			<view :class="{on :isDefault}" @tap="screentap('')">默认</view>
+			<view class='jg-wrap' @tap="screentap('total_sales')">
+				<text :class="{on :isTotal_sales!=0}">销量</text>
 				<view class="jgicon">
-					<uni-icon type="uparrow" size="12" :color="up">
+					<uni-icon type="uparrow" size="12" :color="isTotal_sales==1?'#ff0000':'#ccc'">
 					</uni-icon>
-					<uni-icon type="downarrow" size="12" :color="down">
+					<uni-icon type="downarrow" size="12" :color="isTotal_sales==2?'#ff0000':'#ccc'">
+					</uni-icon>
+				</view>
+			</view>
+			<view class='jg-wrap' @tap="screentap('price')">
+				<text :class="{on :isPrice!=0}">价格</text>
+				<view class="jgicon">
+					<uni-icon type="uparrow" size="12" :color="isPrice==1?'#ff0000':'#ccc'">
+					</uni-icon>
+					<uni-icon type="downarrow" size="12" :color="isPrice==2?'#ff0000':'#ccc'">
 					</uni-icon>
 				</view>
 			</view>
 		</view>
 		<view class="goods-container" v-if="current==0">
-			<block v-for="(item,goodindex) in rcProductgood[0]" :key="goodindex">
+			<block v-for="(item,goodindex) in rcProductgood" :key="goodindex">
 				<good-list :good='item' @onTap="godetail(item.num_iid)" :isgood='isgood'></good-list>
 			</block>
 			<uni-load-more :loadingType="loadingType" :contentText="contentText"></uni-load-more>
@@ -115,12 +126,14 @@
 	import {
 		getGoodsList,
 		getCTK,
-		getOtherGood
+		getOtherGood,
+		getItemsDes,
+		getS11
 	} from '@/api/goods.js'
 	export default {
 		props: {
 			productgood: {
-				type: Object,
+				type: Object
 			},
 			current: {
 				type: [Number, String],
@@ -132,15 +145,24 @@
 			isgood: {
 				type: Boolean,
 				default: false
-			}
+			},
+			isSE:{
+				type:Boolean,
+				default:false
+			},
+			SEGoods:Array
 		},
 		data() {
 			return {
+				imgUrls: [
+					'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg',
+					'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'
+				],
 				scrolltop: 0,
 				page: 1,
 				scrollEv: null,
 				nowScroll: 0,
-				isScroll: false,
+				isScroll: false, 
 				isAndroid: false,
 				timer: null,
 				isShow: false,
@@ -150,6 +172,10 @@
 				tab: "",
 				active: 0,
 				isup: 3,
+				sorts: new Object(),
+				isDefault: true, //默认排序
+				isTotal_sales: 0, //销量排序
+				isPrice: 0, //价格排序
 				count: 0,
 				screen: null,
 				isfixed: false,
@@ -164,8 +190,8 @@
 					contentrefresh: "正在加载...",
 					contentnomore: "没有更多数据了"
 				},
-				type:"",
-				rcProductgood:new Array()
+				type: "",
+				rcProductgood: new Array()
 			}
 		},
 		components: {
@@ -187,61 +213,73 @@
 		},
 
 		created() {
-			console.log('!!', this.productgood);
-		},
+			console.log('!!',);
+			console.log(JSON.stringify(this.productgood)); 
+			console.log(this.isSE);
+			this.getRecommendGood();
+		}, 
 		onLoad() {
-			// this.getRecommendGood();
+			
 		},
 		methods: {
 			//条件筛选
-			screentap(index) {
-				this.page = 1;
-				if (index == 3) {
-					this.active = index;
-					this.isup = this.count % 2 == 0 ? this.isup = 0 : this.isup = 1;
-					this.count++;
-					console.log("this.isip", this.isup)
+			screentap(sortType) {
+				if (sortType == '') {
+					this.isDefault = true;
+					this.isTotal_sales = 0;
+					this.isPrice = 0;
 					this._getGoodsList({
-						page: 0,
-						screen: index,
-						jg: this.isup
+						sorts: sortType
 					});
-					return
+				} else if (sortType == 'total_sales') {
+					this.isDefault = false;
+					this.isPrice = 0;
+					if (this.isTotal_sales == 0 || this.isTotal_sales == 1) {
+						this._getGoodsList({
+							sorts: sortType + '_des'
+						});
+						this.isTotal_sales = 2;
+					} else if (this.isTotal_sales == 2) {
+						this.sorts.sort1 = sortType + '_asc';
+						this._getGoodsList({
+							sorts: sortType + '_asc'
+						});
+						this.isTotal_sales = 1;
+					}
+				} else if (sortType == 'price') {
+					this.isDefault = false;
+					this.isTotal_sales = 0;
+					if (this.isPrice == 0 || this.isPrice == 1) {
+						this._getGoodsList({
+							sorts: sortType + '_des'
+						});
+						this.isPrice = 2;
+					} else {
+						this._getGoodsList({
+							sorts: sortType + '_asc'
+						});
+						this.isPrice = 1;
+					}
 				}
-				this._getGoodsList({
-					page: 0,
-					screen: index
+			},
+			getRecommendGood() {
+				this.rcProductgood = uni.getStorageSync("rcProductgood");
+				getOtherGood({
+					page: this.page,
+					type: "item"
+				}).then(res => {
+					//console.log(JSON.stringify(res.result.data));
+					this.rcProductgood=res.result.data;
+					uni.setStorageSync("rcProductgood", this.rcProductgood);
 				});
-				this.active = index
-				this.isup = 3;
 			},
-			getRecommendGood(){
-				if(!uni.getStorageSync("rcProductgood")){
-					getOtherGood({
-						page:this.page,
-						type:"item"
-					}).then(res=>{
-						this.rcProductgood.push(res.result.data);
-						uni.setStorageSync("rcProductgood",this.rcProductgood);
-						console.log(JSON.stringify(this.rcProductgood))
-					});
-				}else{
-					this.rcProductgood=uni.getStorageSync("rcProductgood");
-				}
-			},
-			_getGoodsList({
-				page = 0,
-				// screen = '',
-				// jg = ''
-			}) {
+			_getGoodsList(obj) {
+				console.log(obj);
 				uni.showLoading({
 					title: '加载中..'
 				})
 				let ret = getGoodsList({
-					page,
-					type: this.type,
-					// screen,
-					// jg
+					sorts:obj.sorts
 				});
 				// let ret=getCTK({
 				// 	page
@@ -252,8 +290,8 @@
 					if (res.code == 200) {
 						this.productgood.product = res.result
 						// this.productgood.product = res.content
-						for(var i=0; i<this.productgood.product.length; i++){
-							// console.log(JSON.stringify(this.productgood.product[i]))
+						for (var i = 0; i < this.productgood.product.length; i++) {
+							//console.log(JSON.stringify(this.productgood.product[i]))
 						}
 					} else {
 						this._showError()
@@ -262,20 +300,20 @@
 			},
 			//条件筛选滑动事件监听 (this._delayfun)
 			_screensticky(ev) {
-				let target = ev.target || ev.srcElement;
+				// let target = ev.target || ev.srcElement;
+				// // this.nowScroll = target.scrollTop
 				// this.nowScroll = target.scrollTop
-				this.nowScroll = target.scrollTop
-				// console.log('滚动', this.nowScroll);
-				if (this.nowScroll > 790) {
-					if (this.isAndroid) {
-						this.isfixed = true;
-					}
-					this.isfixed = true;
-					this.isShow = true;
-				} else {
-					this.isfixed = false;
-					this.isShow = false;
-				}
+				// // console.log('滚动', this.nowScroll);
+				// if (this.nowScroll > 790) {
+				// 	if (this.isAndroid) {
+				// 		this.isfixed = true;
+				// 	}
+				// 	this.isfixed = true;
+				// 	this.isShow = true;
+				// } else {
+				// 	this.isfixed = false;
+				// 	this.isShow = false;
+				// }
 			},
 			jump(type) {
 				if (type == 'search') {
@@ -310,7 +348,7 @@
 			},
 			godetail(id) {
 				if (!this.isgood) {
-					var page=this.page;
+					var page = this.page;
 					uni.navigateTo({
 						url: `/pages/common/goods-detail?id=${id}&page=${page}`
 					})
@@ -340,14 +378,15 @@
 							this.loadingType = 3;
 							return
 						}
-						this.productgood.product = this.productgood.product.concat(res.result);
-						this.page++;
+						// this.productgood.product = this.productgood.product.concat(res.result);
+						this.productgood.product = res.result;
+						this.page++; 
 						this.loadingType = 0;
 					} else {
 						this._showError()
 					}
 				});
-				
+
 				// let ret1 = getOtherGood({
 				// 	page: this.page,
 				// 	type: "item"
@@ -367,9 +406,10 @@
 	}
 </script>
 <style lang="less" scoped>
-	.screen-wrap{
+	.screen-wrap {
 		z-index: 9;
 	}
+
 	.index-content {
 		position: relative;
 		width: 100%;

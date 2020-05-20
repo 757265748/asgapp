@@ -2,7 +2,7 @@
 	<view>
 		<nav-bar title="我的收藏" background="#ff0000" color="#fff" @back="back"></nav-bar>
 		<view class="content">
-			<product-list isShow=true :productList="collection"></product-list>
+			<product-list isShow=true :isCollection="true" :productList="collection"></product-list>
 			<view class="no-collection" v-if="collection.length==0">暂无收藏商品~~~</view>
 		</view>
 
@@ -43,7 +43,7 @@
 						})
 					}
 					this.collection = res.result;
-					console.log(this.collection);
+					console.log(JSON.stringify(res.result));
 				})
 			},
 			getUser() {

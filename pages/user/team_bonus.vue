@@ -1,0 +1,47 @@
+<template>
+	<view class="page" :style="{'height':sysH+'px'}">
+		<view class="head">
+			<view class="money">0.0</view>
+		</view>
+		<view class="body">
+			<view>转到账户余额</view>
+			<view class="uni-flex uni-row margin_t_10">
+				<view style="width: 1rem;">￥</view>
+				<view class="flex_4"><input type="text" value="" placeholder="最低提现团队奖金1元" /></view>
+				<view class="color_1">全部转入</view>
+			</view>
+		</view>
+		<view class="foot">
+			<view class="btn">确认</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				sysH: uni.getSystemInfoSync().screenHeight
+			}
+		}
+	}
+</script>
+
+<style>
+	.body{
+		margin: 20upx 0;
+		padding: 20upx;
+	}
+	.head .money{
+		font-size: 1.5rem;
+		text-align: center;
+		padding: 40upx;
+	}
+	.body,
+	.head{
+		background-color: white;
+	}
+	.page{
+		background-color: #F1F1F1;
+	}
+</style>

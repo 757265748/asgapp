@@ -4,7 +4,7 @@
  */
 const tkApiplatform = uni.getSystemInfoSync().platform
 var baichuan;
-var appke = "27798607"; // 登录百川获取27798607 26019807
+var appke = "27798607"; // 登录百川获取27798607 27788224
 
 if (tkApiplatform == "android") {
     baichuan = uni.requireNativePlugin('taobaologin'); // 安卓百川插件

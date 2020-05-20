@@ -1,2 +1,1 @@
-<import src="./recommend.vue.wxml" />
-    <template is="4112cac5" data="{{ ...$root['0'], $root }}"/>
+<view class="content"><image class="logo" src="../../static/logo.png"></image><view><text class="title">{{title}}</text></view><view-tabbar vue-id="356b2f28-1" current="3" tabs="{{tabs}}" bind:__l="__l"></view-tabbar></view>

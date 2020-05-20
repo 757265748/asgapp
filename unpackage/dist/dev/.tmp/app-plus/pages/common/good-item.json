@@ -1,4 +1,9 @@
 {
-  "usingComponents": {},
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-icon": "/components/uni-icon",
+    "nav-bar": "/components/nav-bar",
+    "product-list": "/components/product-list",
+    "uni-load-more": "/components/uni-load-more"
+  }
 }

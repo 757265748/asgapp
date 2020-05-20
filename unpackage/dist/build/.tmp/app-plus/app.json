@@ -1,10 +1,24 @@
 {
   "pages": [
-    "pages/index/login",
-    "pages/index/board",
-    "pages/index/board",
     "pages/index/user",
+    "pages/user/team_list",
+    "pages/user/set_info",
+    "pages/user/my_team",
+    "pages/user/invite_friend",
+    "pages/user/team_bonus",
+    "pages/user/tx",
+    "pages/user/tx_record",
+    "pages/user/revenue",
+    "pages/user/my_info",
+    "pages/index/indexModel",
+    "pages/user/board",
+    "pages/index/guide",
+    "pages/index/login",
+    "pages/index/lunbo",
+    "pages/common/moreGoods",
     "pages/index/index",
+    "pages/tabPage/tabGoods",
+    "pages/tabPage/19.9",
     "pages/store/index",
     "pages/store/store",
     "pages/store/circle",
@@ -15,12 +29,12 @@
     "pages/chat/friend-circle",
     "pages/chat/group",
     "pages/chat/mail-list",
+    "pages/send_circle/index",
     "pages/school/school",
     "pages/school/index",
     "pages/school/pub-ma",
     "pages/school/recommend",
     "pages/school/school-knowlege",
-    "pages/index/user",
     "pages/index/login",
     "pages/common/good",
     "pages/common/goods-detail",
@@ -37,55 +51,62 @@
     "pages/index/collection",
     "pages/index/bindzfb",
     "pages/index/cash-withdrawal",
-    "pages/index/order",
+    "pages/common/share",
     "pages/index/sub-detail"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#333333",
     "backgroundColor": "#F8F8F8",
     "backgroundColorTop": "#F4F5F6",
     "backgroundColorBottom": "#F4F5F6"
   },
   "tabBar": {
     "color": "#333",
-    "selectedColor": "#ff0000",
+    "selectedColor": "#000",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/index/index",
+        "iconPath": "static/bar/home.png",
         "selectedIconPath": "static/bar/selecthome.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/common/search",
-        "iconPath": "static/bar/search.png",
-        "selectedIconPath": "static/bar/sesearch.png",
-        "text": "搜索"
-      },
-      {
-        "pagePath": "pages/store/index",
+        "pagePath": "pages/store/customer",
         "iconPath": "static/bar/store.png",
         "selectedIconPath": "static/bar/selectstore.png",
         "text": "商城"
       },
       {
+        "pagePath": "pages/send_circle/index",
+        "iconPath": "static/bar/lts.png",
+        "selectedIconPath": "static/bar/selcetlts.png",
+        "text": "发圈"
+      },
+      {
+        "pagePath": "pages/school/index",
+        "iconPath": "static/bar/sch.png",
+        "selectedIconPath": "static/bar/selectsch.png",
+        "text": "学院"
+      },
+      {
         "pagePath": "pages/index/user",
         "iconPath": "static/bar/user.png",
         "selectedIconPath": "static/bar/selectuser.png",
-        "text": "个人"
+        "text": "我的"
       }
     ]
   },
-  "nvueCompiler": "weex",
+  "nvueCompiler": "uni-app",
   "renderer": "auto",
   "splashscreen": {
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
   "appname": "爱淘客",
-  "compilerVersion": "2.3.3",
+  "compilerVersion": "2.6.8",
   "usingComponents": {
     "uni-icon": "/components/uni-icon"
   }

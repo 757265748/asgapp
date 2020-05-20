@@ -1,0 +1,15 @@
+{
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "product-list": "/components/product-list",
+    "uni-section": "/components/other/uni-section/uni-section",
+    "uni-collapse": "/components/other/uni-collapse/uni-collapse",
+    "uni-collapse-item": "/components/other/uni-collapse-item/uni-collapse-item",
+    "uni-list": "/components/other/uni-list/uni-list",
+    "uni-list-item": "/components/other/uni-list-item/uni-list-item",
+    "uni-popup": "/components/uni-popup",
+    "uni-icon": "/components/uni-icon",
+    "ahh5-animated": "/components/ahh5-animated/ahh5-animated"
+  }
+}

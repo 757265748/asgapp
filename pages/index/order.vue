@@ -121,7 +121,7 @@
 					return new Promise((resolve, reject) => {
 						var date = new Date();
 						var year = date.getFullYear();
-						var monthNow = date.getMonth();
+						var monthNow = date.getMonth()+1;
 						var day = date.getDate();
 						var hour = date.getHours();
 						var minutes = date.getMinutes();
@@ -135,7 +135,7 @@
 						//加上订单时间
 						reDate = new Date(year, monthNow, day, hour, minutes + min, seconds);
 						year = reDate.getFullYear();
-						monthNow = reDate.getMonth();
+						monthNow = reDate.getMonth()+1;
 						day = reDate.getDate();
 						hour = reDate.getHours();
 						minutes = reDate.getMinutes();
@@ -148,6 +148,7 @@
 				}
 				var min = 720;
 				var timerIndex = 0;
+				//uni.removeStorageSync("orderData");
 				if (uni.getStorageSync("orderData")) {
 					this.orders = uni.getStorageSync("orderData");
 				}

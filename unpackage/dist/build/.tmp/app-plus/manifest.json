@@ -4,14 +4,14 @@
     "iPhone",
     "iPad"
   ],
-  "id": "__UNI__DA30788",
+  "id": "__UNI__133D546",
   "name": "爱淘客",
   "version": {
-    "name": "1.0.0",
+    "name": "1.1.5",
     "code": "100"
   },
   "description": "",
-  "launch_path": "__uniapptabbar.html",
+  "launch_path": "__uniappview.html",
   "developer": {
     "name": "",
     "email": "",
@@ -30,13 +30,14 @@
     "VideoPlayer": {},
     "Share": {},
     "OAuth": {},
+    "Push": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
   },
   "plus": {
     "useragent": {
-      "value": "uni-app appservice",
+      "value": "uni-app",
       "concatenate": true
     },
     "splashscreen": {
@@ -46,11 +47,15 @@
       "delay": 0
     },
     "popGesture": "close",
-    "launchwebview": {},
+    "launchwebview": {
+      "id": "1",
+      "kernel": "WKWebview",
+      "uni-app": "auto"
+    },
     "statusbar": {
       "immersed": "supportedDevice",
-      "style": "dark",
-      "background": "#F8F8F8"
+      "style": "light",
+      "background": "#333333"
     },
     "distribute": {
       "google": {
@@ -87,7 +92,7 @@
           "<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>"
         ],
         "schemes": [
-          "taobao"
+          "egshuj"
         ]
       },
       "apple": {
@@ -105,7 +110,14 @@
           "tbopen",
           "tmall"
         ],
-        "idfa": false
+        "idfa": false,
+        "capabilities": {
+          "entitlements": {
+            "com.apple.developer.associated-domains": [
+              "applinks:egshuj.openinstall.io"
+            ]
+          }
+        }
       },
       "plugins": {
         "speech": {
@@ -114,18 +126,28 @@
         "share": {
           "weixin": {
             "appid": "wxbb1a562e2efa5ba7"
+          },
+          "qq": {
+            "appid": "101818282"
           }
         },
         "oauth": {
           "weixin": {
             "appid": "wxbb1a562e2efa5ba7",
             "appsecret": "668901d6c814673b44d33828bbd1214f"
+          },
+          "qq": {
+            "appid": "101818282"
           }
         },
         "payment": {
           "weixin": {
             "appid": "wxbb1a562e2efa5ba7"
           }
+        },
+        "ad": {},
+        "push": {
+          "unipush": {}
         },
         "audio": {
           "mp3": {
@@ -135,35 +157,50 @@
       }
     },
     "nativePlugins": {
-      "taobaologin": {
+      "openinstall-plugin": {
+        "APP_KEY": "egshuj",
         "__plugin_info__": {
-          "name": "taobaologin",
-          "description": "安卓淘宝登录插件",
-          "platforms": "Android",
+          "name": "openinstall-uniapp-plugin",
+          "description": "uni-app集成openinstall SDK插件",
+          "platforms": "Android,iOS",
           "url": "",
           "android_package_name": "",
           "ios_bundle_id": "",
           "isCloud": false,
           "bought": -1,
           "pid": "",
-          "parameters": {}
+          "parameters": {
+            "APP_KEY": {
+              "des": "openinstall为应用生成的appkey",
+              "key": "com.openinstall.APP_KEY",
+              "value": ""
+            }
+          }
         }
       },
-      "JHM-BaichuanPlugin": {
+      "dahui-alibaichuan": {
+        "baichuan_appkey": "27788224",
         "__plugin_info__": {
-          "name": "BaichuanPlugin",
+          "name": "dahui-alibaichuan",
           "description": "阿里百川插件",
-          "platforms": "iOS",
+          "platforms": "Android,iOS",
           "url": "",
           "android_package_name": "",
           "ios_bundle_id": "",
           "isCloud": false,
           "bought": -1,
           "pid": "",
-          "parameters": {}
+          "parameters": {
+            "baichuan_appkey": {
+              "des": "百川appkey",
+              "key": "baichuan_appkey",
+              "value": ""
+            }
+          }
         }
       }
     },
+    "usingComponents": false,
     "allowsInlineMediaPlayback": true,
     "safearea": {
       "background": "#ffffff",
@@ -172,15 +209,57 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.3.3",
+      "compilerVersion": "2.6.8",
       "control": "v8",
-      "nvueCompiler": "weex",
-      "renderer": "auto"
+      "nvueCompiler": "uni-app",
+      "renderer": "auto",
+      "nvue": {
+        "flex-direction": "column"
+      }
     },
-    "secondwebview": {
-      "id": "1",
-      "launch_path": "__uniappview.html",
-      "kernel": "WKWebview"
+    "tabBar": {
+      "color": "#333",
+      "selectedColor": "#000",
+      "borderStyle": "rgba(0,0,0,0.4)",
+      "backgroundColor": "#ffffff",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "iconPath": "static/bar/home.png",
+          "selectedIconPath": "static/bar/selecthome.png",
+          "text": "首页"
+        },
+        {
+          "pagePath": "pages/store/customer",
+          "iconPath": "static/bar/store.png",
+          "selectedIconPath": "static/bar/selectstore.png",
+          "text": "商城"
+        },
+        {
+          "pagePath": "pages/send_circle/index",
+          "iconPath": "static/bar/lts.png",
+          "selectedIconPath": "static/bar/selcetlts.png",
+          "text": "发圈"
+        },
+        {
+          "pagePath": "pages/school/index",
+          "iconPath": "static/bar/sch.png",
+          "selectedIconPath": "static/bar/selectsch.png",
+          "text": "学院"
+        },
+        {
+          "pagePath": "pages/index/user",
+          "iconPath": "static/bar/user.png",
+          "selectedIconPath": "static/bar/selectuser.png",
+          "text": "我的"
+        }
+      ],
+      "height": "50px",
+      "child": [
+        "lauchwebview"
+      ],
+      "selected": 4
     }
-  }
+  },
+  "usingComponents": {}
 }

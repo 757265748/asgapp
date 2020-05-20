@@ -1,8 +1,10 @@
 {
-  "usingComponents": {},
   "navigationStyle": "custom",
   "titleNView": {
     "type": "transparent"
   },
-  "bounce": "none"
+  "bounce": "none",
+  "usingComponents": {
+    "view-tabbar": "/components/uni-tabbar"
+  }
 }

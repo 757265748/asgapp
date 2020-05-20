@@ -1,1 +1,1 @@
-<view data-event-opts="{{[['tap',[['goTop',['$event']]]]]}}" class="gotop data-v-fa0cd566" bindtap="__e"><uni-icon vue-id="1" type="gotop" size="30" color="#FF4040" class="data-v-fa0cd566" bind:__l="__l"></uni-icon></view>
+<view data-event-opts="{{[['tap',[['goTop',['$event']]]]]}}" class="gotop data-v-fa0cd566" bindtap="__e"><uni-icon vue-id="392be67b-1" type="gotop" size="30" color="#FF4040" class="data-v-fa0cd566" bind:__l="__l"></uni-icon></view>

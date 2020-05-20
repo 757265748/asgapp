@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "divid-line": "/components/line",
+    "scroll-index": "/components/scroll-index",
+    "media-list": "/components/mediaList",
+    "good-list": "/components/good-list",
+    "uni-load-more": "/components/uni-load-more",
+    "go-top": "/components/go-top",
+    "uni-icon": "/components/uni-icon",
+    "uni-grid": "/components/uni-grid"
+  }
+}

@@ -1,1 +1,0 @@
-<view><block wx:for="{{orders}}" wx:for-item="item" wx:for-index="index" wx:key="index"><block><order-list vue-id="{{'1-'+index}}" good="{{item}}" bind:__l="__l"></order-list></block></block></view>

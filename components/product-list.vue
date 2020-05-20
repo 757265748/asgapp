@@ -1,19 +1,26 @@
 <template>
 	<view class="page">
 		<view class="uni-product-list">
-			<view class="uni-product" v-for="(product,index) in productList" :key="index" @click="godetail(product.num_iid)">
+			<!-- <view class="uni-product" v-for="(product,index) in productList" :key="index" @click="godetail(product.num_iid)"> -->
+			<view class="uni-product" v-for="(product,index) in productList" :key="index" @click="godetail(product.item_id||product.num_iid,product.presale_discount_fee_text)">
 				<view class="image-view">
-					<image v-if="renderImage" class="uni-product-image" :src="product.pict_url"></image>
+					<image v-if="!isCollection&&!isGuress&&!isSE" class="uni-product-image" :src="product.pict_url"></image>
+					<image v-if="isCollection&&!isSE" class="uni-product-image" :src="product.pict_url"></image>
+					<image v-if="isGuress||isSE" class="uni-product-image" :src="'http:'+product.pict_url"></image>
 					<!-- <image v-if="renderImage" class="uni-product-image" :src="product.item_url"></image> -->
 				</view>
 				<view class="uni-product-title">{{product.title}}</view>
-				<view class="uni-product-price">
-					<text class="uni-product-price-favour">￥{{product.quanhoujia}}</text>
-					<text class="uni-product-price-original">￥{{product.quanhoujia}}</text>
-				</view>
-				<view class="uni-product-price">
-					<text class="small-gray">{{product.volume}}人已购</text>
-					<text class="uni-product-tip">{{product.youhuiquan}}元券</text>
+				<view>
+					<view class="uni-product-price">
+						<text class="uni-product-price-favour">￥{{product.zk_final_price}}</text>
+						<to-fixed v-if="!isCollection" class="uni-product-price-original" :priceY="product.zk_final_price" :youhuiquan="product.coupon_amount"></to-fixed>
+						<view v-if="isCollection" class="uni-product-price-original">￥{{product.quanhoujia}}</view>
+					</view>
+					<view class="uni-product-price">
+						<text class="small-gray">{{product.volume}}人已购</text>
+						<text v-if="!isCollection" class="uni-product-tip">{{product.coupon_amount}}元券</text>
+						<text v-if="isCollection" class="uni-product-tip">{{product.youhuiquan}}元券</text>
+					</view>
 				</view>
 				<view v-if='isShow' class="cancle" @tap.stop="cancle(index)">
 					<uni-icon type="shoucang" color="#ff0000"></uni-icon>
@@ -28,6 +35,7 @@
 	import {
 		deleteCollection
 	} from '@/api/goods.js'
+	import toFixed from '@/pages/common/to-fixed.vue'
 	export default {
 		props: {
 			productList: [Array, Object],
@@ -35,28 +43,44 @@
 				type: String,
 				default: 'yhq_goods'
 			},
+			isCollection: {
+				type: Boolean,
+				default: false
+			},
+			isGuress: {
+				type: Boolean,
+				default: false
+			},
 			isShow: {
 				type: [Boolean, String],
 				default: false
+			},
+			isSE:{
+				type:Boolean,
+				default:false
 			}
+		},
+		components: {
+			toFixed
 		},
 		data() {
 			return {
 				renderImage: true
 			};
 		},
-		computed:{
-			quanhoujia(){
-				return 
-			}
+		computed: {},
+		created() {
+			console.log(this.isOrder);
 		},
 		onLoad() {
-			console.log(this.productList);
+
 		},
 		methods: {
-			godetail(id) {
+			godetail(id,presale) {
+				console.log(id);
+				console.log(JSON.stringify(this.productList));
 				uni.navigateTo({
-					url: `/pages/common/goods-detail?id=${id}&table=${this.table}`
+					url: `/pages/common/goods-detail?id=${id}&isSE=${this.isSE}&presale=${presale}`
 				})
 			},
 			cancle(index) {
@@ -76,7 +100,7 @@
 					let user = uni.getStorageSync('user');
 					return user.phone
 				} catch (e) {
-					//TODO handle the exception
+					console.log(e);
 				}
 			}
 		},
@@ -98,6 +122,7 @@
 		/* padding: 20upx; */
 		display: flex;
 		flex-direction: column;
+		margin: 0 10upx;
 	}
 
 	.image-view {
@@ -131,6 +156,7 @@
 		font-size: 28upx;
 		line-height: 1.5;
 		position: relative;
+		height: 20px;
 	}
 
 	.uni-product-price-original {
@@ -148,6 +174,7 @@
 		color: #ffffff;
 		padding: 0 10upx;
 		border-radius: 5upx;
+		font-size: 24upx;
 	}
 
 	.small-gray {

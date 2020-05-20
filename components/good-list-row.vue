@@ -5,9 +5,9 @@
 		</view>
 		<view class="uni-product-title">{{hotGood.title}}</view>
 		<view class="uni-product-price price-wrap">
-			<text class="uni-product-price-favour">￥{{hotGood.zk_final_price}}</text>
+			<text class="uni-product-price-favour">￥{{hotGood.zk_final_price}}</text><br/>
 			<text class="uni-product-price-original">￥{{jhj}}</text>
-			<view class="yj">预估佣金￥{{yj}}</view>
+			<!-- <view class="yj">预估佣金￥{{yj}}</view> -->
 		</view>
 		<view class="uni-product-price">
 			<text class="small-gray">{{hotGood.volume}}人已购</text>

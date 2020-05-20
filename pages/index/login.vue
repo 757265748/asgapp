@@ -14,30 +14,31 @@
 			<view v-show="current === 0">
 				<view class="item">
 					<uni-icon type="shouji" color="#ccc" size="16"></uni-icon>
-					<input @blur="checkphone" class="_input" :placeholder="loginerror" focus />
+					<input class="_input" v-model="phone" :placeholder="loginerror" focus />
 				</view>
 				<view class="item">
 					<uni-icon type="yanzhengma" color="#ccc" size="16"></uni-icon>
 					<input v-model="code" placeholder="请输入验证码" />
-					<view :class="['bt', { disable: isSend }]" @click="send('login')" class="bt">{{ loginyzm }}</view>
+					<button type="primary" :disabled="isSendL" class="bt" @click="send('login')">{{loginyzm}}</button>
 				</view>
-				<button @tap="accessLogin">accessLogin</button>
+				<!-- <button @tap="accessLogin">accessLogin</button> -->
 				<button :class="['login-bt', { disable: isabled }]" :disabled="isabled" @tap="login">登录</button>
 			</view>
 			<view v-show="current === 1">
 				<view class="item">
 					<uni-icon type="shouji" color="#ccc" size="16"></uni-icon>
-					<input @blur="checkphone" :placeholder="loginerror" focus />
+					<input v-model="phone" :placeholder="loginerror" focus />
 				</view>
 				<view class="item">
 					<uni-icon type="yanzhengma" color="#ccc" size="16"></uni-icon>
 					<input v-model="code" placeholder="请输入验证码" />
-					<view :class="['bt', { disable: isSend }]" @click="send('register')" class="bt">{{ regyzm }}</view>
+					<button type="primary" :disabled="isSendR" class="bt" @click="send('register')">{{regyzm}}</button>
 				</view>
 				<view class="item">
 					<uni-icon type="yqm" color="#ccc" size="16"></uni-icon>
 					<input v-model="yqm" placeholder="请输入邀请码" />
 				</view>
+				<!-- <button @tap="accessLogin">accessLogin</button>-->
 				<button :class="['login-bt', { disable: isabled }]" @tap="register" :disabled="isabled">注册</button>
 			</view>
 			<view v-if="viewFlag">
@@ -49,31 +50,33 @@
 
 <script>
 	import uniSegmentedControl from '@/components/uni-segmented-control.vue';
-	// import taobaoApi from '../../common/js/simple-tbapi.js';
-	// import share from '../../common/js/simple-share.js';
+	import share from '../../common/js/simple-share.js';
 	import {
 		order,
 		getRelationId,
-		getCTK
+		getCTK,
+		validyzm,
+		sendyzm
 	} from '@/api/goods.js'
 	import {
 		sendcode,
 		postRegister,
 		postLogin,
 		registerLp1
-	} from '@/api/user';
+	} from '@/api/user.js';
 	export default {
 		data() {
 			return {
 				items: ['登录', '注册'],
 				loginyzm: '发送验证码',
 				regyzm: '发送验证码',
-				isabled: true,
+				isabled: false,
 				timer: null,
 				yqm: '',
+				invite: "",
 				code: '',
-				current: 0,
-				activeColor: '#F9263E',
+				current: 1,
+				activeColor: '#333',
 				styleType: 'button',
 				isSend: true,
 				phone: '',
@@ -83,14 +86,44 @@
 				viewFlag: false,
 				start_time: "",
 				end_time: "",
-				min: 10
+				min: 10,
+				isSendR:false,
+				isSendL:false
 			};
 		},
 		components: {
 			uniSegmentedControl
 		},
-		onLoad() {},
+		onLoad(option) {
+			console.log(uni.getStorageSync("user"));
+			if(option.exit){
+				this.current=0;
+			}
+			if (uni.getStorageSync("loginFlag")) {
+				this.current = 0;
+			}
+			this.getInviteCode().then(res => {
+				this.yqm = res;
+				console.log("yqm:" + this.yqm);
+			});
+		},
 		methods: {
+			getInviteCode() {
+				return new Promise((resolve, reject) => {
+					const openinstall = uni.requireNativePlugin('openinstall-plugin');
+					openinstall.getInstall(
+						8,
+						function(result) {
+							if (result.bindData) {
+								let inviteCode = JSON.parse(result.bindData).invitecode;
+								console.log(inviteCode);
+								console.log('getInstall : channel1=' + JSON.stringify(result) + ', data=' + JSON.parse(result.bindData).yqm);
+								resolve(inviteCode);
+							}
+						}
+					);
+				})
+			},
 			back() {
 				uni.switchTab({
 					url: '/pages/index/index'
@@ -122,96 +155,30 @@
 				console.log(end_time);
 			},
 			accessLogin() {
-				console.log(111111);
-				getCTK({
-					page:1
-				}).then(res=>{
+				// getCTK({id:"557617725627"}).then(res=>{
+				// 	console.log(JSON.stringify(res));
+				// });
+				sendyzm(this.phone).then(res => {
 					console.log(JSON.stringify(res));
 				})
-// 				uni.share({
-// 					provider: "weixin",
-// 					scene: "WXSceneSession",
-// 					type: 0,
-// 					href: "https://t12.baidu.com/it/u=224094710,3804416768&fm=76",
-// 					title: "https://t12.baidu.com/it/u=224094710,3804416768&fm=76",
-// 					summary: "https://t12.baidu.com/it/u=224094710,3804416768&fm=76",
-// 					imageUrl: "https://t12.baidu.com/it/u=224094710,3804416768&fm=76",
-// 					success: function(res) {
-// 						console.log(JSON.stringify(res));
-// 						uni.showToast({
-// 							title: '已分享',
-// 							duration: 2000
-// 						});
-// 					},
-// 
-// 					fail: function(err) {
-// 
-// 						var errrr = JSON.stringify(err);
-// 						if (errrr) {
-// 							uni.showModal({
-// 								title: '表单不能留空',
-// 								content: '请完善所有信息再发起分享',
-// 								success: function(res) {
-// 									if (res.confirm) {
-// 										console.log('用户点击确定');
-// 									} else if (res.cancel) {
-// 										console.log('用户点击取消');
-// 									}
-// 								}
-// 							});
-// 						}
-// 					}
-// 				});
-				// this.user = uni.getStorageSync('user');
-				// if (this.user) {
-				// 	uni.switchTab({
-				// 		url: '/pages/index/user'
-				// 	});
-				// } else {
-				// console.log("no user info");
-				// }
-				let params = {};
-				params.scene = "WXSceneSession";
-				params.href = "www.baidu.com";
-				params.title = "标题";
-				params.summary = "xxx";
-				params.imageUrl = "https://t12.baidu.com/it/u=224094710,3804416768&fm=76";
-				uni.showToast({
-					title: '正在分享'
-				}); //wxContentImage
-				share.wxContentImage(params)
-
-				// taobaoApi.session(res => {
-				// 	console.log(JSON.stringify(res));
-				// 	var params={
-				// 		end_time:"2019-06-24 12:28:22",
-				// 		start_time:"2019-06-24 13:28:22",
-				// 		tbname:"qq470474509"
-				// 	}
-				// 	order(params.end_time,params.start_time,params.tbname);
-				// });
-				// uni.share({
-				// 	provider: "weixin",
-				// 	scene: "WXSceneSession",
-				// 	type: 2,
-				// 	imageUrl: "https://t12.baidu.com/it/u=224094710,3804416768&fm=76",
-				// 	success: function(res) {
-				// 		callback && callback({
-				// 			code: res.errMsg == "share:ok" ? 1 : 0,
-				// 			data: res
-				// 		})
-				// 	},
-				// 	fail: function(err) {
-				// 		callback && callback({
-				// 			code: 0,
-				// 			data: err
-				// 		})
-				// 	}
-				// });
+				const openinstall = uni.requireNativePlugin('openinstall-plugin');
+				openinstall.getInstall(
+					8,
+					function(result) { //https://app-egshuj.openinstall.io/js-test/android/6755751951456521661?yqm=00000000
+						//this.yqm=JSON.parse(result.bindData).stone;
+						if (result.bindData) {
+							console.log(JSON.stringify(result));
+							console.log('getInstall : channel=' + result.channel + ', data=' + JSON.parse(result.bindData).stone);
+						}
+					}
+				);
 			},
 			register() {
-				if (!this.code || !this.yqm) {
-					this._showToast('验证码或邀请码不能为空', 'none');
+				// if (!this.code || !this.yqm) {
+				// 	this._showToast('验证码或邀请码不能为空', 'none');
+				// 	return;
+				// }
+				if (!this.checkphone()) {
 					return;
 				}
 				postRegister({
@@ -219,136 +186,133 @@
 					yqm: this.yqm,
 					code: this.code
 				}).then(res => {
+					console.log(JSON.stringify(res))
 					//this.viewFlag=true;
 					// this.url='http://39.108.215.49:8009/html/code.html';  http://atk.51atk.com/
 					// this.url='https://oauth.taobao.com/authorize?response_type=code&client_id=25901417&redirect_uri=' +
 					// 					'http://39.108.215.49:8009/html/code.html&state=' +
 					// 					this.phone +
 					// 					'&view=wap'
-					console.log(res);
-					// this.user = uni.getStorageSync('user');
-					// console.log(JSON.stringify(this.user));
-					// const bcPlugin = uni.requireNativePlugin('dahui-baichuan');
-					// if (plus.device.vendor == 'Apple') {
-					// 	bcPlugin.BCAuth(result => {
-					// 		uni.showModal({
-					// 			title: '授权登录',
-					// 			content: 'code:' + result['code'] + '\nmessage:' + result['message']
-					// 		});
-					// 	});
-					// } else {
-					// 	bcPlugin.login(result => {
-					// 		if (result.type == 'success') {
-					// 			this.logintext = JSON.stringify(result);
-					// 			if (this.logintext) {//http://atk.51atk.com
-					// 				plus.runtime.openURL(//http://39.108.215.49:8009/html/code.html
-					// 					'https://oauth.taobao.com/authorize?response_type=code&client_id=25901417&redirect_uri=' +
-					// 					'http://atk.51atk.com&state=' +
-					// 					this.phone +
-					// 					'&view=wap'
-					// 				);
-					// 				console.log(this.logintext);
-					// 			}
-					// 			uni.showToast({
-					// 				title: '授权成功'
-					// 			});
-					// 			uni.switchTab({
-					// 				url: '/pages/index/user'
-					// 			});
-					// 		} else {
-					// 			//授权失败，包括用户取消登录
-					// 			uni.showToast({
-					// 				title: '授权失败,如有异常，请联系客服。'
-					// 			});
-					// 		}
-					// 	});
-					// }
-					// if (res.code == 100) {
-					// 	this._showToast(res.msg, 'none');
-					// 	return;
-					// } else {
-					// 	if (res.result) {
-					//
-					// 	}
-					// 	this._showToast(res.msg);
-					// }
-					console.log(res.result);
-					taobaoApi.login(tbRes => {
-						uni.setStorageSync('user', res.result); //将数据存在缓存中
+					//登录标记  表示用户已注册
+					if (res.code == 200) {
+						uni.setStorageSync("loginFlag", true);
 						console.log(JSON.stringify(res));
+						console.log(res.result);
+						uni.setStorageSync('user', res.result); //将数据存在缓存中
+						uni.setStorageSync("invitecode", res.result.invitecode)
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon:"none"
+						})
+						return;
+					}
+					const bcPlugin = uni.requireNativePlugin('dahui-alibaichuan');
+					bcPlugin.BCAuth(result => {
+						uni.setStorageSync("tbsqFlag",true);
+						//code == 0 ,msg:授权成功  ； code==-1  ,msg:报错信息
 						var url = 'https://oauth.taobao.com/authorize?response_type=code&client_id=25901417&redirect_uri=' +
 							'http://39.108.215.49:8009/html/code.html&state=' +
 							this.phone +
 							'&view=wap'
-						if (tbRes.code == 0) {
-							console.log("come in");
-							taobaoApi.openUrl(url, function() {
-								console.log(uni.getStorageSync("user"));
-								uni.reLaunch({
-									url: '/pages/index/user'
-								})
-								console.log("授权成功：" + tbRes.data)
-							})
-						} else {
-							console.log("授权失败：" + tbRes.data)
-						}
-					});
-					if (uni.getStorageSync('user')) {
-						//获取relationId
-						console.log(this.phone);
-						getRelationId({
-							user: this.phone
-						}).then(res => {
-							console.log(res);
-						})
-						setTimeout(function() {
+						bcPlugin.BCGetCoupons(url, result => {
+							console.log(url);
+							console.log(JSON.stringify(result));
 							uni.reLaunch({
 								url: '/pages/index/user'
 							})
-						}, 3000)
-					}
+						});
+
+					});
+					// taobaoApi.login(tbRes => {
+					// 	console.log(JSON.stringify(res));
+					// 	var url = 'https://oauth.taobao.com/authorize?response_type=code&client_id=27788224&redirect_uri=' +
+					// 		'http://39.108.215.49:8009/html/code.html&state=' +
+					// 		this.phone +
+					// 		'&view=wap'
+					// 	if (tbRes.code == 0) {
+					// 		console.log("come in");
+					// 		taobaoApi.openUrl(url, function() {
+					// 			console.log(uni.getStorageSync("user"));
+					// 			uni.reLaunch({
+					// 				url: '/pages/index/user'
+					// 			})
+					// 			console.log("授权成功：" + tbRes.data)
+					// 		})
+					// 	} else {
+					// 		console.log("授权失败：" + tbRes.data)
+					// 	}
+					// });
+					uni.reLaunch({
+						url: '/pages/index/user'
+					})
+					setTimeout(function() {
+						uni.reLaunch({
+							url: '/pages/index/user'
+						})
+					}, 3000)
+					// if (uni.getStorageSync('user')) {
+					// 	console.log(this.phone);
+					// 	uni.reLaunch({
+					// 		url: '/pages/index/user'
+					// 	})
+					// }
 				});
 			},
 
 			//https://oauth.taobao.com/authorize?response_type=code&client_id=25901417&redirect_uri=http://www.fpc98.com/web/smtoutside/waixielogin.aspx/&state=1212&view=web
 			login() {
-				if (!this.phone || !this.code) {
-					this._showToast('手机号码或验证码不能为空', 'none');
-					return;
-				}
+				// if (!this.phone || !this.code) {
+				// 	this._showToast('手机号码或验证码不能为空', 'none');
+				// 	return;
+				// }
+				// uni.switchTab({
+				// 	url: '/pages/index/user'
+				// });
+				console.log(this.phone, this.code);
 				postLogin(this.phone, this.code).then(res => {
-					console.log(this.phone, this.code);
+					console.log(res);
 					if (res.code == 100) {
 						this._showToast(res.msg, 'none');
 						return;
 					}
-					if (res.result) {
-						console.log('登陆!!', res.result);
-						uni.setStorageSync('user', res.result);
+					if (res.user) {
+						console.log('登陆!!', res.user);
+						uni.setStorageSync('user', res.user);
+						console.log(uni.getStorageSync("user"));
 						uni.switchTab({
 							url: '/pages/index/user'
 						});
+					} else {
+						uni.showToast({
+							title: "用户不存在!",
+							icon: "none"
+						})
 					}
 				});
 			},
 			checkphone(e) {
-				this.phone = e.detail.value;
+				//this.phone = e.detail.value;
+				var flag = false;
 				if (!this.phone) {
 					this._showToast('手机号码不能为空', 'none');
-					this.isabled = true;
-					this.isSend = true;
-					return;
+					// this.isabled = true;
+					// this.isSend = true;
+					flag = false;
 				} else if (!/^[1][3,4,5,6,7,8][0-9]{9}$/.test(this.phone)) {
 					this._showToast('请输入正确的手机号码格式', 'none');
-					this.isabled = true;
-					this.isSend = true;
-					return;
+					// this.isabled = true;
+					// this.isSend = true;
+					flag = false;
+				} else {
+					// this.isabled = false;
+					// this.isSend = false;
+					flag = true;
 				}
-				this.isabled = false;
-				this.isSend = false;
+				return flag;
 			},
 			send(type) {
-				if (!this.isSend && this.phone) {
+				if (this.phone) {
 					let isEx = sendcode(this.phone, type);
 					isEx.then(res => {
 						if (res.code == 100) {
@@ -361,19 +325,24 @@
 						let cut = 60;
 						timer = setInterval(() => {
 							if (type == 'login') {
+								this.isSendL=true;
 								this.loginyzm = --cut + 'S';
 							} else if (type == 'register') {
+								this.isSendR=true;
 								this.regyzm = --cut + 'S';
 							}
 							if (cut == 0) {
 								clearInterval(timer);
 								if (type == 'login') {
+									this.isSendL=false;
 									this.loginyzm = '发送验证码';
 								} else {
+									this.isSendR=false;
 									this.regyzm = '发送验证码';
 								}
 								this.isSend = false;
 							}
+
 						}, 1000);
 					});
 				} else if (!this.phone) {
@@ -419,7 +388,7 @@
 		.bt {
 			width: 50%;
 			padding: 10upx 20upx;
-			background: #f9263e;
+			background: #333;
 			border-radius: 10upx;
 			text-align: center;
 			font-size: 20upx;
@@ -433,7 +402,7 @@
 		}
 
 		.login-bt {
-			background: #f9263e;
+			background: #333;
 			border-radius: 10upx;
 			width: calc(100% - 40upx);
 			padding: 0upx 20upx;
@@ -457,7 +426,7 @@
 		flex-direction: row;
 		align-items: center;
 		text-align: center;
-		background: #f9263e;
+		background: #333;
 		height: 100upx;
 		padding-top: 30upx;
 

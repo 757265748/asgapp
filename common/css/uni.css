@@ -872,11 +872,11 @@ radio-group label, checkbox-group label{
 .uni-tab-bar .swiper-box {
 	flex: 1;
 	width: 100%;
-	height: calc(100% - 100upx);
+	height: calc(100% - 280upx);
 }
 
 .uni-tab-bar-loading{
-	padding:20upx 0;
+	/* padding:20upx 0; */
 }
 
 /* comment */

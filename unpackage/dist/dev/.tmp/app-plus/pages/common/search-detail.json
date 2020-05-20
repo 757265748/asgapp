@@ -1,4 +1,17 @@
 {
-  "usingComponents": {},
-  "navigationStyle": "custom"
+  "titleNView": {
+    "titleColor": "#fff",
+    "backgroundColor": "#333",
+    "searchInput": {
+      "backgroundColor": "#fff",
+      "borderRadius": "6px",
+      "placeholder": "请输入你要搜索的商品"
+    }
+  },
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar",
+    "product-list": "/components/product-list",
+    "uni-load-more": "/components/uni-load-more",
+    "media-list": "/components/mediaList"
+  }
 }

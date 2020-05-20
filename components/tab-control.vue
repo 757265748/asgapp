@@ -1,15 +1,8 @@
 <template>
-	<view :class="{ text: styleType === 'text' }" :style="{ borderColor: styleType === 'text' ? '' : activeColor }" class="segmented-control">
-		<view v-for="(item, index) in values" :class="[{ text: styleType === 'text' }, { active: index === currentIndex }]" :key="index" :style="{
-        color:
-          index === currentIndex
-            ? styleType === 'text'
-              ? activeColor
-              : '#fff'
-            : styleType === 'text'
-              ? '#000'
-              : activeColor,
-        backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : ''
+	<view class="segmented-control">
+		<view v-for="(item, index) in values" :key="index" :style="{
+       'background-color':index===currentIndex?activeBack:deadBack,color:index===currentIndex?activeColor:deadColor,
+	   borderColor:index===currentIndex?activeBorder:deadBorder
       }" class="segmented-control-item" @click="_onClick(index)">
 			{{ item }}
 		</view>
@@ -31,6 +24,26 @@
 				}
 			},
 			activeColor: {
+				type: String,
+				default: '#007aff'
+			},
+			activeBack: {
+				type: String,
+				default: '#333'
+			},
+			activeBorder: {
+				type: String,
+				default: '#007aff'
+			},
+			deadColor: {
+				type: String,
+				default: '#007aff'
+			},
+			deadBack: {
+				type: String,
+				default: '#333'
+			},
+			deadBorder: {
 				type: String,
 				default: '#007aff'
 			},
@@ -69,29 +82,33 @@
 	@charset "UTF-8";
 
 	.segmented-control {
+		margin: auto;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		width: 75%;
+		width: 90%;
 		font-size: 28upx;
 		box-sizing: border-box;
-		margin: 0 auto;
+		/* margin: 20upx auto; */
 		overflow: hidden;
-		border: 1px solid;
-		border-radius: 10upx
+		/* border: 1px solid; */
+		/* border-radius: 10upx */
 	}
 
 	.segmented-control.text {
-		border: 0;
+		/* border: 0; */
 		border-radius: 0
 	}
 
 	.segmented-control-item {
 		flex: 1;
 		text-align: center;
-		line-height: 60upx;
+		/* line-height: 60upx; */
 		box-sizing: border-box;
-		border-left: 1px solid
+		border: 1px solid;
+		margin: 0 20upx;
+		padding: 5upx 10upx;
+		border-radius: 1rem;
 	}
 
 	.segmented-control-item.active {
@@ -99,15 +116,15 @@
 	}
 
 	.segmented-control-item.text {
-		border-left: 0;
+		/* border-left: 0; */
 		color: #000
 	}
 
 	.segmented-control-item.text.active {
-		border-bottom-style: solid
+		/* border-bottom-style: solid */
 	}
 
 	.segmented-control-item:first-child {
-		border-left-width: 0
+		/* border-left-width: 0 */
 	}
 </style>

@@ -289,7 +289,7 @@
 } */
 
 .uni-tab-bar-loading {
-	padding: 20upx 0;
+	/* padding: 20upx 0; */
 }
 
 @keyframes navzoomIn {

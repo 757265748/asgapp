@@ -20,7 +20,7 @@
 				<view :style="{background:color}"></view>
 			</view>
 		</view>
-		<text class="loading-text" :style="{color:color}">{{loadingType === 0 ? contentText.contentdown : (loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore)}}</text>
+		<text class="loading-text" :style="{color:color}">{{loadingType === 0 ? contentText.contentdown : (loadingType === 2 ? contentText.contentrefresh : contentText.contentnomore)}}</text>
 	</view>
 </template>
 
@@ -45,9 +45,9 @@
 				type: Object,
 				default () {
 					return {
-						contentdown: "上拉显示更多",
-						contentrefresh: "正在加载...",
-						contentnomore: "没有更多数据了"
+						contentdown: "拉一下显示更多",
+						contentrefresh: "没有更多了",
+						contentnomore: "正在玩命加载..."
 					};
 				}
 			}

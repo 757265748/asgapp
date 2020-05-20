@@ -1,0 +1,204 @@
+.imgChecked.data-v-fb126e92 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+uni-textarea.data-v-fb126e92 {
+  height: 50px;
+  min-height: 50px;
+}
+.text.data-v-fb126e92 {
+  color: #939191;
+  font-size: 12px;
+  line-height: 18px;
+}
+.main.data-v-fb126e92 {
+  background-color: #E6E6E6;
+}
+.head.data-v-fb126e92,
+.body.data-v-fb126e92,
+.foot.data-v-fb126e92 {
+  border-radius: 10rpx;
+}
+.head.data-v-fb126e92 {
+  border-radius: 10rpx;
+  height: 30px;
+  background-color: white;
+  text-indent: 20px;
+  color: #F0AD4E;
+}
+.goodsDes.data-v-fb126e92,
+.controls.data-v-fb126e92,
+.photos.data-v-fb126e92 {
+  margin: 10px;
+  background-color: white;
+  border-radius: 10rpx;
+}
+.goodsDes.data-v-fb126e92 {
+  padding: 10px 20px;
+  height: auto;
+}
+.controls.data-v-fb126e92 {
+  height: 80px;
+  padding: 5px;
+}
+.photos.data-v-fb126e92 {
+  height: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  padding-bottom: 50px;
+}
+.mainPhoto > .image.data-v-fb126e92 {
+  width: 100%;
+  height: 300px;
+}
+.mainPhoto.data-v-fb126e92,
+.smallPhoto.data-v-fb126e92 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0%;
+          flex: 1 1 0%;
+}
+.smallPhoto > view.data-v-fb126e92 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.smallPhoto > view > view.data-v-fb126e92 {
+  height: 100px;
+  width: 50%;
+}
+.foot.data-v-fb126e92 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+}
+.checkControls.data-v-fb126e92,
+.copyControls.data-v-fb126e92 {
+  margin: 10px 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+}
+.copyControls view.data-v-fb126e92 {
+  margin: 0 20rpx;
+  padding: 0 10rpx;
+  border-radius: 20px;
+  background-color: pink;
+  color: red;
+}
+.foot.data-v-fb126e92 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.foot > button.data-v-fb126e92 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  margin: 0 10px;
+  padding: 0;
+  border-radius: 30px;
+}
+.foot > button.data-v-fb126e92:nth-child(1) {
+  background-color: #ff8323;
+}
+.foot > button.data-v-fb126e92:nth-child(2) {
+  background-color: #f14444;
+}
+.bottom-content.data-v-fb126e92 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  padding: 0 35rpx;
+}
+.bottom-content-box.data-v-fb126e92 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin: 15px 15rpx;
+  box-sizing: border-box;
+}
+.bottom-content-image.data-v-fb126e92 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 90rpx;
+  height: 90rpx;
+  overflow: hidden;
+  background: #007aff;
+  border-radius: 10rpx;
+}
+.bottom-content-text.data-v-fb126e92 {
+  font-size: 26rpx;
+  color: #333;
+  margin-top: 10rpx;
+}
+.bottom-btn.data-v-fb126e92 {
+  height: 90rpx;
+  line-height: 90rpx;
+  border-top: 1px #f5f5f5 solid;
+}
+.bottom-content-image.wx.data-v-fb126e92 {
+  background: #00ce47;
+}
+.bottom-content-image.qq.data-v-fb126e92 {
+  background: #00b6f6;
+}
+.bottom-content-image.sina.data-v-fb126e92 {
+  background: #ff766a;
+}
+.bottom-content-image.copy.data-v-fb126e92 {
+  background: #07ccd0;
+}
+@font-face {
+  font-family: 'iconfont';
+  /* project id 1028200 */
+  src: url('https://at.alicdn.com/t/font_1028200_47ewtwy4t04.ttf') format('truetype');
+}
+.icon.data-v-fb126e92 {
+  font-family: 'iconfont';
+  font-size: 40rpx;
+  color: #fff;
+}
+

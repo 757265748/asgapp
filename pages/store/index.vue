@@ -2,16 +2,20 @@
 	<view class="index-content">
 
 		<!-- 查找栏 -->
-		<view class="search-container">
-			<view class="title">商城</view>
-		</view>
+		<!-- <view class="search-container">
+			<view class="title">双11狂欢</view>
+		</view> -->
 		<!-- 主布局区域 -->
 		<view class="uni-tab-bar uni-swiper-tab">
-			<scroll-view id="tab-bar" class="_isfixed " scroll-x :scroll-left="scrollLeft">
+			<view class="container">
+				<product-list></product-list>
+				<uni-load-more :loadingType="loadingType" :contentText="contentText"></uni-load-more>
+			</view>
+			<!-- <scroll-view id="tab-bar" class="_isfixed " scroll-x :scroll-left="scrollLeft">
 				<view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']" :id="tab.id"
 				 :data-current="index" @tap="tapTab">{{tab.name}}</view>
-			</scroll-view>
-
+			</scroll-view> 
+			
 			<swiper :current="tabIndex" class="index-swiper" circular @change="changeTab">
 				<swiper-item>
 					<block>
@@ -29,14 +33,15 @@
 					</block>
 				</swiper-item>
 
-			</swiper>
-		</view>
+			</swiper> -->
+	</view>
 	</view>
 </template>
 
 <script>
 	import dividLine from '@/components/line.vue';
-	import scrollIndex from '@/components/scroll-index.vue'
+	import productList from '@/components/product-list.vue';
+	import uniLoadMore from '@/components/uni-load-more.vue'
 	import {
 		getGoodsList,
 		getRecommend,
@@ -45,15 +50,23 @@
 	export default {
 		components: {
 			dividLine,
-			scrollIndex
+			productList,
+			uniLoadMore
 		},
 		data() {
 			return {
+				contentText: {
+					contentdown: "上拉显示更多",
+					contentrefresh: "正在加载...",
+					contentnomore: "没有更多数据了"
+				},
+				loadingType: 0,
 				uni: "",
 				swiper: "",
 				tab: "",
 				scrolltop: 0,
 				productList: new Array(10),
+				SEGoodsList: new Array(),
 				loadingType: 0,
 				imagelist: [{
 						title: 1,
@@ -102,10 +115,45 @@
 
 			}
 		},
+		created() {
+			this.getSEGoods();
+		},
 		onLoad(option) {
-			this._getData();
+			//this._getData();
+
 		},
 		methods: {
+			SEGoods() {
+				return new Promise((resolve, reject) => {
+					uni.request({
+						url: 'http://api.gw.21ds.cn/api/taoke/get1111MaterialItem',
+						data: {
+							tbname: "qq470474509",
+							apkey: "af030b85-4e9a-a924-bd79-c4a1d6ed8cae",
+							pid: "mm_133093062_391450189_107723950192"
+						},
+						success(res) {
+							//console.log(JSON.stringify(res.data.data));
+							resolve(res.data.data);
+							console.log(JSON.stringify(this.SEGoodsList));
+						},
+						fail(res) {
+							reject(res);
+							console.log(res);
+						}
+					})
+				})
+			},
+			getSEGoods() {
+				// uni.showModal({
+				// 	title:'玩命加载中...',
+				// 	mask:true
+				// })
+				this.SEGoods().then(res => {
+					this.SEGoodsList = res;
+					console.log(JSON.stringify(res));
+				});
+			},
 			qrcode() {
 				console.log('二维码');
 				uni.scanCode({
@@ -216,7 +264,7 @@
 
 			//滑动swiper 改变内容
 			async tapTab(e) { //点击tab-bar
-			
+
 				if (this.tabIndex === e.target.dataset.current) {
 					return false;
 				} else {
@@ -229,16 +277,16 @@
 					this.istapChange = true;
 					this.tabIndex = e.target.dataset.current
 					this.loadingType = 0;
-					 
+
 					if (this.istapChange) {
 						this.tabIndex = index;
 						this.istapChange = false;
 						return;
 					}
-						this.tabIndex = index; //一旦访问data就会出问题
+					this.tabIndex = index; //一旦访问data就会出问题
 					this.loadingType = 0;
 					let good = null;
-					 
+
 					if (!this.productList[this.tabIndex]) {
 						try {
 							good = uni.getStorageSync(this.tabIndex.toString())
@@ -348,13 +396,12 @@
 		width: 60px;
 		height: 60px;
 	}
-
 	.index-content {
 		position: relative;
 		width: 100%;
-		height: 100%;
+		height: auto;
 		overflow: hidden;
-		z-index: 999;
+		margin-bottom:20px;
 		// 公告栏
 		// 		.bulletin-board {
 		// 			width: calc(100% -20upx);

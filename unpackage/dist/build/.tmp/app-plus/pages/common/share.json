@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "创建分享",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#F8F8F8",
+  "backgroundColorTop": "#F4F5F6",
+  "backgroundColorBottom": "#F4F5F6",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup"
+  }
+}

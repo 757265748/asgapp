@@ -1,2 +1,1 @@
-<import src="./web-view.vue.wxml" />
-    <template is="7eab2484" data="{{ ...$root['0'], $root }}"/>
+<view class="content"><nav-bar vue-id="63069b6d-1" color="#fff" background="#ff000" data-event-opts="{{[['^back',[['back']]]]}}" bind:back="__e" bind:__l="__l"></nav-bar><web-view src="{{src}}"></web-view></view>

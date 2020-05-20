@@ -1,0 +1,108 @@
+{
+  "pages": [
+    "pages/common/category",
+    "pages/index/user",
+    "pages/user/team_list",
+    "pages/user/set_info",
+    "pages/user/my_team",
+    "pages/user/invite_friend",
+    "pages/user/team_bonus",
+    "pages/user/tx",
+    "pages/user/tx_record",
+    "pages/user/revenue",
+    "pages/user/my_info",
+    "pages/index/indexModel",
+    "pages/user/board",
+    "pages/index/guide",
+    "pages/index/login",
+    "pages/index/lunbo",
+    "pages/common/moreGoods",
+    "pages/index/index",
+    "pages/tabPage/tabGoods",
+    "pages/tabPage/19.9",
+    "pages/store/index",
+    "pages/store/store",
+    "pages/store/circle",
+    "pages/store/customer",
+    "pages/store/shopcar",
+    "pages/chat/index",
+    "pages/chat/chat",
+    "pages/chat/friend-circle",
+    "pages/chat/group",
+    "pages/chat/mail-list",
+    "pages/send_circle/index",
+    "pages/school/school",
+    "pages/school/index",
+    "pages/school/pub-ma",
+    "pages/school/recommend",
+    "pages/school/school-knowlege",
+    "pages/index/login",
+    "pages/common/good",
+    "pages/common/goods-detail",
+    "pages/common/goods2-detail",
+    "pages/common/good-item",
+    "pages/common/web-view",
+    "pages/common/search",
+    "pages/index/setting",
+    "pages/index/change-name",
+    "pages/index/change-phone",
+    "pages/index/new-phone",
+    "pages/index/total-revenue",
+    "pages/common/search-detail",
+    "pages/index/collection",
+    "pages/index/bindzfb",
+    "pages/index/cash-withdrawal",
+    "pages/common/share",
+    "pages/index/sub-detail"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#333333",
+    "backgroundColor": "#F8F8F8",
+    "backgroundColorTop": "#F4F5F6",
+    "backgroundColorBottom": "#F4F5F6"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#000",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/bar/home.png",
+        "selectedIconPath": "static/bar/selecthome.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/store/customer",
+        "iconPath": "static/bar/store.png",
+        "selectedIconPath": "static/bar/selectstore.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/send_circle/index",
+        "iconPath": "static/bar/lts.png",
+        "selectedIconPath": "static/bar/selcetlts.png",
+        "text": "发圈"
+      },
+      {
+        "pagePath": "pages/school/index",
+        "iconPath": "static/bar/sch.png",
+        "selectedIconPath": "static/bar/selectsch.png",
+        "text": "学院"
+      },
+      {
+        "pagePath": "pages/index/user",
+        "iconPath": "static/bar/user.png",
+        "selectedIconPath": "static/bar/selectuser.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "uni-icon": "/components/uni-icon"
+  },
+  "sitemapLocation": "sitemap.json"
+}

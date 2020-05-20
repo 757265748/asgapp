@@ -1,0 +1,22 @@
+
+.page{
+	background-color: #eaeaea;
+	position: fixed;
+	width: 100%;
+}
+.form-group{
+	margin: 30rpx 0;
+	padding: 10rpx 20rpx;
+	background-color: white;
+}
+.name{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+}
+.input{
+	-webkit-box-flex: 4;
+	-webkit-flex: 4;
+	        flex: 4;
+}
+

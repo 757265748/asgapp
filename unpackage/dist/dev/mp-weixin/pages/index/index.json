@@ -1,0 +1,21 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "首页",
+  "onReachBottomDistance": "50",
+  "usingComponents": {
+    "divid-line": "/components/line",
+    "scroll-index": "/components/scroll-index",
+    "media-list": "/components/mediaList",
+    "good-list": "/components/good-list",
+    "uni-load-more": "/components/uni-load-more",
+    "go-top": "/components/go-top",
+    "uni-icon": "/components/uni-icon",
+    "uni-grid": "/components/uni-grid-first",
+    "order-list": "/components/order-list",
+    "uni-segmented-control": "/components/tab-control",
+    "sort": "/components/sort",
+    "tab-good-list": "/components/tab-good-list",
+    "product-list-row": "/components/product-list-row",
+    "uni-popup": "/components/uni-popup-tab"
+  }
+}

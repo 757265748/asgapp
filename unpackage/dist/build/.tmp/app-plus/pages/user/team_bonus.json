@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "团队奖金",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "奖金明细",
+        "fontSize": "16"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "订单明细",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "media-list": "/components/mediaList",
+    "order-list": "/components/order-list",
+    "uni-segmented-control": "/components/tab-control"
+  }
+}

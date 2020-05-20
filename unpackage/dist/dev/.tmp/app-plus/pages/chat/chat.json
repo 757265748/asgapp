@@ -1,7 +1,7 @@
 {
-  "usingComponents": {},
   "navigationStyle": "custom",
   "titleNView": {
     "type": "transparent"
-  }
+  },
+  "usingComponents": {}
 }

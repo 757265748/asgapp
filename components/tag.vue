@@ -1,5 +1,5 @@
 <template>
-	<view style="margin-top: 10px;" @tap="onTap(tag)">
+	<view class="hot_search" style="margin-top: 10px;" @tap="onTap(tag)">
 		<text class="search-tag" :style="{color: color}">{{tag}}</text>
 	</view>
 </template>
@@ -42,14 +42,28 @@
 		flex-wrap: wrap;
 		margin-top: 60rpx;
 	}
-
-	.search-tag {
-		margin: 80rpx 20rpx;
+	.hot_search{
+		max-width: 50%;
+		box-sizing: border-box;
+		margin: 20upx;
+		overflow: hidden;
+		white-space: pre;
+		text-overflow: ellipsis;
 		color: #333;
 		font-weight: 600;
 		background: #eee;
 		padding: 6upx 20upx;
 		border-radius: 10upx;
+	}
+	.search-tag {
 		white-space: nowrap;
+		// margin: 80rpx 20rpx;
+		// width: 100%;
+		// color: #333;
+		// font-weight: 600;
+		// background: #eee;
+		// padding: 6upx 20upx;
+		// border-radius: 10upx;
+		// white-space: nowrap;
 	}
 </style>

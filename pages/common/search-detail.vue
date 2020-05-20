@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
-		<nav-bar title="搜索" color="#ffffff" background="#ff0000" @back="back"></nav-bar>
-		<view class="search-box">
+		<!-- <nav-bar title="搜索" color="#ffffff" background="#ff0000" @back="back"></nav-bar> -->
+		<!-- <view class="search-box">
 			<view class="wrap">
 				<view class="placeholder">
 					<uni-icon type="search" color="#b5b5b5" size="18"></uni-icon>
@@ -9,43 +9,60 @@
 				</view>
 				<uni-icon @click="clear" v-if="isShow" type="clear" color="#b5b5b5" size="18"></uni-icon>
 			</view>
-		</view>
+		</view> -->
 		<view class="container">
-			<product-list :productList="result" table='yhq_goods'></product-list>
+			<block v-for="(item,index) in result">
+				<media-list :options="item"></media-list>
+			</block>
+			<!-- <product-list :productList="result" table='yhq_goods'></product-list> -->
 			<uni-load-more :loadingType="loadingType" :contentText="contentText"></uni-load-more>
 		</view>
 	</view>
 </template>
 <script>
 	import navBar from '@/components/nav-bar.vue'
+	import mediaList from '@/components/mediaList.vue'
 	import productList from '@/components/product-list.vue'
 	import uniLoadMore from '@/components/uni-load-more.vue'
 	import {
-		getKeyWord
-	} from "@/api/goods"
+		getKeyWord,
+		getGoodDetail,
+		getRelation_id
+	} from "@/api/goods.js"
 	export default {
 		data() {
 			return {
 				isShow: false,
 				result: null,
 				keyword: '',
+				goodsId:'',
 				page: 1,
 				loadingType: 0,
 				contentText: {
-					contentdown: "上拉显示更多",
+					contentdown: "没有更多了",
 					contentrefresh: "正在加载...",
-					contentnomore: "没有更多数据了"
+					contentnomore: "正在加载..."
 				},
 			}
 		},
 		components: {
 			navBar,
 			productList,
-			uniLoadMore
+			uniLoadMore,
+			mediaList
 		},
 		onLoad(option) {
-			this.keyword = option.keyword;
+			this.keyword = option.keyword||'';
+			this.goodsId=option.goodsId||'';
+			console.log(JSON.stringify(option));
 			this.getData();
+		},
+		onNavigationBarSearchInputChanged(e){
+			this.getinput(e);
+			console.log(e);
+		},
+		onNavigationBarSearchInputConfirmed(e){
+			this.onTap(e.text);
 		},
 		//到底加载更多
 		onReachBottom() {
@@ -53,7 +70,8 @@
 				return;
 			}
 			this.loadingType = 1;
-			let ret = getKeyWord(this.keyword, this.page, );
+			console.log(this.page);
+			let ret = getKeyWord(this.keyword, this.page);
 			ret.then(res => {
 				if (res.code == 200) {
 					if (res.result.length == 0) {
@@ -79,28 +97,77 @@
 					delta:1
 				})
 			},
+			getRelationId() {
+				console.log(JSON.stringify(uni.getStorageSync("user")));
+				try {
+					if(uni.getStorageSync("user").pid==""){
+						getRelation_id({
+							phone:uni.getStorageSync("user").phone
+						}).then(res=>{
+							console.log(res.data);
+							if(res.code==200){
+								if(res.data==""){
+									uni.showToast({
+										title:'你还没有授权淘宝',
+										icon:'none'
+									})
+									 return 0;
+								}
+								else return res.data;
+							}
+						})
+					}else{
+						return uni.getStorageSync("user").pid
+					}
+				} catch (e) {
+					console.log(e);
+				}
+			},
 			getData() {
 				uni.showLoading({
 					title: '搜索中'
 				})
-				let ret = getKeyWord(this.keyword);
-				ret.then(res => {
-					console.log(res);
-					uni.hideLoading();
-					if (res.code == 200) {
-						this.result = res.result;
-						console.log('搜索结果', this.result);
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: 'none'
-						})
-					}
-				})
+				if(this.goodsId==''){
+					let ret = getKeyWord(this.keyword,1);
+					ret.then(res => {
+						console.log(JSON.stringify(res));
+						uni.hideLoading();
+						if (res.code == 200) {
+							this.result = res.result;
+							console.log('搜索结果', this.result);
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					console.log(this.getRelationId());
+					getGoodDetail(Number(this.goodsId),Number(this.getRelationId())).then(res=>{
+						uni.hideLoading();
+						console.log(res.data);
+						this.result=[];
+						let goods=res.data.item_info;
+						goods.item_id=res.data.item_id;
+						goods.youhuiquan=res.data.youhuiquan;
+						goods.commission_rate=res.data.max_commission_rate*100;
+						this.result.push(goods);
+						console.log(this.result[0]);
+					})
+				}
 			},
 			submit(e) {
 				this.keyword = e.detail.value.trim();
 				this.getData()
+			},
+			getinput(e){
+				this.value = e.text;
+				if (this.value) {
+					this.isShow = true
+				} else {
+					this.isShow = false
+				}
 			},
 			_getinput(e) {
 				this.keyword = e.detail.value.trim();
@@ -117,6 +184,7 @@
 			onTap(value) {
 				this.keyword = value
 				this.isShow = true
+				this.getData();
 				// console.log(value)
 			},
 		}
@@ -159,7 +227,6 @@
 
 	.container {
 		width: 96%;
-		margin: 102px auto 0 auto;
 	}
 
 	.search-title {

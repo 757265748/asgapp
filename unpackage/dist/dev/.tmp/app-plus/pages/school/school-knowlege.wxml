@@ -1,2 +1,1 @@
-<import src="./school-knowlege.vue.wxml" />
-    <template is="a38c6ab8" data="{{ ...$root['0'], $root }}"/>
+<view class="content"><image class="logo" src="../../static/logo.png"></image><view><text class="title">{{title}}</text></view><view-tabbar vue-id="06bcb5ad-1" current="2" tabs="{{tabs}}" bind:__l="__l"></view-tabbar></view>

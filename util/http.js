@@ -17,7 +17,8 @@ class Http {
 				},
 				success: (res) => {
 					console.log(res);
-					let code = res.statusCode.toString()
+					// let code = res.statusCode.toString()
+					let code = res.code;
 					if (code.startsWith('2')) {
 						resolve(res.data)
 					} else {

@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "支付宝提现",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "提现记录",
+        "fontSize": "16"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

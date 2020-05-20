@@ -1,0 +1,22 @@
+{
+  "titleNView": {
+    "buttons": [
+      {
+        "background": "#FC1F3F",
+        "colorPressed": "#666",
+        "text": "搜索",
+        "fontSize": "15px",
+        "float": "right",
+        "type": "forward"
+      }
+    ],
+    "searchInput": {
+      "backgroundColor": "#7C7C7C",
+      "placeholderColor": "#fff",
+      "borderRadius": "20px",
+      "placeholder": "搜索用户名或手机号",
+      "disabled": false
+    }
+  },
+  "usingComponents": {}
+}

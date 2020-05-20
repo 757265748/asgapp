@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
-  "navigationStyle": "custom"
+  "navigationBarTitleText": "我的",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "uni-segmented-control": "/components/uni-segmented-control"
+  }
 }

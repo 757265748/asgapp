@@ -1,12 +1,13 @@
 <template>
-	<view>{{quanhoujia}}</view>
+	<view class="quanhoujia">￥{{quanhoujia}}</view>
 </template>
 
 <script>
 	export default{
 		props:{
 			priceY:{
-				type:Number
+				type:String,
+				default:""
 			},
 			youhuiquan:{
 				type:Number
@@ -14,12 +15,18 @@
 		},
 		computed:{
 			quanhoujia(){
-				console.log(this.priceY-this.youhuiquan);
-				return (this.priceY-this.youhuiquan).toFixed(1);
+				try{
+					return (Number(this.priceY)-this.youhuiquan).toFixed(1);
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		}
 	}
 </script>
 
 <style>
+	.quanhoujia{
+		color: #FF0000;
+	}
 </style>
