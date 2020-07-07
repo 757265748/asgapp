@@ -9,8 +9,69 @@
 		// 	}
 		// },
 		// {
-		// 	"path":"pages/index/vue"
+		// 	"path": "pages/user/opinion",
+		// 	"style":{
+		// 		"navigationBarTitleText":"意见反馈"
+		// 	}
 		// },
+		// {
+		// 	"path": "pages/index/welcome",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// },
+		{
+			"path": "pages/index/guide",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/user/push",
+			"style":{
+				"navigationBarTitleText":"消息推送测试"
+			}
+		},
+		{
+			"path": "pages/user/opinion",
+			"style":{
+				"navigationBarTitleText":"意见反馈"
+			}
+		},
+		{
+			"path": "pages/index/tab_more",
+			"style":{
+				"navigationBarBackgroundColor":"#EA4D3E",
+				"navigationBarTitleText":"商品分类"
+			}
+		},
+		{
+			"path": "pages/user/business_cooperation",
+			"style":{
+				"navigationBarTitleText":"招商合作",
+				"navigationBarBackgroundColor":"#EA4D3E"
+			}
+		},
+		{
+			"path": "pages/user/about_me",
+			"style":{
+				"navigationBarTitleText":"关于我们",
+				"navigationBarBackgroundColor":"#EA4D3E"
+			}
+		},
+		{
+			"path": "pages/user/order_get",
+			"style":{
+				"navigationBarTitleText":"订单找回",
+				"navigationBarBackgroundColor":"#EA4D3E"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
 		{
 			"path": "pages/index/user",
 			"style": {
@@ -29,10 +90,32 @@
 			}
 		},
 		{
+			"path": "pages/user/newbie_tutorial",
+			"style":{
+				"navigationBarTitleText":"新手教程",
+				"navigationBarBackgroundColor":"#EA4D3E"
+			}
+		},
+		{
+			"path": "pages/user/common_problem",
+			"style":{
+				"navigationBarTitleText":"常见问题",
+				"navigationBarBackgroundColor":"#EA4D3E"
+			}
+		},
+		{
+			"path":"pages/vip/index",
+			"style":{
+				"navigationBarTitleText":"会员尊享",
+				"navigationBarBackgroundColor":"#EA4D3E"
+			}
+		},
+		{
 			"path": "pages/user/team_list",
 			"style": {
 				"navigationBarTitleText": "团队成员",
-				"navigationBarTextStyle": "white"
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#EA4D3E"
 			}
 		},
 		{
@@ -45,6 +128,7 @@
 		{
 			"path": "pages/user/my_team",
 			"style": {
+				"navigationBarBackgroundColor":"#EA4D3E",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [{
@@ -57,8 +141,8 @@
 							"type": "forward"
 						}],
 						"searchInput": {
-							"backgroundColor": "#7C7C7C",
-							"placeholderColor": "#fff",
+							"backgroundColor": "#fff",
+							"placeholderColor": "#7C7C7C",
 							"borderRadius": "20px",
 							"placeholder": "搜索用户名或手机号",
 							"disabled": false
@@ -71,13 +155,15 @@
 			"path": "pages/user/invite_friend",
 			"style": {
 				"navigationBarTitleText": "邀请好友",
-				"navigationBarTextStyle": "white"
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#EA4D3E"
 			}
 		},
 		{
 			"path": "pages/user/team_bonus",
 			"style": {
 				"navigationBarTitleText": "团队奖金",
+				"navigationBarBackgroundColor":"#EA4D3E",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [{
@@ -113,6 +199,7 @@
 			"style": {
 				"navigationBarTitleText": "我的收益",
 				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#EA4D3E",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [{
@@ -135,7 +222,7 @@
 			"path": "pages/user/board",
 			"style": {
 				"navigationBarTitleText": "订单明细",
-				// "navigationBarBackgroundColor": "#F9263E",
+				"navigationBarBackgroundColor": "#EA4D3E",
 				"navigationBarTextStyle": "white"
 			}
 		},
@@ -162,57 +249,6 @@
 				// "navigationBarBackgroundColor": "#F9263E",
 				"navigationBarTextStyle": "white"
 			}
-		},
-		{
-			"path": "pages/index/index",
-			// "style": {
-			// 	"enablePullDownRefresh":true,
-			// 	"navigationBarTitleText": "首页",
-			// 	"onReachBottomDistance": "50",
-			// 	"app-plus": {
-			// 		"titleNView": {
-			// 			"type": "transparent",
-			// 			"buttons": [{
-			// 				"colorPressed": "#666",
-			// 				"text": "\u00BB",
-			// 				"float": "right",
-			// 				"fontWeight": "bold"
-			// 			}],
-			// 			"searchInput": {
-			// 				"backgroundColor": "#fff",
-			// 				"placeholderColor": "#666",
-			// 				"borderRadius": "6px",
-			// 				"placeholder": "版本号1.1.9",
-			// 				"disabled": true
-			// 			}
-			// 		}
-			// 	}
-			// }
-			"style": {
-				"navigationBarTitleText": "导航栏带搜索框",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent",
-						"titleColor": "#fff",
-						"backgroundColor": "#007AFF",
-						"buttons": [{
-							"fontSrc": "/static/uni.ttf",
-							"text": "\ue537",
-							"width": "40px",
-							"fontSize": "28px",
-							"color": "#fff",
-							"background": "rgba(0,0,0,0)"
-						}],
-						"searchInput": {
-							"backgroundColor": "#F6F6F6",
-							"borderRadius": "6px",
-							"placeholder": "请输入地址 如：大钟寺",
-							"disabled": true
-						}
-					}
-				}
-			}
-			
 		},
 		/* tabPage */
 		{
@@ -280,20 +316,6 @@
 		// 	}
 		// },
 		{
-			"path": "pages/store/index",
-			"style": {
-				"navigationBarTitleText": "双11会场",
-				"navigationBarBackgroundColor": "#FC1F3F",
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent"
-					},
-					"bounce": "none"
-				}
-			}
-		},
-		{
 			"path": "pages/store/store",
 			"style": {
 				"navigationStyle": "custom",
@@ -318,15 +340,11 @@
 			}
 		},
 		{
-			"path": "pages/store/customer",
+			"path": "pages/store/index",
 			"style": {
-				"navigationStyle": "custom",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent"
-					},
-					"bounce": "none"
-				}
+				"navigationBarTitleText":"疯抢",
+				"navigationBarBackgroundColor":"#EA4D3E"
+				
 			}
 		},
 		{
@@ -383,6 +401,7 @@
 		}, {
 			"path": "pages/send_circle/index",
 			"style": {
+				"navigationStyle":"custom",
 				"navigationBarTitleText": "发圈",
 				// "navigationBarBackgroundColor": "#F9263E",
 				"navigationBarTextStyle": "white"
@@ -578,15 +597,16 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/index/index",
-				"iconPath": "static/bar/home.png",
-				"selectedIconPath": "static/bar/selecthome.png",
+				"iconPath": "static/bar/home_off.png",
+				"selectedIconPath": "static/bar/home_on.png",
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/store/customer",
-				"iconPath": "static/bar/store.png",
-				"selectedIconPath": "static/bar/selectstore.png",
-				"text": "商城"
+				"pagePath": "pages/store/index",
+				// "pagePath": "pages/tabbar/tabbar",
+				"iconPath": "static/bar/mark_off.png",
+				"selectedIconPath": "static/bar/mark_on.png",
+				"text": "疯抢"
 			},
 			// {
 			// 	"pagePath": "pages/store/index",
@@ -601,16 +621,16 @@
 			// 	"text": "聊天"
 			// },
 			{
-				"pagePath": "pages/send_circle/index",
-				"iconPath": "static/bar/lts.png",
-				"selectedIconPath": "static/bar/selcetlts.png",
-				"text": "发圈"
+				"pagePath": "pages/vip/index",
+				"iconPath": "static/bar/join_off.png",
+				"selectedIconPath": "static/bar/join_on.png",
+				"text": "会员尊享"
 			},
 			{
-				"pagePath": "pages/school/index",
-				"iconPath": "static/bar/sch.png",
-				"selectedIconPath": "static/bar/selectsch.png",
-				"text": "学院"
+				"pagePath": "pages/send_circle/index",
+				"iconPath": "static/bar/share_off.png",
+				"selectedIconPath": "static/bar/share_on.png",
+				"text": "发圈"
 			},
 			// {
 			// 	"pagePath": "pages/store/index",
@@ -626,8 +646,8 @@
 			// },
 			{
 				"pagePath": "pages/index/user",
-				"iconPath": "static/bar/user.png",
-				"selectedIconPath": "static/bar/selectuser.png",
+				"iconPath": "static/bar/mine_off.png",
+				"selectedIconPath": "static/bar/mine_on.png",
 				"text": "我的"
 			}
 		]

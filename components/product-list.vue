@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<view class="uni-product-list">
+		<view class="uni-product-list uni-flex uni-row">
 			<!-- <view class="uni-product" v-for="(product,index) in productList" :key="index" @click="godetail(product.num_iid)"> -->
 			<view class="uni-product" v-for="(product,index) in productList" :key="index" @click="godetail(product.item_id||product.num_iid,product.presale_discount_fee_text)">
 				<view class="image-view">

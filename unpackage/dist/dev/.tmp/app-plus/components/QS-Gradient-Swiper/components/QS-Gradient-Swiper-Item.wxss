@@ -1,0 +1,22 @@
+
+.QS-Gradient-Swiper-Item.data-v-5369813d{
+
+	height: 100%;
+	width: 100%;
+
+	position: relative;
+}
+.QS-Gradient-Swiper-Item-image.data-v-5369813d{
+	position: absolute;
+
+	left: 50%;
+	bottom: 5%;
+	height: 50%;
+	width: 80%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+
+	border-radius: 10rpx;
+	background-color: #F8F8F8;
+}
+

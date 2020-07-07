@@ -1,0 +1,25 @@
+
+.QSGradientSwiper.data-v-2052b063 {
+	position: relative;
+}
+#background1.data-v-2052b063{
+	position: fixed;
+	width: 100%;
+	top: -24.5%;
+
+	top: -250rpx;
+
+	z-index: 99;
+}
+.background.data-v-2052b063 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.swiper-item.data-v-2052b063 {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+

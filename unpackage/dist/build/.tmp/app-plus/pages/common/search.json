@@ -9,7 +9,6 @@
     }
   },
   "usingComponents": {
-    "uni-icon": "/components/uni-icon",
     "nav-bar": "/components/nav-bar",
     "tag-item": "/components/tag"
   }

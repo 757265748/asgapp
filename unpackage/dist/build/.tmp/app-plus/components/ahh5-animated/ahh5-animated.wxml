@@ -1,0 +1,1 @@
+<view hidden="{{!(show)}}" class="{{['components animated data-v-7c28dc13',tmpName]}}" style="{{(style)}}"><slot></slot></view>

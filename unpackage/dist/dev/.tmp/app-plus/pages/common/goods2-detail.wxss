@@ -451,6 +451,7 @@
           align-items: center;
   width: 33.3333%;
   height: 100%;
+  background: -webkit-gradient(linear, left top, right top, from(#e8592f), to(#fac835));
   background: -webkit-linear-gradient(left, #e8592f, #fac835);
   background: linear-gradient(to right, #e8592f, #fac835);
   color: #fff;
@@ -471,6 +472,7 @@
           align-items: center;
 }
 .footer-container .copy.data-v-def56dc6 {
+  background: -webkit-gradient(linear, left top, right top, from(#fb2d5d), to(#fe050c));
   background: -webkit-linear-gradient(left, #fb2d5d, #fe050c);
   background: linear-gradient(to right, #fb2d5d, #fe050c);
   display: -webkit-box;

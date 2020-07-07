@@ -9,19 +9,16 @@
 		 :scroll-left="scrollLeft">
 			<view v-for="(tab,index) in tabBars" :key="tab.id" class="swiper-tab-list" :class="tabIndex==index ? 'active' : ''"
 			 :id="tab.id" :data-current="index" @click="tapTab">{{tab.name}}
-				<view v-show="tabIndex==index" style="height: 4upx;background-color: #A9731A;width: 100%;margin: auto;"></view>
+				<view v-show="tabIndex==index" style="height: 2upx;background-color: #A9731A;width: 70%;margin: auto;"></view>
 			</view>
 		</scroll-view>
 		<swiper :current="tabIndex" class="swiper-box" :duration="300" @change="changeTab">
 			<swiper-item v-for="(tab,index1) in newsitems" :key="index1">
 				<scroll-view class="list" scroll-y @scrolltolower="loadMore(index1)">
-					<!-- <block v-for="(newsitem,index2) in tab.data" :key="index2">
-						
-					</block> -->
 					<view v-if="tabIndex==1" class="item uni-flex uni-row between" v-for="(item,index) in team_list1" :key="'key'+index">
 						<view class="uni-flex uni-row">
 							<view class="flex_1" style="display: flex;align-items:center;margin-right: 10upx;">
-								<image :src="item.avatar?item.avatar:'../../static/bar/selectuser.png'" style="width:80upx;height: 80upx;" mode="aspectFill"></image>
+								<image :src="item.avatar?item.avatar:'../../static/logoB.png'" style="width:80upx;height: 80upx;border-radius: 1rem;" mode="aspectFill"></image>
 							</view>
 							<view class="uni-flex uni-column">
 								<view>{{item.username}}</view>
@@ -355,23 +352,13 @@
 		line-height: 70upx;
 	}
 
-	/*  */
 	.headTab,
 	.headTab_1 {
 		padding: 20upx 0;
 	}
 
-	/* .tab-bar{
-		position: fixed;
-	} */
-	/* .tab-bar
-	.headTab,
-	.headTab_1 {
-		position: fixed;
-	} */
-
 	.headTab {
-		background-color: #333;
+		background-color: #EA4D3E;
 	}
 
 	.headTab_1 {

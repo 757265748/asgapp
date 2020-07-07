@@ -25,6 +25,30 @@ export function getTbkShop(data) {
 
 	})
 }
+//收藏商品是否存在
+export function collect_byId(data) {
+	console.log(data);
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: `${BASE_URL}/api/get/good/goodcollection/byId`,
+			data: {
+				item_id:data.item_id,
+			},
+			method: "GET",
+			header: {
+				'content-header': 'application/json'
+			},
+			success: (res) => {
+				resolve(res.data);
+			},
+			fail: (err) => {
+				reject(err);
+				console.log('添加收藏:', err)
+			}
+		});
+
+	})
+}
 //添加收藏
 export function insert_collect(data) {
 	console.log(data);
@@ -204,7 +228,10 @@ export function addSendCircle(data) {
 				invitecode: data.invitecode,
 				short_url: data.short_url,
 				description: data.description,
-				yj: data.yj
+				yj: data.yj,
+				create_date:data.create_date,
+				create_user:data.create_user,
+				create_user_sex:data.create_user_sex,
 			},
 			method: "GET",
 			header: {
@@ -655,7 +682,7 @@ export function getGoodsList(data) {
 			data: {
 				page: data.page || 0,
 				type: data.type,
-				sort: data.sorts
+				sort: data.sort
 			},
 			method: "GET",
 			header: {

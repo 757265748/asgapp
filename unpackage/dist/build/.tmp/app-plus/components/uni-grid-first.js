@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/uni-grid-first"],{2563:function(t,n,u){"use strict";u.r(n);var e=u("6fe4"),r=u("52a0");for(var o in r)"default"!==o&&function(t){u.d(n,t,(function(){return r[t]}))}(o);u("e65e");var i,c=u("f0c5"),a=Object(c["a"])(r["default"],e["b"],e["c"],!1,null,null,null,!1,e["a"],i);n["default"]=a.exports},"52a0":function(t,n,u){"use strict";u.r(n);var e=u("b3a0"),r=u.n(e);for(var o in e)"default"!==o&&function(t){u.d(n,t,(function(){return e[t]}))}(o);n["default"]=r.a},"6fe4":function(t,n,u){"use strict";var e,r=function(){var t=this,n=t.$createElement;t._self._c},o=[];u.d(n,"b",(function(){return r})),u.d(n,"c",(function(){return o})),u.d(n,"a",(function(){return e}))},b3a0:function(t,n,u){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.default=void 0;var e={name:"UniGrid",props:{options:{type:Array,default:function(){return[]}},imgW:{type:String},type:{type:String,default:"square"},columnNum:{type:[Number,String],default:3},showOutBorder:{type:Boolean,default:!0},showBorder:{type:Boolean,default:!0}},data:function(){return{}},computed:{gridGroup:function(){var t=this,n=[],u=[];if(this.options&&this.options.forEach((function(e,r){u.push(e),r%t.columnNum===t.columnNum-1&&(n.push(u),u=[])})),u.length>0){if(this.columnNum>u.length)for(var e=0,r=u.length;e<this.columnNum-r;e++)u.push({seize:!0});n.push(u)}return u=null,n}},created:function(){this.columnNumber=this.gridGroup[0].length},methods:{onClick:function(t,n){this.$emit("click",{index:t*this.columnNumber+n})}}};n.default=e},e65e:function(t,n,u){"use strict";var e=u("f283"),r=u.n(e);r.a},f283:function(t,n,u){}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/uni-grid-first-create-component',
+    {
+        'components/uni-grid-first-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('6e42')['createComponent'](__webpack_require__("2563"))
+        })
+    },
+    [['components/uni-grid-first-create-component']]
+]);

@@ -1,0 +1,1 @@
+<view class="QS-Gradient-Swiper-Item data-v-bd426e8a"><view class="QS-Gradient-Swiper-Item data-v-bd426e8a"><image class="QS-Gradient-Swiper-Item-image data-v-bd426e8a" src="{{item.path}}" mode="aspectFill"></image></view></view>

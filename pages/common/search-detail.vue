@@ -12,7 +12,7 @@
 		</view> -->
 		<view class="container">
 			<block v-for="(item,index) in result">
-				<media-list :options="item"></media-list>
+				<media-list :options="item" @click="goDetail(item)"></media-list>
 			</block>
 			<!-- <product-list :productList="result" table='yhq_goods'></product-list> -->
 			<uni-load-more :loadingType="loadingType" :contentText="contentText"></uni-load-more>
@@ -32,6 +32,7 @@
 	export default {
 		data() {
 			return {
+				user:null,
 				isShow: false,
 				result: null,
 				keyword: '',
@@ -52,6 +53,7 @@
 			mediaList
 		},
 		onLoad(option) {
+			this.user = uni.getStorageSync('user');
 			this.keyword = option.keyword||'';
 			this.goodsId=option.goodsId||'';
 			console.log(JSON.stringify(option));
@@ -92,6 +94,36 @@
 			})
 		},
 		methods: {
+			goDetail(e) {
+				if (!this.user) {
+					uni.showToast({
+						title: '未登录!',
+						icon: 'none'
+					});
+					return;
+				}
+				console.log(this.user.pid);
+				if(this.user.pid == ''){
+					uni.showToast({
+						title: '未授权!',
+						icon: 'none'
+					});
+					return;
+				}
+				if (this.navigateFlag) {
+					return;
+				}
+				this.navigateFlag = true;
+				console.log(e);
+				// #ifdef APP-PLUS
+				uni.navigateTo({
+					url: `/pages/common/goods-detail?id=${e.item_id}`
+				});
+				// #endif
+				setTimeout(() => {
+					this.navigateFlag = false;
+				}, 200);
+			},
 			back(){
 				uni.navigateBack({
 					delta:1
@@ -224,11 +256,6 @@
 
 		}
 	}
-
-	.container {
-		width: 96%;
-	}
-
 	.search-title {
 		span {
 			margin-top: 30rpx;

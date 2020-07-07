@@ -2,7 +2,7 @@
     "name" : "爱淘客",
     "appid" : "__UNI__133D546",
     "description" : "",
-    "versionName" : "1.1.9",
+    "versionName" : "1.1.25",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -13,6 +13,7 @@
             }
         },
         // "renderer": "native", //App端纯原生渲染模式
+        //"nvueCompiler":"uni-app", //是否启用 uni-app 模式  uni-app weex
         /* 5+App特有相关 */
         "modules" : {
             "Contacts" : {},
@@ -68,12 +69,13 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
                     "<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>"
                 ],
-                "schemes" : [ "egshuj" ]
+                "schemes" : [ "egshuj" ],
+                "abiFilters" : [ "armeabi-v7a", "x86" ]
             },
             "ios" : {
                 "urltypes" : [
                     {
-                        "urlschemes" : [ "tbopen27788224" ],
+                        "urlschemes" : [ "tbopen30375104" ],
                         /* 27788224  25901417 */
                         "id" : "tbopen"
                     }
@@ -116,6 +118,45 @@
                 "push" : {
                     "unipush" : {}
                 }
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "unpackage/res/icons/72x72.png",
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/icons/1024x1024.png",
+                    "ipad" : {
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                    },
+                    "iphone" : {
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    }
+                }
+            },
+            "splashscreen" : {
+                "android" : {
+                    "hdpi" : "static/logoQ1.png",
+                    "xhdpi" : "static/logoQ2.png",
+                    "xxhdpi" : "static/logoQ3.png"
+                }
             }
         },
         "nativePlugins" : {
@@ -141,7 +182,8 @@
                 }
             },
             "dahui-alibaichuan" : {
-                "baichuan_appkey" : "27788224",
+                // "baichuan_appkey" : "27788224",
+                "baichuan_appkey" : "30375104",
                 "__plugin_info__" : {
                     "name" : "dahui-alibaichuan",
                     "description" : "阿里百川插件",
@@ -162,7 +204,9 @@
                 }
             }
         },
-        "usingComponents" : false
+        "usingComponents" : false,
+        "nvueLaunchMode" : "fast",
+        "compilerVersion" : 2
     },
     "mp-toutiao" : {
         "usingComponents" : true

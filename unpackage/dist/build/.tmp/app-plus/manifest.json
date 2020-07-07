@@ -7,7 +7,7 @@
   "id": "__UNI__133D546",
   "name": "爱淘客",
   "version": {
-    "name": "1.1.5",
+    "name": "1.1.21",
     "code": "100"
   },
   "description": "",
@@ -48,6 +48,9 @@
     },
     "popGesture": "close",
     "launchwebview": {
+      "statusbar": {
+        "background": "#333"
+      },
       "id": "1",
       "kernel": "WKWebview",
       "uni-app": "auto"
@@ -201,6 +204,8 @@
       }
     },
     "usingComponents": false,
+    "nvueLaunchMode": "fast",
+    "compilerVersion": 2,
     "allowsInlineMediaPlayback": true,
     "safearea": {
       "background": "#ffffff",
@@ -209,7 +214,7 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.6.8",
+      "compilerVersion": "2.6.16",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
@@ -225,32 +230,32 @@
       "list": [
         {
           "pagePath": "pages/index/index",
-          "iconPath": "static/bar/home.png",
-          "selectedIconPath": "static/bar/selecthome.png",
+          "iconPath": "static/bar/home_off.png",
+          "selectedIconPath": "static/bar/home_on.png",
           "text": "首页"
         },
         {
-          "pagePath": "pages/store/customer",
-          "iconPath": "static/bar/store.png",
-          "selectedIconPath": "static/bar/selectstore.png",
+          "pagePath": "pages/store/index",
+          "iconPath": "static/bar/mark_off.png",
+          "selectedIconPath": "static/bar/mark_on.png",
           "text": "商城"
         },
         {
+          "pagePath": "pages/vip/index",
+          "iconPath": "static/bar/join_off.png",
+          "selectedIconPath": "static/bar/join_on.png",
+          "text": "会员尊享"
+        },
+        {
           "pagePath": "pages/send_circle/index",
-          "iconPath": "static/bar/lts.png",
-          "selectedIconPath": "static/bar/selcetlts.png",
+          "iconPath": "static/bar/share_off.png",
+          "selectedIconPath": "static/bar/share_on.png",
           "text": "发圈"
         },
         {
-          "pagePath": "pages/school/index",
-          "iconPath": "static/bar/sch.png",
-          "selectedIconPath": "static/bar/selectsch.png",
-          "text": "学院"
-        },
-        {
           "pagePath": "pages/index/user",
-          "iconPath": "static/bar/user.png",
-          "selectedIconPath": "static/bar/selectuser.png",
+          "iconPath": "static/bar/mine_off.png",
+          "selectedIconPath": "static/bar/mine_on.png",
           "text": "我的"
         }
       ],

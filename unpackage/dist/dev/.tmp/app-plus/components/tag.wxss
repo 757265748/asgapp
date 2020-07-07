@@ -16,13 +16,21 @@
           flex-wrap: wrap;
   margin-top: 60rpx;
 }
-.search-tag {
-  margin: 80rpx 20rpx;
+.hot_search {
+  max-width: 50%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 20rpx;
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
   color: #333;
   font-weight: 600;
   background: #eee;
   padding: 6rpx 20rpx;
   border-radius: 10rpx;
+}
+.search-tag {
   white-space: nowrap;
 }
 

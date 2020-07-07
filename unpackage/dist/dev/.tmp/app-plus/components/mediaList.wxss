@@ -128,6 +128,7 @@
 }
 .goods-wrap .desc .shop-desc .coupon-wrap .value.data-v-179e9dc6 {
   background: #FBCF78;
+  background: -webkit-gradient(linear, right top, left top, from(#f5c15b), to(#ffd788));
   background: -webkit-linear-gradient(right, #f5c15b, #ffd788);
   background: linear-gradient(to left, #f5c15b, #ffd788);
   border-radius: 10rpx;
@@ -151,5 +152,6 @@
   width: 10rpx;
   height: 10rpx;
   background-color: white;
+  position: relative;
 }
 

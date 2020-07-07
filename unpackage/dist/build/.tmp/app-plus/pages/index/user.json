@@ -1,7 +1,7 @@
 {
-  "navigationBarTitleText": "我的",
-  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "uni-segmented-control": "/components/uni-segmented-control"
+    "uni-segmented-control": "/components/uni-segmented-control",
+    "uni-icons": "/components/uni-icon"
   }
 }

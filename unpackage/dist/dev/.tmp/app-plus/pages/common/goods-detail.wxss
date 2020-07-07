@@ -1,12 +1,116 @@
+.top-back.data-v-083824fd {
+  position: absolute;
+  left: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  float: left;
+  background: rgba(0, 0, 0, 0.3);
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-left: 20rpx;
+}
+.collect_title.data-v-083824fd {
+  text-align: center;
+}
+.collect_price.data-v-083824fd {
+  color: #ff1213;
+}
+.colle_group.data-v-083824fd {
+  position: relative;
+}
+.collect.data-v-083824fd {
+  position: absolute;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+}
+.box.data-v-083824fd {
+  width: 100%;
+  height: 450rpx;
+  padding: 10rpx;
+  background: rgba(255, 255, 255, 0.8);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 30rpx;
+}
+.swiper.data-v-083824fd {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container.data-v-083824fd {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+uni-swiper.data-v-083824fd {
+  height: 100%;
+}
+.swiper-item.data-v-083824fd {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: 420rpx;
+  text-align: center;
+  broder-radius: 6rpx;
+  background-color: white;
+}
+.swiper-item .img.data-v-083824fd {
+  height: 80%;
+}
+.swiper-item .dec.data-v-083824fd {
+  padding: 0 10rpx;
+  font-size: 0.8rem;
+}
+.swiper-tall.data-v-083824fd {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.swiper-title.data-v-083824fd {
+  width: 750rpx;
+  text-align: center;
+}
 page.data-v-083824fd {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
           flex-direction: column;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-color: #fff;
 }
 view.data-v-083824fd {
@@ -81,7 +185,8 @@ button.data-v-083824fd {
   -webkit-align-items: center;
           align-items: center;
   margin: 15px 15rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .bottom-content-image.data-v-083824fd {
   display: -webkit-box;
@@ -132,17 +237,11 @@ button.data-v-083824fd {
   color: #fff;
 }
 .detail-container.data-v-083824fd {
-  height: 100vh;
   width: 100%;
   overflow-x: hidden;
 }
 ._img.data-v-083824fd {
   width: 100%;
-}
-.container.data-v-083824fd {
-  width: calc(100% - 40rpx);
-  padding: 20rpx 20rpx;
-  background: #fff;
 }
 .avtive.data-v-083824fd {
   position: relative !important;
@@ -156,8 +255,11 @@ button.data-v-083824fd {
   bottom: -5rpx;
   left: 25%;
 }
+.head.data-v-083824fd {
+  position: relative;
+}
 .mnav-bar.data-v-083824fd {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -172,10 +274,10 @@ button.data-v-083824fd {
   -webkit-justify-content: flex-end;
           justify-content: flex-end;
   width: 100%;
-  height: 80px;
+  height: 30px;
   padding: 40rpx 0;
   background: rgba(255, 255, 255, 0.5);
-  z-index: 999;
+  z-index: 2;
 }
 .mnav-bar .wrap .back.data-v-083824fd {
   display: -webkit-box;
@@ -195,6 +297,7 @@ button.data-v-083824fd {
   margin-left: 20rpx;
 }
 .mnav-bar .wrap .nav-title.data-v-083824fd {
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -226,14 +329,14 @@ button.data-v-083824fd {
 }
 .price-container.data-v-083824fd {
   width: 100%;
-  padding: 20rpx 0;
-  background: #fff;
+  padding: 20rpx 10rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .price-container .jh.data-v-083824fd {
   padding: 0rpx 12rpx;
   border-radius: 8rpx;
   background: #ffe9ec;
-  font-size: 12rpx;
   color: #ff1213;
   text-align: center;
 }
@@ -445,9 +548,17 @@ button.data-v-083824fd {
   margin-left: 15%;
 }
 .store-introduction.data-v-083824fd {
-  padding: 20rpx 10rpx;
-  margin-top: 10px;
   position: relative;
+}
+.store-introduction .store.data-v-083824fd {
+  margin-top: 10rpx;
+  border-top: 8rpx solid #efefef;
+  padding: 10rpx 20rpx;
+}
+.store-introduction .Recommendation.data-v-083824fd {
+  border-top: 8rpx solid #efefef;
+  border-bottom: 8rpx solid #efefef;
+  padding: 10rpx 20rpx;
 }
 .store-introduction .rank.data-v-083824fd {
   display: -webkit-box;
@@ -463,6 +574,7 @@ button.data-v-083824fd {
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
+  padding: 10rpx 20rpx;
 }
 .store-introduction .item.data-v-083824fd {
   display: -webkit-box;
@@ -511,6 +623,7 @@ button.data-v-083824fd {
 }
 .footer-container.data-v-083824fd {
   position: fixed;
+  z-index: 10;
   bottom: 0;
   left: 0;
   right: 0;
@@ -586,6 +699,7 @@ button.data-v-083824fd {
           align-items: center;
   width: 33.3333%;
   height: 100%;
+  background: -webkit-gradient(linear, left top, right top, from(#e8592f), to(#fac835));
   background: -webkit-linear-gradient(left, #e8592f, #fac835);
   background: linear-gradient(to right, #e8592f, #fac835);
   color: #fff;
@@ -606,6 +720,7 @@ button.data-v-083824fd {
           align-items: center;
 }
 .footer-container .copy.data-v-083824fd {
+  background: -webkit-gradient(linear, left top, right top, from(#fb2d5d), to(#fe050c));
   background: -webkit-linear-gradient(left, #fb2d5d, #fe050c);
   background: linear-gradient(to right, #fb2d5d, #fe050c);
   display: -webkit-box;

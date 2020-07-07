@@ -387,7 +387,7 @@
 	} */
 	
 	.headTab {
-		background-color: #333;
+		background-color: #EA4D3E;
 	}
 	
 	.headTab_1 {

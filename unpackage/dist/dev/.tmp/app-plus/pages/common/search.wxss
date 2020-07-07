@@ -86,6 +86,8 @@
   -webkit-justify-content: flex-start;
           justify-content: flex-start;
   margin-top: 30rpx;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
 }
 .search-tag.data-v-7e3abdbd {
   margin: 10rpx 20rpx;
@@ -114,6 +116,5 @@
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
           justify-content: space-between;
-  margin-right: 80rpx;
 }
 

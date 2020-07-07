@@ -18,32 +18,37 @@
 						url: "index",
 						type: "baokuan",
 						title: '每日爆款',
+						icon:'../../static/bar/home_off.png',
 						page: 'school'
 					}, {
 						url: "/pages/school/pub-ma",
 						type: "xuanchuan",
 						title: '宣传素材',
+						icon:'../../static/bar/home_off.png',
 						page: 'school'
 					},
 					{
 						url: "/pages/school/school-knowlege",
 						type: "study",
-						title: ' 知识学院',
+						title: '知识学院',
+						icon:'../../static/bar/home_off.png',
 						page: 'school'
 					},
 					{
 						url: "/pages/school/recommend",
 						type: "xinyu",
 						title: ' 每日心语',
+						icon:'../../static/bar/home_off.png',
 						page: 'school'
 					},
 					{
 						url: "user",
 						type: "user",
 						title: ' 我的',
+						icon:'../../static/bar/home_off.png',
 						page: 'index'
 					}
-				]
+				],
 			}
 		},
 		components: {

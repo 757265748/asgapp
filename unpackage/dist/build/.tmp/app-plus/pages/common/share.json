@@ -5,6 +5,6 @@
   "backgroundColorTop": "#F4F5F6",
   "backgroundColorBottom": "#F4F5F6",
   "usingComponents": {
-    "uni-popup": "/components/uni-popup"
+    "uni-popup": "/components/uni-popup/uni-popup"
   }
 }

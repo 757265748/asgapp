@@ -13,7 +13,12 @@ export function get_tb_topic_list(data) {
 			},
 			data,
 			success: (res) => {
-				resolve(res);
+				console.log(res);
+				if(res.data.code==200){
+					resolve(res.data.result);
+				}else{
+					resolve(res.errMsg);
+				}
 			},
 			fail: (err) => {
 				console.log('ERROR_MSG', err)
@@ -233,7 +238,9 @@ export function get_tab_goods(data) {
 		uni.request({
 			url: `${BASE_URL}/api/get/fp/get_tab_goods`,
 			data:{
-				pageIndex:data?data.pageIndex:1
+				page:data?data.page:1,
+				type:data?data.type:'',
+				sort:data?data.sort:'',
 			},
 			method: "get",
 			header: {

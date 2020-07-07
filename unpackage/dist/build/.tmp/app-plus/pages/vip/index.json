@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会员尊享",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

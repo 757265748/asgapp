@@ -1,7 +1,8 @@
 .content.data-v-aeedccc6 {
   width: calc(75% - 20rpx);
   margin: 0 auto;
-  box-shadow: 0 0 10rpx 2rpx #eeeeee;
+  -webkit-box-shadow: 0 0 10rpx 2rpx #eeeeee;
+          box-shadow: 0 0 10rpx 2rpx #eeeeee;
   padding: 20rpx 10rpx;
   border-radius: 10rpx;
 }

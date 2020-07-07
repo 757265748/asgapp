@@ -10,6 +10,7 @@
 	color: #fff;
 	padding: 10rpx;
 	border-radius: 1rem;
+	background: -webkit-gradient(linear, right top, left top, from(#c3842e), to(#f0b700));
 	background: -webkit-linear-gradient(right, #c3842e, #f0b700);
 	background: linear-gradient(to left, #c3842e, #f0b700);
 }

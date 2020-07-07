@@ -79,7 +79,7 @@
 					tbAccredit: {
 						key:'pid',
 						name: '淘宝授权',
-						center: '<text style="font-size:.3rem">访问淘宝页面无需输入账号密码</text>',
+						center: '<text style="font-size:.6rem">访问淘宝页面无需输入账号密码</text>',
 						content: '<switch name="switch1" checked="false" />',
 						switch: uni.getStorageSync("tbsqFlag")
 					},
@@ -106,13 +106,6 @@
 			this.init();
 			console.log(JSON.stringify(this.lists));
 			console.log(uni.getStorageSync("user"));
-			excute_set_info({
-				id:this.user.id,
-				columnName:'zfb',
-				columnValue:'13008847296'
-			}).then(res=>{
-				console.log(res);
-			})
 		},
 		methods: {
 			init(){
@@ -181,7 +174,7 @@
 							this.tbsqFlag = true;
 							uni.setStorageSync("tbsqFlag", true);
 							//code == 0 ,msg:授权成功  ； code==-1  ,msg:报错信息
-							var url = 'https://oauth.taobao.com/authorize?response_type=code&client_id=25901417&redirect_uri=' +
+							var url = 'https://oauth.taobao.com/authorize?response_type=code&client_id=30375104&redirect_uri=' +
 								'http://39.108.215.49:8009/html/code.html&state=' +
 								uni.getStorageSync("user").phone + '&view=wap'
 							bcPlugin.BCGetCoupons(url, result => {
@@ -243,8 +236,8 @@
 			},
 			exitLogin() {
 				uni.removeStorageSync('user');
-				uni.navigateTo({
-					url: '/pages/index/login?exit=' + true
+				uni.reLaunch({
+					url: '/pages/index/login'
 				})
 			},
 			delImg(i) {

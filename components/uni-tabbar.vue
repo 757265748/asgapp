@@ -1,15 +1,20 @@
 <template>
 	<view class="content">
 		<view v-if="tabs.length > 0" class="wrap" v-for="(item , index) in tabs" :key="index" @click="jump(item.page,item.url,index)">
-			<uni-icon class="icon" size="28" :color="current == index? '#ff0000' : '#707070'" :type="item.type"></uni-icon>
-			<text :class="current == index? 'txt on' :'txt' ">{{item.title}}</text>
+			<!-- <uni-icons type="chat" color="#fff" size="25" style="z-index:999" :color="current == index? '#ff0000' : '#707070'" /> -->
+			<image class="animation-scale-up" :src="item.icon" mode="aspectFit"></image>
+			<text :class="current == index? 'txt on' :'txt' ">{{item.type}}</text>
 		</view>
 	</view>
 </template>
 
 <script>
+	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	//自定义tabbar 
 	export default {
+		components:{
+			uniIcons
+		},
 		props: {
 			tabs: {
 				type: Array
@@ -46,6 +51,10 @@
 </script>
 
 <style lang="less" scoped>
+	image{
+		width: 60upx;
+		height: 60upx;
+	}
 	.content {
 		background: #555555;
 		position: fixed !important;

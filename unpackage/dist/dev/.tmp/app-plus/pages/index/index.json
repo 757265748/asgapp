@@ -1,37 +1,22 @@
 {
-  "navigationBarTitleText": "首页",
-  "onReachBottomDistance": "50",
-  "titleNView": {
-    "type": "transparent",
-    "buttons": [
-      {
-        "colorPressed": "#666",
-        "text": "»",
-        "float": "right",
-        "fontWeight": "bold"
-      }
-    ],
-    "searchInput": {
-      "backgroundColor": "#fff",
-      "placeholderColor": "#666",
-      "borderRadius": "6px",
-      "placeholder": "版本号1.1.6",
-      "disabled": true
-    }
-  },
+  "navigationBarTitleText": "导航栏带搜索框",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "uni-icon": "/components/uni-icon",
     "divid-line": "/components/line",
     "scroll-index": "/components/scroll-index",
     "media-list": "/components/mediaList",
     "good-list": "/components/good-list",
     "uni-load-more": "/components/uni-load-more",
     "go-top": "/components/go-top",
-    "uni-grid": "/components/uni-grid",
+    "uni-icon": "/components/uni-icon",
+    "uni-grid": "/components/uni-grid-first",
     "order-list": "/components/order-list",
     "uni-segmented-control": "/components/tab-control",
     "sort": "/components/sort",
     "tab-good-list": "/components/tab-good-list",
-    "product-list-row": "/components/product-list-row"
+    "product-list-row": "/components/product-list-row",
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "uni-drawer": "/components/uni-drawer",
+    "q-s-gradient-swiper": "/components/QS-Gradient-Swiper/QS-Gradient-Swiper-vue"
   }
 }

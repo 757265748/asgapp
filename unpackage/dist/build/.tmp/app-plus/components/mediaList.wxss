@@ -1,4 +1,4 @@
-.goods-wrap.data-v-3a9eecac {
+.goods-wrap.data-v-70f7b5a8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -18,17 +18,17 @@
   padding: 0 20rpx;
   border-bottom: 1rpx solid #f8f8f8;
 }
-.goods-wrap .goods-img.data-v-3a9eecac {
+.goods-wrap .goods-img.data-v-70f7b5a8 {
   width: 300rpx;
   border-radius: 20rpx;
 }
-.goods-wrap .goods-img .img.data-v-3a9eecac {
+.goods-wrap .goods-img .img.data-v-70f7b5a8 {
   width: 280rpx;
   height: 280rpx;
   padding: 10rpx;
   border-radius: 20rpx;
 }
-.goods-wrap .desc.data-v-3a9eecac {
+.goods-wrap .desc.data-v-70f7b5a8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -45,7 +45,7 @@
   white-space: normal;
   line-height: 1.8;
 }
-.goods-wrap .desc .shop-title.data-v-3a9eecac {
+.goods-wrap .desc .shop-title.data-v-70f7b5a8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -54,16 +54,16 @@
   -webkit-flex-direction: row;
           flex-direction: row;
 }
-.goods-wrap .desc .shop-title .logo.data-v-3a9eecac {
+.goods-wrap .desc .shop-title .logo.data-v-70f7b5a8 {
   width: 50rpx;
   height: 50rpx;
   margin-right: 10rpx;
 }
-.goods-wrap .desc .shop-title .txt.data-v-3a9eecac {
+.goods-wrap .desc .shop-title .txt.data-v-70f7b5a8 {
   font-size: 25rpx;
   font-weight: 600;
 }
-.goods-wrap .desc .shop-desc .price-wrap.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .price-wrap.data-v-70f7b5a8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -78,7 +78,7 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.goods-wrap .desc .shop-desc .price-wrap .price.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .price-wrap .price.data-v-70f7b5a8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -93,21 +93,21 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.goods-wrap .desc .shop-desc .price-wrap .present.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .price-wrap .present.data-v-70f7b5a8 {
   font-size: 26rpx;
   font-weight: 500;
   color: #ce0000;
 }
-.goods-wrap .desc .shop-desc .price-wrap .yj.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .price-wrap .yj.data-v-70f7b5a8 {
   font-size: 20rpx;
   color: #FF0000;
 }
-.goods-wrap .desc .shop-desc .price-wrap .original.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .price-wrap .original.data-v-70f7b5a8 {
   text-decoration: line-through;
   color: #555555;
   font-size: 20rpx;
 }
-.goods-wrap .desc .shop-desc .coupon-wrap.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .coupon-wrap.data-v-70f7b5a8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -122,12 +122,13 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.goods-wrap .desc .shop-desc .coupon-wrap .num.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .coupon-wrap .num.data-v-70f7b5a8 {
   color: #555555;
   font-size: 20rpx;
 }
-.goods-wrap .desc .shop-desc .coupon-wrap .value.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .coupon-wrap .value.data-v-70f7b5a8 {
   background: #FBCF78;
+  background: -webkit-gradient(linear, right top, left top, from(#f5c15b), to(#ffd788));
   background: -webkit-linear-gradient(right, #f5c15b, #ffd788);
   background: linear-gradient(to left, #f5c15b, #ffd788);
   border-radius: 10rpx;
@@ -146,10 +147,11 @@
   -webkit-justify-content: space-between;
           justify-content: space-between;
 }
-.goods-wrap .desc .shop-desc .coupon-wrap .value view.data-v-3a9eecac {
+.goods-wrap .desc .shop-desc .coupon-wrap .value view.data-v-70f7b5a8 {
   border-radius: 1rem;
   width: 10rpx;
   height: 10rpx;
   background-color: white;
+  position: relative;
 }
 

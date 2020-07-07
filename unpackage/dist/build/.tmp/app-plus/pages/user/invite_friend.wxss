@@ -1,11 +1,11 @@
 
-.foot .copy_link{
+.foot .copy_link {
 	background-color: #666;
 }
-.foot .share{
+.foot .share {
 	background-color: #eac783;
 }
-.foot view{
+.foot view {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
 	        flex: 1;
@@ -13,15 +13,15 @@
 	padding: 10rpx;
 	color: white;
 }
-.foot{
+.foot {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 }
-.page{
+.page {
 	background-color: #333;
 }
-.body{
+.body {
 	padding-top: 30%;
 }
 .scroll-view_H {

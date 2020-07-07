@@ -22,18 +22,18 @@
   background: #fff;
 }
 .screen-wrap .jg-wrap {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-            justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-            align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
 }
 

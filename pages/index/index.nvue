@@ -1,0 +1,1609 @@
+<template>
+	<view class="tabs">
+		<!-- <view class="search-container" :style="{'padding-top':statusBarH+20+'px'}" style="width: 100%;color: white;">
+			<image class="logo" src="../../static/logo.png" mode="aspectFit"></image>
+			<view class="head uni-flex uni-row flex-row" style="width: 750rpx;justify-content: space-between;margin: 0upx 10upx;;position: relative;">
+				<view style="width: 750rpx;justify-content: center;display: flex;flex-direction: row;position: relative;" class="">
+					<text style="color: #fff;text-align: center;">搜索淘宝隐藏优惠券</text>
+				</view>
+			</view>
+			<view style="position: absolute;right: 40upx;top: 60upx;width: 80rpx;height: 60upx;display: flex;align-items: flex-end;justify-content: flex-end;margin-left: 10upx;"
+			 @tap="infoClick">
+				<uni-icons type="chat" color="#fff" size="24" />
+				<text style="position: absolute;right: 0upx;top: 0upx;width: 34upx;height: 34upx;font-size: 24upx;text-align: center;z-index:9;color: white;font-weight: bold;border-radius: 50rpx;background-color: red;">{{unreadcount}}</text>
+			</view>
+			<view class="flex-row" style="width:100%;display: flex;flex-direction: row;justify-content: space-between;">
+				<view class="search uni-flex uni-row flex-row" style="width: 720rpx;height: 60upx;justify-content: center;
+				border-radius: 20upx;background-color: #fff;padding: 10upx"
+				 @tap="searchClick">
+					<view class="title" style="width: 90%;padding: 10upx;">
+						<text style="color: #192C3E;font-size: 30rpx;">搜淘宝商品标题 领优惠券拿返现</text>
+					</view>
+				</view>
+			</view>
+		</view> -->
+		<view class="search-container" :style="{ 'padding-top': statusBarH + 'px' }" style="width: 100%;color: white;">
+			<view style="display: flex;flex-direction: row;justify-content: space-between;width: 700rpx;align-items: center;height: 80upx;">
+				<view><image class="logo" src="../../static/logo.png" mode="aspectFit"></image></view>
+				<!-- #ifdef H5 -->
+				<view class="head uni-flex uni-row flex-row" style="width: 80%;justify-content: center;">
+					<text style="color: #fff;text-align: center;">搜索淘宝隐藏优惠券</text>
+				</view>
+				<!-- #endif -->
+				<!-- #ifdef APP-PLUS -->
+				<view class="head uni-flex uni-row flex-row" style="width: 100%;"><text style="color: #fff;text-align: center;">搜索淘宝隐藏优惠券</text></view>
+				<!-- #endif -->
+				<view style="position: relative;height:80upx;display: flex;justify-content: center;z-index:999" @tap="infoClick">
+					<uni-icons type="chat" color="#fff" size="24" />
+					<view style="position: absolute;top: 0upx;right: 0;width: 34upx;height: 34upx;z-index:9;border-radius: 34upx;background-color: #990000;justify-content: center;">
+						<text style="text-align: center;color: white;font-weight: bold;font-size: 24upx;">{{ unreadcount }}</text>
+					</view>
+				</view>
+			</view>
+			<view class="flex-row" style="width:100%;display: flex;flex-direction: row;justify-content: center;">
+				<view
+					class="search uni-flex uni-row flex-row"
+					style="width: 720rpx;height: 60upx;justify-content: center;align-items: center;
+				border-radius: 20upx;background-color: #fff;padding: 10upx"
+					@tap="searchClick"
+				>
+					<view class="title" style="width: 90%;padding: 10upx;"><text style="color: #192C3E;font-size: 30rpx;">搜淘宝商品标题 领优惠券拿返现</text></view>
+				</view>
+			</view>
+		</view>
+		<scroll-view id="tab-bar" class="scroll-h" :scroll-x="true" :show-scrollbar="false" :scroll-into-view="scrollInto">
+			<view v-for="(tab, index) in tabBars" :key="tab.id" class="uni-tab-item" :id="tab.id" :data-current="index" @click="ontabtap">
+				<view :class="tabIndex == index ? 'uni-tab-item-active' : ''">
+					<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.name }}</text>
+					<view v-if="tabIndex == index" style="width: 100%;height: 5upx;background-color: #FFE292;"></view>
+				</view>
+			</view>
+			<view class="tab-more-btn">
+				<uni-icons :type="!tab_more_flag ? 'list' : 'list'" color="#fff" @click="togglePopup()" />
+			</view>
+		</scroll-view>
+		<swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange" :style="{ height: currentH - 200 + 'px' }">
+			<swiper-item class="swiper-item" v-for="(tab, index1) in newsList" :key="index1">
+				<!-- #ifdef APP-NVUE -->
+				<list class="scroll-v list" enableBackToTop="true" scroll-y loadmoreoffset="15" @loadmore="loadMore(index1)">
+					<refresh class="refresh" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" :display="tab.refreshing ? 'show' : 'hide'">
+						<div class="refresh-view">
+							<image
+								class="refresh-icon"
+								:src="refreshIcon"
+								:style="{ width: tab.refreshing || pulling ? 0 : '30px' }"
+								:class="{ 'refresh-icon-active': tab.refreshFlag }"
+							></image>
+							<loading-indicator class="loading-icon" animating="true" v-if="tab.refreshing"></loading-indicator>
+							<text class="loading-text">{{ tab.refreshText }}</text>
+						</div>
+					</refresh>
+					<cell v-if="tab.lunbo" style="width: 100%;">
+						<swiper class="lunbo" indicator-dots="true" v-if="set_page.lunbo == 1">
+							<swiper-item v-for="(img, key) in tab.lunbo" style="border-radius: 20upx">
+								<image @tap="lunboClick(img.activityLink)" :src="img.materialLink" style="margin: auto; display: flex;height: 100%;width: 100%;" />
+							</swiper-item>
+						</swiper>
+					</cell>
+					<cell v-if="tab.shouye">
+						<view class="tab-grid uni-flex uni-row" v-if="set_page.tab_grid == 1">
+							<view class="grid-item-first uni-flex uni-column" @click="tabClick(item)" v-for="(item, index) in tab.tabbar">
+								<image class="tabImg" :src="item.image"></image>
+								<view>
+									<text style="font-size: 28upx;">{{ item.text }}</text>
+								</view>
+							</view>
+						</view>
+					</cell>
+					<cell v-else>
+						<view class="tab-grid uni-flex uni-row" v-if="set_page.tab_grid == 1">
+							<view class="grid-item uni-flex uni-column" @click="tabClick(item)" v-for="(item, index) in tab.tabbar">
+								<image class="tabImg" :src="item.image"></image>
+								<text style="text-align: center;font-size: 30rpx;">{{ item.text }}</text>
+							</view>
+						</view>
+					</cell>
+					<cell v-if="tab.lunbo">
+						<!-- <view style="height: 80px;"><image src="../../static/tab/tab_head.png" style="height: 160upx;" mode="aspectFit"></image></view> -->
+						<view class="activify" v-if="set_page.active == 1">
+							<view class="item" v-for="(item,index) in tab.activity" @tap="pthd(item.activityLink)">
+								<image class="activify_img" :src="item.materialLink" mode=""></image>
+							</view>
+							<!-- <view class="uni-flex uni-row">
+								<view class="item" @tap="pthd(tab.activity[0].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[0].materialLink" mode=""></image>
+								</view>
+								<view class="item" @tap="pthd(tab.activity[1].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[1].materialLink" mode=""></image>
+								</view>
+							</view>
+							<view class="uni-flex uni-row">
+								<view class="item" @tap="pthd(tab.activity[2].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[2].materialLink" mode=""></image>
+								</view>
+								<view class="item" @tap="pthd(tab.activity[3].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[3].materialLink" mode=""></image>
+								</view>
+							</view>
+							<view class="uni-flex uni-row bottom">
+								<view class="item" @tap="pthd(tab.activity[2].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[4].materialLink" mode=""></image>
+								</view>
+								<view class="item" @tap="pthd(tab.activity[3].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[5].materialLink" mode=""></image>
+								</view>
+							</view> -->
+						</view>
+					</cell>
+					<cell>
+						<view :class="['screen-wrap', { fixed: sortTabFixed }, { fixed: tabIndex == -1 }]">
+							<view class="jg-wrap" :class="{ on: isDefault }" @tap="screentap('')">
+								<text style="font-size: 28upx;">{{ tab.sort[0] }}</text>
+							</view>
+							<view class="jg-wrap" @tap="screentap('total_sales')">
+								<text :class="{ on: isTotal_sales != 0 }" style="font-size: 28upx;">{{ tab.sort[1] }}</text>
+								<view class="jgicon uni-flex uni-column" v-if="isTotal_sales != 0">
+									<uni-icons :type="isTotal_sales == 1 ? 'arrowup' : 'arrowdown'"></uni-icons>
+								</view>
+							</view>
+							<view class="jg-wrap" @tap="screentap('tk_rate')">
+								<text :class="{ on: isTk_rate != 0 }" style="font-size: 28upx;">{{ tab.sort[2] }}</text>
+								<view class="jgicon uni-flex uni-column" v-if="isTk_rate != 0"><uni-icons :type="isTk_rate == 1 ? 'arrowup' : 'arrowdown'"></uni-icons></view>
+							</view>
+							<view class="jg-wrap" @tap="screentap('price')">
+								<text :class="{ on: isPrice != 0 }" style="font-size: 28upx;">{{ tab.sort[3] }}</text>
+								<view class="jgicon uni-flex uni-column" v-if="isPrice != 0"><uni-icons :type="isPrice == 1 ? 'arrowup' : 'arrowdown'"></uni-icons></view>
+							</view>
+						</view>
+					</cell>
+					<cell v-for="(newsitem, index2) in tab.data" :key="newsitem.item_id"><mediaList :options="newsitem" @click="goDetail(newsitem)"></mediaList></cell>
+					<cell class="loading-more" v-if="tab.isLoading || tab.data.length > 4">
+						<text class="loading-more-text">{{ tab.loadingText }}</text>
+					</cell>
+				</list>
+				<!-- #endif -->
+				<!-- #ifndef APP-NVUE -->
+				<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y @scrolltolower="loadMore(index1)">
+					<view v-if="tab.lunbo" style="width: 100%;">
+						<swiper class="lunbo" indicator-dots="true" v-if="set_page.lunbo == 1">
+							<swiper-item v-for="(img, key) in tab.lunbo" style="border-radius: 20upx">
+								<image @tap="lunboClick(img.activityLink)" :src="img.materialLink" style="margin: auto; display: flex;height: 100%;width: 100%;" />
+								<!-- <image @tap="lunboClick(img.get_url)" :src="img.pic" style="margin: auto;display: flex;height: 100%;width: 100%;" /> -->
+							</swiper-item>
+						</swiper>
+						<view class="tab-grid uni-flex uni-row" v-if="set_page.tab_grid == 1">
+							<view class="grid-item-first uni-flex uni-column" @click="tabClick(item)" style="" v-for="(item, index) in tabBars[0].childTabs">
+								<image class="tabImg" :src="item.image"></image>
+								<text style="text-align: center;font-size: 30rpx;">{{ item.text }}</text>
+							</view>
+						</view>
+					</view>
+					<view v-else>
+						<view class="tab-grid uni-flex uni-row" v-if="set_page.tab_grid == 1">
+							<view class="grid-item uni-flex uni-column" @click="tabClick(item)" style="" v-for="(item, index) in tabBars[index1].childTabs">
+								<image class="tabImg" :src="item.image"></image>
+								<text style="text-align: center;font-size: 30rpx;">{{ item.text }}</text>
+							</view>
+						</view>
+					</view>
+					<view v-if="tab.lunbo">
+						<view style="height: 80px;"><image src="../../static/tab/tab_head.png" style="height: 160upx;" mode="aspectFit"></image></view>
+						<view class="activify" v-if="set_page.active == 1">
+							<view class="item" v-for="(item,index) in tab.activity" @tap="pthd(item.activityLink)">
+								<image class="activify_img" :src="item.materialLink" mode=""></image>
+							</view>
+							<!-- <view class="uni-flex uni-row">
+								<view class="item" @tap="pthd(tab.activity[0].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[0].materialLink" mode=""></image>
+								</view>
+								<view class="item" @tap="pthd(tab.activity[1].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[1].materialLink" mode=""></image>
+								</view>
+							</view>
+							<view class="uni-flex uni-row">
+								<view class="item" @tap="pthd(tab.activity[2].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[2].materialLink" mode=""></image>
+								</view>
+								<view class="item" @tap="pthd(tab.activity[3].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[3].materialLink" mode=""></image>
+								</view>
+							</view>
+							<view class="uni-flex uni-row bottom">
+								<view class="item" @tap="pthd(tab.activity[2].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[4].materialLink" mode=""></image>
+								</view>
+								<view class="item" @tap="pthd(tab.activity[3].activityLink)" style="-webkit-flex: 1;flex: 1;">
+									<image class="activify_img" :src="tab.activity[5].materialLink" mode=""></image>
+								</view>
+							</view> -->
+						</view>
+					</view>
+					<view :class="['screen-wrap', { fixed: sortTabFixed }, { fixed: tabIndex == -1 }]">
+						<view class="jg-wrap" :class="{ on: isDefault }" @tap="screentap('')">
+							<text style="font-size: 28upx;">{{ tab.sort[0] }}</text>
+						</view>
+						<view class="jg-wrap" @tap="screentap('total_sales')">
+							<text :class="{ on: isTotal_sales != 0 }" style="font-size: 28upx;">{{ tab.sort[1] }}</text>
+							<view class="jgicon uni-flex uni-column" v-if="isTotal_sales != 0"><uni-icons :type="isTotal_sales == 1 ? 'arrowup' : 'arrowdown'"></uni-icons></view>
+						</view>
+						<view class="jg-wrap" @tap="screentap('tk_rate')">
+							<text :class="{ on: isTk_rate != 0 }" style="font-size: 28upx;">{{ tab.sort[2] }}</text>
+							<view class="jgicon uni-flex uni-column" v-if="isTk_rate != 0"><uni-icons :type="isTk_rate == 1 ? 'arrowup' : 'arrowdown'"></uni-icons></view>
+						</view>
+						<view class="jg-wrap" @tap="screentap('price')">
+							<text :class="{ on: isPrice != 0 }" style="font-size: 28upx;">{{ tab.sort[3] }}</text>
+							<view class="jgicon uni-flex uni-column" v-if="isPrice != 0"><uni-icons :type="isPrice == 1 ? 'arrowup' : 'arrowdown'"></uni-icons></view>
+						</view>
+					</view>
+					<view v-for="(newsitem, index2) in tab.data" :key="newsitem.id"><mediaList :options="newsitem" @click="goDetail(newsitem)"></mediaList></view>
+					<view class="loading-more" v-if="tab.isLoading || tab.data.length > 4">
+						<text class="loading-more-text">{{ tab.loadingText }}</text>
+					</view>
+				</scroll-view>
+				<!-- #endif -->
+			</swiper-item>
+		</swiper>
+		<!-- #ifdef APP-PLUS -->
+		<view v-if="!user.pid" class="uni-flex uni-row flex-row" style="display: flex;justify-content: center;position: fixed;bottom: 20upx;width: 750rpx;">
+			<view style="background-color: rgba(0, 0, 0, 0.5);border-radius: 20upx;padding: 20upx;" @tap="tbsq">
+				<text style="color: white;">未淘宝授权(一键授权)</text>
+			</view>
+		</view>
+		<!-- #endif -->
+		<!-- #ifndef APP-PLUS -->
+		<view v-if="!user.pid" class="uni-flex uni-row flex-row" style="display: flex;justify-content: center;position: fixed;bottom: 100upx;width: 750rpx;">
+			<view style="background-color: rgba(0, 0, 0, 0.5);border-radius: 20upx;padding: 20upx;" @tap="tbsq">
+				<text style="color: white;text-align: center;">未淘宝授权(一键授权)</text>
+			</view>
+		</view>
+		<!-- #endif -->
+		<uni-popup class="tab_popup" ref="showpopup" :type="type" @change="change" style="">
+			<view class="tab_more" style="background-color: white;">
+				<view class="tab_head"><view class="title" style="padding: 20upx;">全部频道</view></view>
+				<view class="tab_body flex-row uni-flex uni-row">
+					<view
+						class="item"
+						v-for="(item, index) in tabBars"
+						style="width: 187.5rpx;
+		padding: 10upx;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;"
+						@click="tab_more(index)"
+					>
+						<image class="tabImg" :src="item.childTabs[0].image" mode=""></image>
+						<text style="text-align: center;font-size: 30rpx;">{{ item.name }}</text>
+					</view>
+				</view>
+			</view>
+		</uni-popup>
+	</view>
+</template>
+<script>
+import mediaList from '@/components/mediaList.vue';
+import uniIcons from '@/components/uni-icons/uni-icons.vue';
+import { getGoodsList } from '@/api/goods.js';
+import { get_tb_topic_list, get_tab_goods } from '@/api/fp_page.js';
+import { getUserInfo, getUserinit } from '@/api/user.js';
+import { set_page } from '@/api/set_page.js';
+// 缓存每页最多
+const MAX_CACHE_DATA = 100;
+// 缓存页签数量
+const MAX_CACHE_PAGE = 3;
+let newsData = [];
+export default {
+	data() {
+		return {
+			currentH: uni.getSystemInfoSync().screenHeight,
+			user: null,
+			statusBarH: 20,
+			isDefault: true, //默认排序
+			isTotal_sales: 0, //销量排序
+			isTk_rate: 0, //佣金排序
+			isPrice: 0, //价格排序
+			sortTabFixed: false,
+			unreadcount: 0,
+			statusBarH: 20,
+			set_page: {
+				lunbo: 1,
+				tab_grid: 1,
+				active: 1,
+				tbjx: 1
+			},
+			tab_more_flag: false, //更多选项是否打开
+			tabbars_more_item: '', //全部频道的选中项
+			type: '', //弹出popup类型
+			list: [],
+			tabCur: 0,
+			mainCur: 0,
+			verticalNavTop: 0,
+			load: true,
+			newsList: [],
+			cacheTab: [],
+			tabIndex: 0,
+			tabBars: [
+				{
+					name: '首页',
+					id: 'sy',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/tabbar01_01.png',
+							text: '9.9元'
+						},
+						{
+							image: '/static/tab/tabbar01_02.png',
+							text: '19.9元'
+						},
+						{
+							image: '/static/tab/tabbar01_03.png',
+							text: '高佣金'
+						},
+						{
+							image: '/static/tab/tabbar01_04.png',
+							text: '秒杀榜'
+						},
+						{
+							image: '/static/tab/tabbar01_05.png',
+							text: '淘抢购'
+						},
+						{
+							image: '/static/tab/tabbar01_06.png',
+							text: '聚划算'
+						},
+						{
+							image: '/static/tab/tabbar01_07.png',
+							text: '美食街'
+						},
+						{
+							image: '/static/tab/tabbar01_08.png',
+							text: '生活购'
+						},
+						{
+							image: '/static/tab/tabbar01_09.png',
+							text: '食品'
+						},
+						{
+							image: '/static/tab/tabbar01_10.png',
+							text: '高佣商品'
+						}
+					]
+				},
+				{
+					name: '母婴',
+					id: 'my',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/muying/1.png',
+							text: '孕产用品'
+						},
+						{
+							image: '/static/tab/v_1/muying/2.png',
+							text: '尿不湿'
+						},
+						{
+							image: '/static/tab/v_1/muying/3.png',
+							text: '玩具图书'
+						},
+						{
+							image: '/static/tab/v_1/muying/4.png',
+							text: '婴童用品'
+						},
+						{
+							image: '/static/tab/v_1/muying/5.png',
+							text: '奶粉辅食'
+						},
+						{
+							image: '/static/tab/v_1/muying/6.png',
+							text: '奶瓶奶嘴'
+						},
+						{
+							image: '/static/tab/v_1/muying/7.png',
+							text: '婴童床品'
+						},
+						{
+							image: '/static/tab/v_1/muying/8.png',
+							text: '童装童鞋'
+						}
+					]
+				},
+				{
+					name: '美食',
+					id: 'ms',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/meishi/1.png',
+							text: '休闲食品'
+						},
+						{
+							image: '/static/tab/v_1/meishi/2.png',
+							text: '坚果蜜饯'
+						},
+						{
+							image: '/static/tab/v_1/meishi/3.png',
+							text: '饼干糕点'
+						},
+						{
+							image: '/static/tab/v_1/meishi/4.png',
+							text: '茶酒冲饮'
+						},
+						{
+							image: '/static/tab/v_1/meishi/5.png',
+							text: '蔬菜熟食/蛋类'
+						},
+						{
+							image: '/static/tab/v_1/meishi/6.png',
+							text: '粮油调料'
+						},
+						{
+							image: '/static/tab/v_1/meishi/7.png',
+							text: '保健滋补'
+						},
+						{
+							image: '/static/tab/v_1/meishi/8.png',
+							text: '肉脯卤味'
+						}
+					]
+				},
+				{
+					name: '女装',
+					id: 'nz',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/nvzhuang/1.png',
+							text: '裙子'
+						},
+						{
+							image: '/static/tab/v_1/nvzhuang/2.png',
+							text: 'T恤'
+						},
+						{
+							image: '/static/tab/v_1/nvzhuang/3.png',
+							text: '衬衫'
+						},
+						{
+							image: '/static/tab/v_1/nvzhuang/4.png',
+							text: '裤子'
+						},
+						{
+							image: '/static/tab/v_1/nvzhuang/5.png',
+							text: '外套'
+						},
+						{
+							image: '/static/tab/v_1/nvzhuang/6.png',
+							text: '背心吊带'
+						},
+						{
+							image: '/static/tab/v_1/nvzhuang/7.png',
+							text: '卫衣'
+						},
+						{
+							image: '/static/tab/v_1/nvzhuang/8.png',
+							text: '蕾丝衫/雪纺衫'
+						}
+					]
+				},
+				{
+					name: '美妆',
+					id: 'mz',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/meizhuang/1.png',
+							text: '卸妆洁面'
+						},
+						{
+							image: '/static/tab/v_1/meizhuang/2.png',
+							text: '面膜'
+						},
+						{
+							image: '/static/tab/v_1/meizhuang/3.png',
+							text: '底妆'
+						},
+						{
+							image: '/static/tab/v_1/meizhuang/4.png',
+							text: '唇妆香水'
+						},
+						{
+							image: '/static/tab/v_1/meizhuang/5.png',
+							text: '洗护用品'
+						},
+						{
+							image: '/static/tab/v_1/meizhuang/6.png',
+							text: '口腔护理'
+						},
+						{
+							image: '/static/tab/v_1/meizhuang/7.png',
+							text: '美发护发'
+						},
+						{
+							image: '/static/tab/v_1/meizhuang/8.png',
+							text: '个护用品'
+						}
+					]
+				},
+				{
+					name: '内衣',
+					id: 'ny',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/neiyi/1.png',
+							text: '内裤'
+						},
+						{
+							image: '/static/tab/v_1/neiyi/2.png',
+							text: '文胸'
+						},
+						{
+							image: '/static/tab/v_1/neiyi/3.png',
+							text: '文胸套装'
+						},
+						{
+							image: '/static/tab/v_1/neiyi/4.png',
+							text: '保暖内衣'
+						},
+						{
+							image: '/static/tab/v_1/neiyi/5.png',
+							text: '袜子'
+						},
+						{
+							image: '/static/tab/v_1/neiyi/6.png',
+							text: '睡衣/家具服'
+						},
+						{
+							image: '/static/tab/v_1/neiyi/7.png',
+							text: '朔身衣'
+						},
+						{
+							image: '/static/tab/v_1/neiyi/8.png',
+							text: '基础打底'
+						}
+					]
+				},
+				{
+					name: '百货',
+					id: 'bh',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/baihuo/1.png',
+							text: '清洁用品'
+						},
+						{
+							image: '/static/tab/v_1/baihuo/2.png',
+							text: '床上用品'
+						},
+						{
+							image: '/static/tab/v_1/baihuo/3.png',
+							text: '家具饰品'
+						},
+						{
+							image: '/static/tab/v_1/baihuo/4.png',
+							text: '餐厨用具'
+						},
+						{
+							image: '/static/tab/v_1/baihuo/5.png',
+							text: '收纳储物'
+						},
+						{
+							image: '/static/tab/v_1/baihuo/6.png',
+							text: '绿植花卉'
+						},
+						{
+							image: '/static/tab/v_1/baihuo/7.png',
+							text: '家具日用'
+						},
+						{
+							image: '/static/tab/v_1/baihuo/8.png',
+							text: '文体车品'
+						}
+					]
+				},
+				{
+					name: '鞋包',
+					id: 'xbps',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/xiebao/1.png',
+							text: '女鞋'
+						},
+						{
+							image: '/static/tab/v_1/xiebao/2.png',
+							text: '男鞋'
+						},
+						{
+							image: '/static/tab/v_1/xiebao/3.png',
+							text: '女包/男包'
+						},
+						{
+							image: '/static/tab/v_1/xiebao/4.png',
+							text: '箱包配件'
+						},
+						{
+							image: '/static/tab/v_1/xiebao/5.png',
+							text: '穿戴用品'
+						},
+						{
+							image: '/static/tab/v_1/xiebao/6.png',
+							text: '手表'
+						},
+						{
+							image: '/static/tab/v_1/xiebao/7.png',
+							text: '潮流饰品'
+						},
+						{
+							image: '/static/tab/v_1/xiebao/8.png',
+							text: '珠宝首饰'
+						}
+					]
+				},
+				{
+					name: '家电',
+					id: 'smjd',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/jiadian/1.png',
+							text: '电子产品/数码'
+						},
+						{
+							image: '/static/tab/v_1/jiadian/2.png',
+							text: '手机壳/手机膜'
+						},
+						{
+							image: '/static/tab/v_1/jiadian/3.png',
+							text: '智能设备'
+						},
+						{
+							image: '/static/tab/v_1/jiadian/4.png',
+							text: '数码配件'
+						},
+						{
+							image: '/static/tab/v_1/jiadian/5.png',
+							text: '影音电器'
+						},
+						{
+							image: '/static/tab/v_1/jiadian/6.png',
+							text: '生活电器'
+						},
+						{
+							image: '/static/tab/v_1/jiadian/7.png',
+							text: '厨房电器'
+						},
+						{
+							image: '/static/tab/v_1/jiadian/8.png',
+							text: '大家电'
+						}
+					]
+				},
+				{
+					name: '男装',
+					id: 'lz',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/nanzhuang/1.png',
+							text: 'Polo衫'
+						},
+						{
+							image: '/static/tab/v_1/nanzhuang/2.png',
+							text: 'T恤'
+						},
+						{
+							image: '/static/tab/v_1/nanzhuang/3.png',
+							text: '衬衫'
+						},
+						{
+							image: '/static/tab/v_1/nanzhuang/4.png',
+							text: '卫衣'
+						},
+						{
+							image: '/static/tab/v_1/nanzhuang/5.png',
+							text: '短裤'
+						},
+						{
+							image: '/static/tab/v_1/nanzhuang/6.png',
+							text: '牛仔裤'
+						},
+						{
+							image: '/static/tab/v_1/nanzhuang/7.png',
+							text: '休闲裤'
+						},
+						{
+							image: '/static/tab/v_1/nanzhuang/8.png',
+							text: '休闲套装'
+						}
+					]
+				},
+				{
+					name: '运动',
+					id: 'sp',
+					addGoodsFlag: false,
+					sorts: {
+						isDefault: true,
+						isTotal_sales: 0,
+						isTk_rate: 0,
+						isPrice: 0
+					},
+					childTabs: [
+						{
+							image: '/static/tab/v_1/yundong/1.png',
+							text: '瑜伽'
+						},
+						{
+							image: '/static/tab/v_1/yundong/2.png',
+							text: '游泳'
+						},
+						{
+							image: '/static/tab/v_1/yundong/3.png',
+							text: '球类运动'
+						},
+						{
+							image: '/static/tab/v_1/yundong/4.png',
+							text: '运动鞋'
+						},
+						{
+							image: '/static/tab/v_1/yundong/5.png',
+							text: '运动服装'
+						},
+						{
+							image: '/static/tab/v_1/yundong/6.png',
+							text: '运动包/配件'
+						},
+						{
+							image: '/static/tab/v_1/yundong/7.png',
+							text: '骑行装备'
+						},
+						{
+							image: '/static/tab/v_1/yundong/8.png',
+							text: '户外/登山'
+						}
+					]
+				}
+			],
+			scrollInto: '',
+			showTips: false,
+			navigateFlag: false,
+			pulling: false,
+			refreshIcon:
+				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg=='
+		};
+	},
+	onShow() {
+		this.tabIndex = 0; //回到主页
+		this.getUser();
+		set_page.first_page().then(res => {
+			console.log(res);
+			let d = res.data.result;
+			this.set_page.lunbo = d.lunbo;
+			this.set_page.tab_grid = d.tab_grid;
+			this.set_page.active = d.active;
+			this.set_page.tbjx = d.tbjx;
+		});
+	},
+	created() {
+		this.user = uni.getStorageSync('user');
+		// #ifdef APP-PLUS
+		if (plus.navigator.isImmersedStatusbar()) {
+			console.log(plus.navigator.getStatusbarHeight());
+			this.statusBarH = plus.navigator.getStatusbarHeight();
+		}
+		// #endif
+	},
+	components: {
+		uniIcons,
+		mediaList
+	},
+	onReady() {
+		//当前页数初始化
+		for (let i = 0; i < this.tabBars.length; i++) {
+			this.tabBars[i].page = 0;
+		}
+		setTimeout(() => {
+			this.tabBars.forEach(tabBar => {
+				this.newsList.push({
+					data: [],
+					sort: [],
+					isLoading: false,
+					refreshText: '',
+					loadingText: '加载更多...'
+				});
+			});
+			this.getList(0);
+		}, 1050);
+		console.log(this.user);
+		// Store.search({
+		// 	keyWords: '巧克力',
+		// }).then(res => {
+		// 	console.log(res);
+		// })
+	},
+	onBackPress() {
+		this.$refs['showpopup'].close();
+	},
+	methods: {
+		getList(index) {
+			let activeTab = this.newsList[index];
+			let data = {};
+			data = {
+				page: this.tabBars[index].page,
+				type: this.tabBars[index].name
+			};
+			if (index == 0) {
+				console.log(index);
+				Promise.all([
+					get_tb_topic_list({
+						cid: this.user.pid
+					}),
+					get_tab_goods(data)
+				]).then(res => {
+					// console.log(JSON.stringify(res));
+					activeTab.lunbo = JSON.parse(res[0]).data;
+					activeTab.activity = JSON.parse(res[0]).data;
+					console.log(activeTab.activity);
+					activeTab.shouye = true;
+					activeTab.sort = ['默认', '销量', '佣金', '价格'];
+					activeTab.tabbar = this.tabBars[index].childTabs;
+					activeTab.data = activeTab.data.concat(res[1].data.res);
+					this.tabBars[index].page++;
+				});
+			} else {
+				console.log(index);
+				getGoodsList(data).then(res => {
+					console.log(Array.isArray(res.result));
+					activeTab.sort = ['默认', '销量', '佣金', '价格'];
+					activeTab.tabbar = this.tabBars[index].childTabs;
+					activeTab.data = activeTab.data.concat(res.result);
+					this.tabBars[index].page++;
+					if (!Array.isArray(res.result)) {
+						getGoodsList(data).then(res => {
+							console.log(res.result.isArray());
+							activeTab.data = activeTab.data.concat(res.result);
+						});
+					}
+				});
+			}
+		},
+		goDetail(e) {
+			if (!this.user) {
+				uni.showToast({
+					title: '未登录!',
+					icon: 'none'
+				});
+				return;
+			}
+			console.log(this.user.pid);
+			if(this.user.pid == ''){
+				uni.showToast({
+					title: '未授权!',
+					icon: 'none'
+				});
+				return;
+			}
+			if (this.navigateFlag) {
+				return;
+			}
+			this.navigateFlag = true;
+			console.log(e);
+			// #ifdef APP-PLUS
+			uni.navigateTo({
+				url: `/pages/common/goods-detail?id=${e.item_id}`
+			});
+			// #endif
+			setTimeout(() => {
+				this.navigateFlag = false;
+			}, 200);
+		},
+		close(index1, index2) {
+			uni.showModal({
+				content: '是否删除本条信息？',
+				success: res => {
+					if (res.confirm) {
+						this.newsList[index1].data.splice(index2, 1);
+					}
+				}
+			});
+		},
+		loadMore(e) {
+			setTimeout(() => {
+				// this.getList(this.tabIndex);
+				console.log(this.tabIndex);
+				let activeTab = this.newsList[this.tabIndex];
+				let data = {};
+				data = {
+					page: this.tabBars[this.tabIndex].page,
+					type: this.tabBars[this.tabIndex].name,
+					sort: this.tabBars[this.tabIndex].sort
+				};
+				console.log(data);
+				if (this.tabIndex == 0) {
+					get_tab_goods(data).then(res => {
+						console.log(JSON.stringify(res.data.res));
+						activeTab.data = activeTab.data.concat(res.data.res);
+						this.tabBars[this.tabIndex].page++;
+					});
+				} else {
+					getGoodsList(data).then(res => {
+						activeTab.data = activeTab.data.concat(res.result);
+						this.tabBars[this.tabIndex].page++;
+						// console.log(this.newsList);
+					});
+				}
+			}, 500);
+		},
+		ontabtap(e) {
+			let index = e.target.dataset.current || e.currentTarget.dataset.current;
+			this.switchTab(index);
+		},
+		ontabchange(e) {
+			let index = e.target.current || e.detail.current;
+			this.switchTab(index);
+		},
+		switchTab(index) {
+			if (this.newsList[index].data.length === 0) {
+				this.getList(index);
+			}
+
+			if (this.tabIndex === index) {
+				return;
+			}
+
+			// 缓存 tabId
+			if (this.newsList[this.tabIndex].data.length > MAX_CACHE_DATA) {
+				let isExist = this.cacheTab.indexOf(this.tabIndex);
+				if (isExist < 0) {
+					this.cacheTab.push(this.tabIndex);
+					//console.log("cache index:: " + this.tabIndex);
+				}
+			}
+
+			this.tabIndex = index;
+			this.scrollInto = this.tabBars[index].id;
+
+			// 释放 tabId
+			if (this.cacheTab.length > MAX_CACHE_PAGE) {
+				let cacheIndex = this.cacheTab[0];
+				this.clearTabData(cacheIndex);
+				this.cacheTab.splice(0, 1);
+				//console.log("remove cache index:: " + cacheIndex);
+			}
+		},
+		clearTabData(e) {
+			this.newsList[e].data.length = 0;
+			this.newsList[e].loadingText = '加载更多...';
+		},
+		refreshData() {
+			this.newsList[this.tabIndex].data = [];
+			this.getList(this.tabIndex);
+		},
+		onrefresh(e) {
+			var tab = this.newsList[this.tabIndex];
+			if (!tab.refreshFlag) {
+				return;
+			}
+			tab.refreshing = true;
+			tab.refreshText = '正在刷新...';
+
+			setTimeout(() => {
+				this.refreshData();
+				this.pulling = true;
+				tab.refreshing = false;
+				tab.refreshFlag = false;
+				tab.refreshText = '已刷新';
+				setTimeout(() => {
+					// TODO fix ios和Android 动画时间相反问题
+					this.pulling = false;
+				}, 500);
+			}, 2000);
+		},
+		onpullingdown(e) {
+			var tab = this.newsList[this.tabIndex];
+			if (tab.refreshing || this.pulling) {
+				return;
+			}
+			if (Math.abs(e.pullingDistance) > Math.abs(e.viewHeight)) {
+				tab.refreshFlag = true;
+				tab.refreshText = '释放立即刷新';
+			} else {
+				tab.refreshFlag = false;
+				tab.refreshText = '下拉可以刷新';
+			}
+		},
+		newGuid() {
+			let s4 = function() {
+				return ((65536 * (1 + Math.random())) | 0).toString(16).substring(1);
+			};
+			return (s4() + s4() + '-' + s4() + '-4' + s4().substr(0, 3) + '-' + s4() + '-' + s4() + s4() + s4()).toUpperCase();
+		},
+		screentap(sortType) {
+			if (sortType == '') {
+				this.isDefault = true;
+				this.isTotal_sales = 0;
+				this.isTk_rate = 0;
+				this.isPrice = 0;
+				this._getGoodsList({
+					sorts: sortType
+				});
+			} else if (sortType == 'total_sales') {
+				this.isDefault = false;
+				this.isTk_rate = 0;
+				this.isPrice = 0;
+				if (this.isTotal_sales == 0 || this.isTotal_sales == 1) {
+					this._getGoodsList({
+						sorts: sortType + '_des'
+					});
+					this.isTotal_sales = 2;
+				} else if (this.isTotal_sales == 2) {
+					this._getGoodsList({
+						sorts: sortType + '_asc'
+					});
+					this.isTotal_sales = 1;
+				}
+			} else if (sortType == 'tk_rate') {
+				this.isDefault = false;
+				this.isTotal_sales = 0;
+				this.isPrice = 0;
+				if (this.isTk_rate == 0 || this.isTk_rate == 1) {
+					this._getGoodsList({
+						sorts: sortType + '_des'
+					});
+					this.isTk_rate = 2;
+				} else {
+					this._getGoodsList({
+						sorts: sortType + '_asc'
+					});
+					this.isTk_rate = 1;
+				}
+			} else if (sortType == 'price') {
+				this.isDefault = false;
+				this.isTotal_sales = 0;
+				this.isTk_rate = 0;
+				if (this.isPrice == 0 || this.isPrice == 1) {
+					this._getGoodsList({
+						sorts: sortType + '_des'
+					});
+					this.isPrice = 2;
+				} else {
+					this._getGoodsList({
+						sorts: sortType + '_asc'
+					});
+					this.isPrice = 1;
+				}
+			}
+		},
+		_getGoodsList(obj) {
+			console.log(this.tabIndex);
+			console.log(obj);
+			let activeTab = this.newsList[this.tabIndex];
+			let data = {};
+			if (obj.sorts != this.tabBars[this.tabIndex].sort) {
+				this.tabBars[this.tabIndex].page = 0;
+			}
+			data = {
+				page: this.tabBars[this.tabIndex].page,
+				type: this.tabBars[this.tabIndex].name,
+				sort: this.tabBars[this.tabIndex].sort || obj.sorts
+			};
+			console.log(data);
+			if (this.tabIndex == 0) {
+				get_tab_goods(data).then(res => {
+					console.log(JSON.stringify(res.data.res));
+					if (obj.sorts != this.tabBars[this.tabIndex].sort) {
+						activeTab.data = res.data.res;
+						this.tabBars[this.tabIndex].page = 0;
+					}
+					this.tabBars[this.tabIndex].sort = obj.sorts;
+					activeTab.data = activeTab.data.concat(res.data.res);
+					this.tabBars[this.tabIndex].page++;
+				});
+			} else {
+				getGoodsList(data).then(res => {
+					if (obj.sorts != this.tabBars[this.tabIndex].sort) {
+						activeTab.data = res.result;
+						this.tabBars[this.tabIndex].page = 0;
+					}
+					this.tabBars[this.tabIndex].sort = obj.sorts;
+					activeTab.data = activeTab.data.concat(res.result);
+					this.tabBars[this.tabIndex].page++;
+					// console.log(this.newsList);
+				});
+			}
+		},
+		tbsq() {
+			const bcPlugin = uni.requireNativePlugin('dahui-alibaichuan');
+			bcPlugin.BCAuth(result => {
+				//code == 0 ,msg:授权成功  ； code==-1  ,msg:报错信息
+				var url =
+					'https://oauth.taobao.com/authorize?response_type=code&client_id=25901417&redirect_uri=' +
+					'http://39.108.215.49:8009/html/code.html&state=' +
+					this.user.phone +
+					'&view=wap';
+				bcPlugin.BCGetCoupons(url, result => {
+					console.log('授权成功!');
+				});
+			});
+		},
+		getUser() {
+			let ret = getUserInfo(uni.getStorageSync('user').phone);
+			let ret1 = getUserinit(uni.getStorageSync('user').phone);
+			ret1.then(res => {
+				console.log('用户信息', res);
+				this.unreadcount = res.result.unreadcount;
+			});
+			ret.then(res => {
+				if (res.code == 100) {
+					uni.showToast({
+						title: '初始化用户信息失败',
+						icon: 'none'
+					});
+					return;
+				} else {
+					uni.setStorageSync('user', res.result);
+					this.user = uni.getStorageSync('user');
+					//初始化用户信息
+					let data = res.result;
+				}
+			});
+		},
+		pthd(link) {
+			uni.showLoading({
+				title: '正在加载...'
+			});
+			plus.webview.create(link);
+			setTimeout(() => {
+				uni.hideLoading();
+			}, 3000);
+		},
+		lunboClick(link) {
+			uni.showLoading({
+				title: '正在加载...'
+			});
+			plus.webview.create(link);
+			setTimeout(() => {
+				uni.hideLoading();
+			}, 3000);
+		},
+		//点击头部按钮
+		infoClick() {
+			console.log(11);
+			uni.navigateTo({
+				url: '/pages/user/board'
+			});
+		},
+		searchClick() {
+			uni.navigateTo({
+				url: '/pages/common/search',
+				animationType: 'fade-in'
+			});
+		},
+		tab_more(index) {
+			this.tabIndex = index;
+			this.switchTab(index);
+			this.$refs['showpopup'].close();
+		},
+		tabClick(item) {
+			let that = this;
+			//不是第一页的时候tabar结构不一样所以分不同逻辑
+			let type = item.text;
+			if (that.tabBars[that.tabIndex].name == '女装') {
+				type += '女';
+			} else if (that.tabBars[that.tabIndex].name == '男装') {
+				type += '男';
+			}
+			uni.navigateTo({
+				url: `/pages/tabPage/tabGoods?type=${type}`
+			});
+		},
+		togglePopup() {
+			uni.navigateTo({
+				url: '/pages/index/tab_more'
+			});
+			// this.type = type
+			// this.$nextTick(() => {
+			// 	this.$refs['show' + open].open()
+			// })
+		},
+		cancel(type) {
+			this.$refs['show' + type].close();
+		},
+		change(e) {
+			console.log('是否打开:' + e.show);
+		}
+	}
+};
+</script>
+
+<style>
+uni-page-head .uni-page-head {
+	background-color: #000000;
+	height: 40upx;
+}
+.logo {
+	width: 60upx;
+	height: 60upx;
+	border-radius: 60upx;
+	/* position: absolute;
+	left: 50upx;
+	top: 60upx; */
+}
+.screen-wrap {
+	height: 60upx;
+	width: 750rpx;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	padding: 20upx 0;
+	background: #fff;
+}
+
+.jg-wrap {
+	/* #ifdef APP-PLUS */
+	width: 100%;
+	/* #endif */
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.activify {
+	background-color: #cf3c32;
+	padding: 10upx;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.activify .item {
+	width: 48%;
+	height: 200rpx;
+	margin: 5rpx;
+}
+
+.activify_img {
+	width: 360rpx;
+	height: 200rpx;
+	/* #ifdef APP-PLUS */
+	width: 355rpx;
+	margin: 5rpx 5rpx;
+	/* #endif */
+	border-radius: 10upx;
+}
+
+.tbsq {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 750rpx;
+	display: flex;
+	flex-direction: row;
+}
+
+.tbsq > view {
+	text-align: center;
+	border-radius: 20upx;
+	padding: 20upx;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff0f6;
+	width: 600rpx;
+}
+
+.tab_more {
+}
+
+.tab_head .title {
+	padding: 20upx;
+}
+
+.tab_body .item {
+	width: 250rpx;
+	padding: 10upx;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tab_body {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.tab-grid {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.grid-item-first {
+	width: 140rpx;
+	height: 160rpx;
+	padding: 10upx;
+	align-items: center;
+	justify-content: center;
+}
+
+.grid-item {
+	width: 160rpx;
+	height: 160rpx;
+	padding: 10upx;
+	align-items: center;
+	justify-content: center;
+}
+
+.tabImg {
+	height: 100upx;
+	width: 100upx;
+}
+
+.tabbar {
+	position: relative;
+}
+
+.tab-more-btn {
+	font-weight: bold;
+	position: fixed;
+	height: 80rpx;
+	top: 180rpx;
+	/* #ifdef APP-PLUS */
+	top: 220rpx;
+	/* #endif */
+	right: -4upx;
+	padding: 0 20upx;
+	background-color: #ea4d3e;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.lunbo {
+	margin: 20upx;
+}
+
+.uni-input-placeholder {
+	color: white;
+	font-size: 30rpx;
+}
+
+.head .title,
+.search {
+	width: 100%;
+	text-align: center;
+	color: white;
+	font-size: 30rpx;
+}
+
+.head {
+	width: 100%;
+	flex-direction: row;
+	justify-content: center;
+	position: relative;
+}
+
+.search-container {
+	justify-content: space-between;
+	align-items: center;
+	background-color: #ea4d3e;
+	position: relative;
+	height: 180rpx;
+	/* #ifdef APP-PLUS */
+	height: 220rpx;
+	/* #endif */
+}
+
+/* #ifndef APP-PLUS */
+page {
+	width: 100%;
+	min-height: 100%;
+	display: flex;
+}
+
+/* #endif */
+
+.tabs {
+	flex: 1;
+	flex-direction: column;
+	overflow: hidden;
+	background-color: #ffffff;
+	/* #ifdef MP-ALIPAY || MP-BAIDU */
+	height: 100vh;
+	/* #endif */
+	position: relative;
+}
+
+.scroll-h {
+	position: relative;
+	background-color: #ea4d3e;
+	width: 750rpx;
+	height: 80rpx;
+	flex-direction: row;
+	/* #ifndef APP-PLUS */
+	white-space: nowrap;
+	/* #endif */
+	padding-right: 60rpx;
+}
+
+.uni-tab-item {
+	height: 80rpx;
+	/* #ifndef APP-PLUS */
+	display: inline-block;
+	/* #endif */
+	flex-wrap: nowrap;
+	padding: 0 32upx;
+}
+
+.uni-tab-item-title {
+	color: #fff;
+	font-size: 30rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	flex-wrap: nowrap;
+	/* #ifndef APP-PLUS */
+	white-space: nowrap;
+	/* #endif */
+}
+
+.uni-tab-item-title-active {
+	color: #ffe292;
+}
+
+.swiper-box {
+	flex: 1;
+}
+
+.swiper-item {
+	flex: 1;
+	flex-direction: column;
+	overflow: scroll;
+}
+
+.scroll-v {
+	flex: 1;
+	/* #ifndef MP-ALIPAY */
+	flex-direction: column;
+	/* #endif */
+	width: 750rpx;
+}
+
+.update-tips {
+	position: absolute;
+	left: 0;
+	top: 41px;
+	right: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #fddd9b;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.update-tips-text {
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.refresh {
+	width: 750rpx;
+	height: 64px;
+	justify-content: center;
+	background-color: white;
+}
+
+.refresh-view {
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.refresh-icon {
+	width: 30px;
+	height: 30px;
+	transition-duration: 0.5s;
+	transition-property: transform;
+	transform: rotate(0deg);
+	transform-origin: 15px 15px;
+}
+
+.refresh-icon-active {
+	transform: rotate(180deg);
+}
+
+.loading-icon {
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+	color: #999999;
+}
+
+.loading-text {
+	margin-left: 2px;
+	font-size: 16px;
+	color: #999999;
+}
+
+.loading-more {
+	align-items: center;
+	justify-content: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+.loading-more-text {
+	font-size: 28rpx;
+	color: #999;
+}
+</style>

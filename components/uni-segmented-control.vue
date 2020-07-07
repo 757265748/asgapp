@@ -3,13 +3,13 @@
 		<view v-for="(item, index) in values" :class="[{ text: styleType === 'text' }, { active: index === currentIndex }]" :key="index" :style="{
         color:
           index === currentIndex
-            ? styleType === 'text'
+            ? styleType === 'button'
               ? activeColor
               : '#fff'
-            : styleType === 'text'
-              ? '#000'
+            : styleType === 'button'
+              ? '#333'
               : activeColor,
-        backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : ''
+        backgroundColor: index === currentIndex && styleType === 'button' ? activeBack : ''
       }" class="segmented-control-item" @click="_onClick(index)">
 			{{ item }}
 		</view>
@@ -31,6 +31,10 @@
 				}
 			},
 			activeColor: {
+				type: String,
+				default: '#007aff'
+			},
+			activeBack: {
 				type: String,
 				default: '#007aff'
 			},

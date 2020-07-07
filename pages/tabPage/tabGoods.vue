@@ -24,7 +24,7 @@
 		<view class="uni-tab-bar">
 			<scroll-view class="list" scroll-y @scroll="scroll" @scrolltolower="loadMore" @touchstart="touchmove($event)">
 				<block v-for="(newsitem,index2) in newsitems" :key="index2">
-					<media-list :options="newsitem"></media-list>
+					<media-list :options="newsitem" @click="goDetail(newsitem)"></media-list>
 				</block>
 				<uni-load-more class="loadMore" :loadingType="loadingType"></uni-load-more>
 				<go-top v-if="toTop" @goTop="goTop"></go-top>
@@ -116,6 +116,11 @@
 			})
 		},
 		methods: {
+			goDetail(e) {
+				uni.navigateTo({
+					url: `/pages/common/goods-detail?id=${e.item_id}`
+				});
+			},
 			scroll(e) {},
 			touchmove(e) {
 				console.log(uni.getStorageSync("nextPage" + this.type));
@@ -293,6 +298,9 @@
 </script>
 
 <style lang="less" scoped>
+	.uni-icon{
+		font-size: .8rem;
+	}
 	.fixed {
 		position: fixed;
 		z-index: 9;
@@ -301,7 +309,7 @@
 
 	// 条件筛选
 	.screen-wrap {
-		height: 30upx;
+		height: 60upx;
 		width: 100%;
 		display: flex;
 		flex-direction: row;

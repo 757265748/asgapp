@@ -1,0 +1,14 @@
+.content.data-v-0089e118 {
+  text-align: center;
+  height: 400rpx;
+}
+.logo.data-v-0089e118 {
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 200rpx;
+}
+.title.data-v-0089e118 {
+  font-size: 36rpx;
+  color: #8f8f94;
+}
+

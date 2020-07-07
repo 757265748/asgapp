@@ -57,29 +57,46 @@
 		</view>
 		<view class="foot">
 			<button type="primary" size="mini" @tap="copykey('wa');">复制分享文案</button>
-			<button type="primary" size="mini" @click="togglePopup('bottom-share')">分享图片</button>
+			<button type="primary" size="mini" @click="togglePopup('bottom', 'share')">分享图片</button>
 		</view>
-		<uni-popup :show="type === 'bottom-share'" style="z-index: 9999;" position="bottom" @hidePopup="togglePopup('')">
-			<view style="display: block;">
-				<view class="bottom-title">分享到</view>
-				<view class="bottom-content">
-					<view v-for="(item, index) in bottomData" :key="index" class="bottom-content-box">
-						<view @tap="share(item.text)">
-							<view :class="item.name" class="bottom-content-image">
-								<text class="icon">{{ item.icon }}</text>
-							</view>
-							<view class="bottom-content-text">{{ item.text }}</view>
+		<uni-popup ref="showshare" :type="type" @change="change">
+			<view class="uni-share">
+				<text class="uni-share-title">分享到</text>
+				<view class="uni-share-content">
+					<view v-for="(item, index) in bottomData" :key="index" class="uni-share-content-box" @tap="share(item.text)">
+						<view class="uni-share-content-image">
+							<image :src="item.icon" class="content-image" mode="widthFix" />
 						</view>
+						<text class="uni-share-content-text">{{ item.text }}</text>
 					</view>
 				</view>
-				<view class="bottom-btn" @click="togglePopup('')">取消分享</view>
+				<text class="uni-share-btn" @click="cancel('share')">取消分享</text>
 			</view>
 		</uni-popup>
 	</view>
 </template>
 
 <script>
-	import uniPopup from '@/components/uni-popup.vue'
+	function dateFormat(fmt, date) {
+		let ret;
+		const opt = {
+			"Y+": date.getFullYear().toString(), // 年
+			"m+": (date.getMonth() + 1).toString(), // 月
+			"d+": date.getDate().toString(), // 日
+			"H+": date.getHours().toString(), // 时
+			"M+": date.getMinutes().toString(), // 分
+			"S+": date.getSeconds().toString() // 秒
+			// 有其他格式化字符需求可以继续添加，必须转化成字符串
+		};
+		for (let k in opt) {
+			ret = new RegExp("(" + k + ")").exec(fmt);
+			if (ret) {
+				fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+			};
+		};
+		return fmt;
+	}
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import downloader from '@/common/js/img-downloader.js';
 	import {addSendCircle,sendCircleExisit,shareCount} from '@/api/goods.js'
 	export default {
@@ -91,11 +108,13 @@
 		},
 		onLoad(options) {
 			this.id=options.id;
+			console.log(1111);
+			console.log(uni.getStorageSync("user").invitecode);
 			console.log(options); 
 			this.shares=options;
 			this.shares.small_images=this.shares.small_images.split(",");
 			console.log(this.shares.small_images);
-			console.log("http://39.108.215.49:8009/"+uni.getStorageSync("invitecode")+"/"+uni.getStorageSync("invitecode")+".png");
+			console.log("http://39.108.215.49:8009/"+uni.getStorageSync("user").invitecode+"/"+uni.getStorageSync("user").invitecode+".png");
 			uni.getSystemInfo({
 			　　success: function(res) { // res - 各种参数
 			　　   console.log(res.windowWidth); // 屏幕的宽度 
@@ -106,10 +125,6 @@
 			       }
 			});
 			this.imgs.push(this.shares.imgUrl);
-			// this.shares.imgUrl="http://10.10.10.8:85/SerFile/"+uni.getStorageSync("invitecode")+"/"+uni.getStorageSync("invitecode")+".png"
-			// setTimeout(function(){
-				
-			// },1500)
 		},
 		data() {
 			return {
@@ -120,25 +135,20 @@
 				shareCount:0,
 				shareImg:false,
 				bottomData: [{
-						text: '微信好友',
-						icon: '\ue6a4',
-						name: 'wx'
-					},
-					{
-						text: '朋友圈',
-						icon: '\ue646',
-						name: 'wx'
-					},
-					{
-						text: '发圈',
-						icon: '\ue647',
-						name: 'wx'
-					},
-					// {
-					// 	text: 'QQ好友',
-					// 	icon: '\ue66b',
-					// 	name: 'qq'
-					// },
+							text: '微信好友',
+							icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
+							name: 'wx'
+						},
+						{
+							text: '朋友圈',
+							icon: '../../static/share/pyq.png',
+							name: 'pyq'
+						},
+						{
+							text: '发圈',
+							icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-4.png',
+							name: 'fq'
+						}
 				],
 				tklShow:false,
 				syShow:false,
@@ -150,6 +160,7 @@
 		},
 		onBackPress(e) {
 			uni.setStorageSync("webview",true);//从webview返回时  取缓存值的标记
+			this.$refs['showshare'].close()
 			// uni.navigateTo({
 			// 	url:'/pages/common/goods-detail?id='+this.id
 			// })
@@ -183,8 +194,18 @@
 					}
 				}
 			},
-			togglePopup(type) {
+			togglePopup(type,open) {
+				console.log(type);
 				this.type = type;
+				this.$nextTick(() => {
+					this.$refs['show' + open].open()
+				})
+			},
+			cancel(type) {
+				this.$refs['show' + type].close()
+			},
+			change(e) {
+				console.log('是否打开:' + e.show)
 			},
 			//复制淘口令
 			copykey(type) {
@@ -290,6 +311,8 @@
 													// 	}
 													// });
 												plus.runtime.openURL(`weixin://`);
+												that.shareAdd++; //页面分享次数+1
+												that.sendCircle(); //数据库分享次数更新
 												that.type = ''; //还原底部
 											} else {
 												that.type = ''; //还原底部
@@ -322,51 +345,13 @@
 				}
 			},
 			share(value) {
+				// #ifdef APP-PLUS
 				uni.showLoading({
 					title:'请稍等...',
 					mask:true
 				})
+				// #endif
 				let that = this;
-				// if(this.imgs.length>=1){
-				// 	for (var item in this.imgs) {
-				// 		let promise = downloader.load(this.imgs[item], item); //下载
-				// 		if(item>=this.imgs.length){
-				// 			promise.then(([err, res])=>{                 //下载结果
-				// 			    console.log(err, res);                   // err 和 res 只会有一个存在，另一个为null  
-				// 				// #ifdef APP-PLUS
-				// 				if(res.errMsg=="saveImageToPhotosAlbum:ok"){
-				// 					uni.showModal({
-				// 						content:"图片已保存至手机图库\n文案已自动复制",
-				// 						showCancel:true,
-				// 						confirmText:"打开微信",
-				// 						success(res) {
-				// 							if(res.confirm){
-				// 								console.log("weixin");
-				// 								location="weixin://"
-				// 							}
-				// 						}
-				// 					})
-				// 				}
-				// 				// #endif
-				// 				// #ifdef H5
-				// 				if(res.statusCode==200){
-				// 					uni.showModal({
-				// 						content:"图片已保存至手机图库\n文案已自动复制",
-				// 						showCancel:true,
-				// 						confirmText:"打开微信",
-				// 						success(res) {
-				// 							if(res.confirm){
-				// 								location="weixin://"
-				// 							}
-				// 						}
-				// 					})
-				// 				}
-				// 				// #endif
-				// 			});
-				// 		}
-				// 	}
-				// 	return; 
-				// }
 				if(value=="微信好友"){
 					// this.saveImg('WXSceneSession',0);
 					
@@ -394,23 +379,42 @@
 					// });
 					that.type='';//还原底部
 					uni.share({
-						provider: "weixin",
-						scene: "WXSceneSession",
-						type: 0,
-						href: this.shares.item_url,
-						title: this.shares.title,
-						summary: this.shares.item_description,
-						imageUrl: this.shares.imgUrl,
-						success: function(res) {
-							console.log("success:" + JSON.stringify(res));
-						},
-						fail: function(err) {
-							console.log("fail:" + JSON.stringify(err));
-						},
+					    provider: "weixin",
+					    scene: "WXSceneSession",
+					    type: 2,
+					    imageUrl: this.shares.imgUrl,
+					    success: function (res) {
+					        console.log("success:" + JSON.stringify(res));
+							that.shareAdd++; //页面分享次数+1
+							that.sendCircle(); //数据库分享次数更新
+					    },
+					    fail: function (err) {
+					        console.log("fail:" + JSON.stringify(err));
+					    },
 						complete() {
 							uni.hideLoading();
 						}
 					});
+					// uni.share({
+					// 	provider: "weixin",
+					// 	scene: "WXSceneSession",
+					// 	type: 0,
+					// 	href: this.shares.item_url,
+					// 	title: this.shares.title,
+					// 	summary: this.shares.item_description,
+					// 	imageUrl: this.shares.imgUrl,
+					// 	success: function(res) {
+					// 		console.log("success:" + JSON.stringify(res));
+					// 		that.shareAdd++; //页面分享次数+1
+					// 		that.sendCircle(); //数据库分享次数更新
+					// 	},
+					// 	fail: function(err) {
+					// 		console.log("fail:" + JSON.stringify(err));
+					// 	},
+					// 	complete() {
+					// 		uni.hideLoading();
+					// 	}
+					// });
 				}else if(value=="朋友圈"){
 					this.saveImg('WXSenceTimeline',0);
 					// let promise = downloader.load(this.shares.imgUrl, 'image'); //下载
@@ -490,6 +494,7 @@
 								};
 								imgs.push(o);
 							}
+							//发圈临时数据
 							let send_circle_goods={
 								title:this.shares.title,
 								pict_url:this.shares.pict_url,
@@ -502,7 +507,10 @@
 								comment:this.shares.copykey,
 								invitecode:this.shares.invitecode,
 								short_url:this.shares.short_url,
-								yj:this.shares.yj
+								yj:this.shares.yj,
+								create_date:'刚刚',
+								create_user:uni.getStorageSync("user").username,
+								create_user_sex:uni.getStorageSync("user").sex
 							}
 							console.log(send_circle_goods);
 							uni.setStorageSync("send_circle",send_circle_goods);
@@ -519,7 +527,10 @@
 								invitecode:this.shares.invitecode,
 								short_url:this.shares.short_url,
 								description:this.shares.description,
-								yj:this.shares.yj
+								yj:this.shares.yj,
+								create_date:dateFormat('YYYY-mm-dd HH:MM:SS',new Date()),
+								create_user:uni.getStorageSync("user").username,
+								create_user_sex:uni.getStorageSync("user").sex,
 							}).then(res=>{
 								console.log(res);
 								if(res.data.code==200){
@@ -537,6 +548,77 @@
 </script>
 
 <style scoped lang="less">
+	/* 底部分享 */
+	.uni-share {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		flex-direction: column;
+		/* #endif */
+		background-color: #fff;
+	}
+	
+	.uni-share-title {
+		line-height: 60rpx;
+		font-size: 24rpx;
+		padding: 15rpx 0;
+		text-align: center;
+	}
+	
+	.uni-share-content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		padding: 15px;
+	}
+	
+	.uni-share-content-box {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		align-items: center;
+		width: 200rpx;
+	}
+	
+	.uni-share-content-image {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 60rpx;
+		height: 60rpx;
+		overflow: hidden;
+		border-radius: 10rpx;
+	}
+	
+	.content-image {
+		width: 60rpx;
+		height: 60rpx;
+	}
+	
+	.uni-share-content-text {
+		font-size: 26rpx;
+		color: #333;
+		padding-top: 5px;
+		padding-bottom: 10px;
+	}
+	
+	.uni-share-btn {
+		height: 90rpx;
+		line-height: 90rpx;
+		font-size: 14px;
+		border-top-color: #f5f5f5;
+		border-top-width: 1px;
+		border-top-style: solid;
+		text-align: center;
+		color: #666;
+	}
+	// -------
 	.imgChecked{
 		position: absolute;
 		left: 0;

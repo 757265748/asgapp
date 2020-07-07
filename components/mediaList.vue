@@ -1,80 +1,50 @@
 <template>
-	<view class="view">
-		<!-- 除第一页商品展示 tabgoods商品id为num_iid-->
-		<view class="list-cell" v-if="tab==-1" hover-class="uni-list-cell-hover" @click="godetail(options.item_id||options.num_iid,options.pict_url)">
-			<view class="media-list goods-wrap" v-if="options.title">
-				<view class="view goodsList">
-					<view class="goods-img">
-						<image class="img" :src="options.pict_url" mode=""></image>
-					</view>
-				</view>
-				<view class="desc">
-					<view class="shop-title">
-						<!-- #ifdef APP-PLUS -->
-						<image class="logo" mode="aspectFit" :src="logo"></image>
-						<!-- #endif -->
-						<view class="txt">{{options.title}}</view>
-					</view>
-					<view class="shop-desc">
-						<!-- <view class="price-wrap" v-if="!isgood"> -->
-						<view class="price-wrap">
-							<view class="price">
-								<view class="original">原价￥{{options.zk_final_price}}</view>
-								<view class="present">￥{{qhj}}</view>
-							</view><!-- zk_final_price -->
-							<!-- #ifdef APP-PLUS -->
-							<view class="yj">预估佣金￥{{yj}}</view>
-							<!-- #endif -->
+	<!-- remove list-cell layer fix android 4.x overflow limit error: 28 layers! -->
+	<!-- <view class="list-cell view" @click="click"></view> -->
+	<view class="media-item view" hover-class="media-item-hover" @click="bindClick">
+		<!-- <view class="view" :style="newsitem.article_type === 2 ? 'flex-direction: row';" :class="{'media-image-right': newsitem.article_type === 2, 'media-image-left': newsitem.article_type === 1}"> -->
+		<!-- TODO 在支付宝小程序下 需要用 style 覆盖标签的默认样式 -->
+		<view class="view" style="display: flex; flex-direction: row;align-items: center;">
+			<view class="mainPic">
+				<image :src="options.pict_url" class="pic image-list3" mode="aspectFill"></image>
+			</view>
+			<view class="uni-flex uni-column goods_info">
+				<view>
+					<view class="info-text" style="width:490rpx;">
+						<text style="font-size: 28upx;font-weight: bold;">{{options.title}}</text>
+						<view class="flex-row" style="align-items: center;">
+							<image src="../static/shop_icon.png" style="width: 40upx;height: 40upx;padding-right: 10upx;" mode=""></image>
+							<text style="font-size: 28upx;">{{options.shop_title}}</text>
 						</view>
-						<view class="coupon-wrap">
-							<view class="num">{{options.volume}}人已购</view>
-							<view class="value">
-								<view class="v_l"></view>
-								{{options.youhuiquan||0}}元
-								<view class="v_r"></view>
-							</view>
+					</view>
+					<view class="qh flex-row" style="font-size: 30upx;align-items: center;font-weight: bold;">
+						<text style="font-size: 16px;line-height: 1rem;color: #A71E1C;">￥</text>
+						<text style="font-size: 16px;line-height: 1rem;color: #A71E1C;">{{qhj}}</text>
+						<text style="font-size: 24upx;line-height:30upx;color: #A71E1C;">券后</text>
+					</view>
+					<view class="flex-row center">
+						<view class="info-text flex-row" style="align-items: center;">
+							<text style="font-size: 28upx;">原价￥</text>
+							<text class="qh_price" style="text-decoration: line-through;padding-left: 10upx;font-size: 28upx;">{{options.zk_final_price}}</text>
+						</view>
+						<view class="info-text quan uni-flex" style="background-color: #FBDDA3;justify-content: center;align-items: center;">
+							<text style="font-size: 24upx;color: #836424;text-align: center">{{options.youhuiquan||0}}元券</text>
+						</view>
+					</view>
+					<view class="bottom">
+						<view class="info-text yj uni-flex" style="background-color: #FBE9EB;justify-content: center;align-items: center;">
+							<view class="l"></view>
+							<view class="r"></view>
+							<text style="font-size: 24upx;line-height: 24upx;color: #A71E1C;">你能赚￥{{yj}}</text>
+						</view>
+						<view class="info-text sale flex-row">
+							<text style="color: #776140;font-size: 30upx;" class="sale_count">{{options.volume}}人已购</text>
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view v-else>
-			<!-- 第一页商品展示 -->
-			<view v-if="tab==0" class="list-cell" hover-class="uni-list-cell-hover" @click="godetail(options.num_iid,'ztk')">
-				<view class="media-list goods-wrap">
-					<view class="view goodsList">
-						<view class="goods-img">
-							<image class="img" :src="options.pict_url" mode=""></image>
-						</view>
-					</view>
-					<view class="desc">
-						<view class="shop-title">
-							<!-- #ifdef APP-PLUS -->
-							<image class="logo" mode="aspectFit" :src="logo"></image>
-							<!-- #endif -->
-							<view class="txt">{{options.title}}</view>
-						</view>
-						<view class="shop-desc">
-							<view class="price-wrap">
-								<view class="price">
-									<view class="original">原价￥{{options.zk_final_price}}</view>
-									<!-- #ifdef APP-PLUS -->
-									<view class="present">￥{{qhj}}</view>
-									<!-- #endif -->
-								</view>
-								<!-- #ifdef APP-PLUS -->
-								<view class="yj">预估佣金￥{{options.yj}}</view>
-								<!-- #endif -->
-							</view>
-							<view class="coupon-wrap">
-								<view class="num">{{options.volume}}人已购</view>
-								<view class="value">{{options.youhuiquan}}元</view>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
+		<view class="media-item-line" style="position: absolute;"></view>
 	</view>
 </template>
 
@@ -140,121 +110,122 @@
 	}
 </script>
 
-<style lang="less" scoped>
-	.goods-wrap {
+<style>
+	.center{
+		justify-content: space-between;
 		display: flex;
 		flex-direction: row;
+	}
+	.info-text{
+		margin: 10rpx 0;
+	}
+	.sale_count {
+		padding-left: 10upx;
+	}
+	
+	.sale {
+		padding: 10rpx 20rpx;
+		font-size: 1.2rem;
+		background-color: #fae9cf;
+		border-radius: 6upx;
+		color: #776140 !important;
+		height: 50rpx;
+		line-height: 32rpx;
+	}
+	
+	.bottom {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 		align-items: center;
-		justify-content: flex-start;
-		flex-wrap: nowrap;
-		width: calc(100% - 40upx);
-		padding: 0 20upx;
-		border-bottom: 1upx solid #f8f8f8;
-
-		.goods-img {
-			width: 300upx;
-			border-radius: 20upx;
-
-			.img {
-				width: 280upx;
-				height: 280upx;
-				padding: 10upx;
-				border-radius: 20upx;
-			}
-		}
-
-		.desc {
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			height: calc(320upx - 20upx);
-			padding: 10upx 0;
-			width: 100%;
-			white-space: normal;
-			line-height: 1.8;
-
-			.shop-title {
-				display: flex;
-				flex-direction: row;
-
-				.logo {
-					width: 50upx;
-					height: 50upx;
-					margin-right: 10upx;
-				}
-
-				.txt {
-					font-size: 25upx;
-					font-weight: 600;
-				}
-			}
-
-			.shop-desc {
-
-				.price-wrap {
-					display: flex;
-					flex-direction: row;
-					justify-content: space-between;
-					align-items: center;
-
-					.price {
-						display: flex;
-						flex-direction: row;
-						justify-content: flex-start;
-						align-items: center;
-					}
-
-					.present {
-						font-size: 26upx;
-						font-weight: 500;
-						color: #ce0000;
-					}
-
-					.yj {
-						font-size: 20upx;
-						color: #FF0000;
-					}
-
-					.original {
-						text-decoration: line-through;
-						color: #555555;
-						font-size: 20upx;
-					}
-				}
-
-				.coupon-wrap {
-					display: flex;
-					flex-direction: row;
-					justify-content: space-between;
-					align-items: center;
-
-					.num {
-						color: #555555;
-						font-size: 20upx;
-					}
-
-					.value {
-						background: #FBCF78;
-						background: linear-gradient(to left,#f5c15b,#ffd788);
-						border-radius: 10upx;
-						// border-style: dotted;
-						font-size: 24upx;
-						font-weight: 500;
-						padding: 0upx 30upx;
-						color: #AA7D20;
-						display: flex;
-						flex-direction: row;
-						justify-content: space-between;
-					}
-					.value view{
-						border-radius: 1rem;
-						width: 10upx;
-						height: 10upx;
-						background-color: white;
-						position: relative;
-					}
-				}
-			}
-		}
+	}
+	
+	.quan .l {
+		left: -8rpx;
+	}
+	
+	.quan .r {
+		right: -8rpx;
+	}
+	
+	.quan .l,
+	.quan .r {
+		position: absolute;
+		top: 16rpx;
+		background-color: white;
+		width: 16rpx;
+		height: 16rpx;
+		border-radius: 16rpx;
+	}
+	
+	
+	.quan,.yj {
+		height: 50rpx;
+		text-align: center;
+		padding: 6upx 20upx;
+		line-height: 50rpx;
+		border-radius: 6upx;
+		color: #B85C59 !important;
+		font-weight: bold;
+	}
+	
+	.qh {
+		color: #F0AD4E !important;
+	}
+	
+	.qh .qh_price {
+		color: #D33839;
+		font-weight: bold;
+		padding: 0 10upx;
+	}
+	
+	.twoHour {
+		text-align: center;
+	}
+	
+	.twoHour_count {
+		color: #D7442D !important;
+		font-size: 1rem;
+		font-weight: normal;
+		padding: 0 10upx;
+		display: inline-block;
+	}
+	
+	.goods_info {
+		margin-left: 20upx;
+	}
+	
+	.mainPic {
+		box-sizing: border-box;
+	}
+	
+	.pic {
+		width: 200rpx;
+		height: 250rpx;
+		border-radius: 10upx;
+	}
+	
+	.view {
+		flex-direction: column;
+	}
+	
+	.flex-row {
+		flex-direction: row;
+	}
+	
+	.flex-col {
+		flex-direction: column;
+	}
+	
+	.media-item {
+		border-radius: 20upx;
+		position: relative;
+		flex: 1;
+		flex-direction: column;
+		border-bottom-width: 1rpx;
+		border-bottom-style: solid;
+		border-bottom-color: #ebebeb;
+		margin: 10rpx 20rpx;
+		background-color: #fff;
 	}
 </style>

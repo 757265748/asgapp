@@ -14,6 +14,31 @@ export function excute_set_info(data) {
 		})
 	})
 }
+export function insert_opinion(data) {
+	console.log(data);
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: `${BASE_URL}/api/get/user/insert_opinion`,
+			method: "get",
+			header: {
+				'content-header': 'application/json'
+			},
+			data: {
+				content: data.content,
+				create_date: data.create_date,
+				create_user:data.create_user,
+				imgs:data.imgs
+			},
+			success: (res) => {
+				console.log(res);
+				resolve(res.data);
+			},
+			fail: (err) => {
+				console.log('ERROR_MSG', err)
+			}
+		});
+	})
+}
 export function set_info(data) {
 	console.log(data);
 	return new Promise((resolve, reject) => {

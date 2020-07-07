@@ -1,0 +1,14 @@
+.content.data-v-89f4d146 {
+  text-align: center;
+  height: 400rpx;
+}
+.logo.data-v-89f4d146 {
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 200rpx;
+}
+.title.data-v-89f4d146 {
+  font-size: 36rpx;
+  color: #8f8f94;
+}
+

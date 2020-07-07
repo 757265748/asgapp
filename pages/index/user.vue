@@ -1,25 +1,28 @@
 <template>
-	<view class="page" style="overflow: hidden;">
-		<view class="head uni-flex uni-row">
-			<view class="head_title flex_4">我的</view>
-			<view class="setIcon flex_1" @tap="edit_info">
+	<view class="page" style="overflow: hidden;" v-if="user">
+		<view class="head uni-flex uni-row" :style="{'padding-top':statusBarH+'px'}">
+			<!-- <view class="setIcon flex_1" @tap="edit_info">
 				<view class="uni-icon uni-icon-gear"></view>
-			</view>
-		</view>
-		<view class="userInfo uni-media-list">
-			<view class="uni-media-list-logo">
-				<image :src="user.avatar" @tap="edit_info"></image>
-			</view>
-			<view class="uni-media-list-body">
-				<view class="uni-media-list-text-top uni-flex uni-row between">
-					<view>
-						<text @tap="edit_info">{{user.username||0}}</text>
-						<text @tap="edit_info" v-show="user.TeamType==0" class="userType">{{user_data?user_data.jurisdictionA:''}}</text>
-						<text @tap="edit_info" v-show="user.TeamType==1" class="userType">创始会员</text>
+			</view> -->
+			<view class="uni-media-list-text-top uni-flex uni-row between">
+				<view class="uni-flex uni-row user_info">
+					<view class="uni-media-list-logo">
+						<image :src="user.avatar||'../../static/logoB.png'" @tap="edit_info"></image>
 					</view>
-					<view class="" style="text-decoration: underline;"  @tap="team_list" v-show="user.TeamQX==1">团员列表</view>
+					<view class="uni-flex uni-column" style="flex: 3;">
+						<view class="text">
+							<text @tap="edit_info" class="username">{{user.username||0}}</text>
+							<view class="userType">
+								<text @tap="edit_info" v-show="user.TeamType==0" class="">{{user_data?user_data.jurisdictionA:'游客'}}</text>
+								<text @tap="edit_info" v-show="user.TeamType==1" class="specialType">创始会员</text>
+							</view>
+						</view>
+						<view @tap="copykey(user_data.InviteCode||'')" class="inviteCode">
+							<text>邀请ID:{{user_data?user_data.InviteCode:'00000000'}}</text>
+						</view>
+					</view>
 				</view>
-				<view @tap="copykey(user_data.InviteCode||'')" class="uni-media-list-text-bottom uni-ellipsis">邀请ID:{{user_data?user_data.InviteCode:0}}</view>
+				<view class="teamList" style="flex: 2;" @tap="team_list" v-show="user.TeamQX==1">团员列表</view>
 			</view>
 		</view>
 		<view class="yj">
@@ -27,38 +30,38 @@
 				<view></view>
 				<view class="yj1">
 					<view class="title">累计总收入(元)</view>
-					<text>{{user_data?user_data.CommissionTotal:0}}</text>
+					<text>{{user_data?user_data.CommissionTotal:'0.00'}}</text>
 				</view>
 				<view></view>
 			</view>
 			<view class="column2">
 				<view class="yj1">
 					<view class="title">本月预估总收入</view>
-					<text>{{user_data?user_data.CommissionAllMonth:0}}</text>
+					<text>{{user_data?user_data.CommissionAllMonth:'0.00'}}</text>
 				</view>
 				<view></view>
 				<view class="yj1">
 					<view class="title">今天预估收入</view>
-					<text>{{user_data?user_data.CommissionAllDay:0}}</text>
+					<text>{{user_data?user_data.CommissionAllDay:'0.00'}}</text>
 				</view>
 			</view>
 		</view>
 		<view class="sy uni-flex uni-row">
-			<view class="uni-flex uni-column">
-				<img :src="headIcon" alt="" @tap="orderDetail(1)">
+			<view class="content uni-flex uni-column">
+				<image src='../../static/user/tab_1.png' alt="" @tap="orderDetail(1)"></image>
 				<text>我的收益</text>
 			</view>
-			<view class="uni-flex uni-column" @tap="orderDetail(2)">
-				<img :src="headIcon" alt="">
-				<text>订单明细</text>
+			<view class="content uni-flex uni-column">
+				<image src='../../static/user/tab_2.png' alt="" @tap="orderDetail(2)">
+					<text>订单明细</text>
 			</view>
-			<view class="uni-flex uni-column" @tap="orderDetail(3)">
-				<img :src="headIcon" alt="">
-				<text>我的团队</text>
+			<view class="content uni-flex uni-column">
+				<image src='../../static/user/tab_3.png' alt="" @tap="orderDetail(3)">
+					<text>我的团队</text>
 			</view>
-			<view class="uni-flex uni-column" @tap="orderDetail(4)">
-				<img :src="headIcon" alt="">
-				<text>邀请好友</text>
+			<view class="content uni-flex uni-column">
+				<image src='../../static/user/tab_4.png' alt="" @tap="orderDetail(4)">
+					<text>邀请好友</text>
 			</view>
 		</view>
 		<view class="page2">
@@ -73,16 +76,16 @@
 				</swiper>
 			</view>
 			<view class="syData">
-				<view class="title uni-flex uni-row">
+				<view class="syData_head title uni-flex uni-row">
 					<view class="title">收益数据</view>
 					<view class="more" @tap="moreData">更多数据&gt;&gt;</view>
 				</view>
 				<view>
-					<view class="uni-padding-wrap" style="border-bottom: 1px solid #ccc;width: 90%;">
+					<view class="uni-padding-wrap" style="border-bottom: 1px solid #ccc;width: 100%;">
 						<uni-segmented-control :current="current" :values="items" :style-type="styleType" :active-color="activeColor"
 						 @clickItem="onClickItem" />
 					</view>
-					<view class="uni-flex uni-row title2">
+					<view class="uni-flex uni-row title2" style="margin-top: 20upx;">
 						<view><text>今日预估</text></view>
 						<view>
 							<text>今日粉丝</text>
@@ -108,59 +111,59 @@
 					</view>
 				</view>
 			</view>
-			<view class="hyzx" v-show="pdd==1||jd==1||gfwx==1">
-				<view class="title uni-list-cell">会员中心</view>
+			<!-- <view class="hyzx" v-show="pdd==1||jd==1||gfwx==1">
+				<view class="hyzx_head uni-list-cell">会员中心</view>
 				<view class="content uni-flex uni-row">
 					<view class="uni-flex uni-column" v-show="pdd==1">
-						<img :src="headIcon" alt="">
+						<image :src="headIcon" alt="">
 						<text>拼多多小程序</text>
 					</view>
 					<view class="uni-flex uni-column" v-show="jd==1">
-						<img :src="headIcon" alt="">
+						<image :src="headIcon" alt="">
 						<text>京东小程序</text>
 					</view>
 					<view class="uni-flex uni-column" v-show="gfwx==1">
-						<img :src="headIcon" alt="">
+						<image :src="headIcon" alt="">
 						<text>官方微信</text>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			<view class="other" v-show="otherService">
 				<view class="title">其他服务</view>
 				<view class="content uni-flex uni-row">
-					<view v-show="xsjc==1">
-						<img :src="headIcon" alt="">
+					<view v-show="xsjc==1" @tap="tabBtmLink('newbie_tutorial')">
+						<image src="../../static/user/newbie_tutorial.png" mode=""></image>
 						<view>新手教程</view>
 					</view>
-					<view v-show="cjwt==1">
-						<img :src="headIcon" alt="">
+					<view v-show="cjwt==1" @tap="tabBtmLink('common_problem')">
+						<image src="../../static/user/question.png" mode=""></image>
 						<view>常见问题</view>
 					</view>
-					<view v-show="zhds==1">
-						<img :src="headIcon" alt="">
-						<view>智慧大师</view>
+					<view v-show="zhds==1" @tap="tabBtmLink('order_get')">
+						<image src="../../static/user/zhdd.png" mode=""></image>
+						<view>订单找回</view>
 					</view>
-					<view v-show="collect==1">
-						<img :src="headIcon" alt="">
+					<view v-show="collect==1" @tap="tabBtmLink('collect')">
+						<image src="../../static/user/collect.png" mode=""></image>
 						<view>收藏夹</view>
 					</view>
 				</view>
 				<view class="content2 uni-flex uni-row">
-					<view v-show="dtwl==1">
-						<img :src="headIcon" alt="">
-						<view>地推物料</view>
+					<view v-show="dtwl==1" @tap="tabBtmLink('push')">
+						<image src="../../static/user/dtwl.png" alt="">
+							<view>地推物料</view>
 					</view>
-					<view v-show="yjfk==1">
-						<img :src="headIcon" alt="">
+					<view v-show="yjfk==1" @tap="tabBtmLink('opinion')">
+						<image src="../../static/user/feedback.png" mode=""></image>
 						<view>意见反馈</view>
 					</view>
-					<view v-show="aboutWe==1">
-						<img :src="headIcon" alt="">
+					<view v-show="aboutWe==1" @tap="tabBtmLink('about_me')">
+						<image src="../../static/user/about_me.png" mode="aspectFit"></image>
 						<view>关于我们</view>
 					</view>
-					<view v-show="lp==1">
-						<img :src="headIcon" alt="">
-						<view>令牌</view>
+					<view v-show="lp==1" @tap="tabBtmLink('business_cooperation')">
+						<image src="../../static/user/swhz.png" mode="aspectFit"></image>
+						<view>商务合作</view>
 					</view>
 				</view>
 			</view>
@@ -221,11 +224,13 @@
 				user: new Object(),
 				tbsqFlag: uni.getStorageSync("tbsqFlag"),
 				user_data: null, //用户佣金信息返回
+				statusBarH: 0
 			}
 		},
-		computed:{
-			otherService(){
-				let flag = this.xsjc==0&&this.cjwt==0&&this.zhds==0&&this.collect==0&&this.dtwl==0&&this.yjfk==0&&this.aboutWe==0&&this.lp==0?false:true;
+		computed: {
+			otherService() {
+				let flag = this.xsjc == 0 && this.cjwt == 0 && this.zhds == 0 && this.collect == 0 && this.dtwl == 0 && this.yjfk ==
+					0 && this.aboutWe == 0 && this.lp == 0 ? false : true;
 				return flag;
 			}
 		},
@@ -243,6 +248,13 @@
 			uni.stopPullDownRefresh();
 		},
 		onLoad() {
+			this.user = uni.getStorageSync('user');
+			// #ifdef APP-PLUS
+			if (plus.navigator.isImmersedStatusbar()) {
+				console.log(plus.navigator.getStatusbarHeight());
+				this.statusBarH = plus.navigator.getStatusbarHeight();
+			}
+			// #endif
 			// console.log(uni.getStorageSync('user'));
 			// tx_zfb({
 			// 	alipay:'13008847296',
@@ -263,41 +275,87 @@
 			// this.getData(); //再次获取授权信息  避免授权之后  界面未更新
 		},
 		methods: {
-			copykey(){
-				
+			tabBtmLink(type) {
+				console.log(type);
+				switch (type) {
+					case 'newbie_tutorial':
+						uni.navigateTo({
+							url: '/pages/user/newbie_tutorial'
+						})
+						break;
+					case 'common_problem':
+						uni.navigateTo({
+							url: '/pages/user/common_problem'
+						})
+						break;
+					case 'about_me':
+						uni.navigateTo({
+							url: '/pages/user/about_me'
+						})
+						break;
+					case 'business_cooperation':
+						uni.navigateTo({
+							url: '/pages/user/business_cooperation'
+						})
+						break;
+					case 'order_get':
+						uni.navigateTo({
+							// url: '/pages/user/order_get'
+							url: '/pages/user/order_get'
+						})
+						break;
+					case 'opinion':
+						uni.navigateTo({
+							url: '/pages/user/opinion'
+						})
+						break;
+					case 'collect':
+						uni.navigateTo({
+							url: '/pages/index/collection'
+						})
+						break;
+					case 'push':
+						uni.navigateTo({
+							url: '/pages/user/push'
+						})
+						break;
+				}
 			},
-			team_list(){
+			copykey() {
+
+			},
+			team_list() {
 				uni.navigateTo({
-					url:'/pages/user/team_list'
+					url: '/pages/user/team_list'
 				})
 			},
-			moreData(){
+			moreData() {
 				uni.navigateTo({
-					url:'/pages/user/revenue'
+					url: '/pages/user/revenue'
 				})
 			},
-			orderDetail(index){
-				switch(index){
+			orderDetail(index) {
+				switch (index) {
 					case 1:
 						uni.navigateTo({
-							url:'/pages/user/revenue'
+							url: '/pages/user/revenue'
 						})
-					break;
+						break;
 					case 2:
 						uni.navigateTo({
-							url:'/pages/user/board'
+							url: '/pages/user/board'
 						})
-					break;
+						break;
 					case 3:
 						uni.navigateTo({
-							url:'/pages/user/my_team'
+							url: '/pages/user/my_team'
 						})
-					break;
+						break;
 					case 4:
 						uni.navigateTo({
-							url:'/pages/user/invite_friend'
+							url: '/pages/user/invite_friend'
 						})
-					break;
+						break;
 				}
 			},
 			onClickItem(index) {
@@ -360,24 +418,24 @@
 			},
 			getCommission() {
 				getnowbalance({
-					pid:this.user.pid
+					pid: this.user.pid
 				}).then(res => {
 					console.log(res);
 				})
 			},
 			getUser() {
-				set_page.my_page().then(res=>{
-					this.pdd=res.data.result.pdd;
-					this.jd=res.data.result.jd;
-					this.gfwx=res.data.result.gfwx;
-					this.xsjc=res.data.result.xsjc;
-					this.cjwt=res.data.result.cjwt;
-					this.zhds=res.data.result.zhds;
-					this.collect=res.data.result.collect;
-					this.dtwl=res.data.result.dtwl;
-					this.yjfk=res.data.result.yjfk;
-					this.aboutWe=res.data.result.aboutWe;
-					this.lp=res.data.result.lp;
+				set_page.my_page().then(res => {
+					this.pdd = res.data.result.pdd;
+					this.jd = res.data.result.jd;
+					this.gfwx = res.data.result.gfwx;
+					this.xsjc = res.data.result.xsjc;
+					this.cjwt = res.data.result.cjwt;
+					this.zhds = res.data.result.zhds;
+					this.collect = res.data.result.collect;
+					this.dtwl = res.data.result.dtwl;
+					this.yjfk = res.data.result.yjfk;
+					this.aboutWe = res.data.result.aboutWe;
+					this.lp = res.data.result.lp;
 					console.log(res);
 				})
 				console.log(uni.getStorageSync('user'));
@@ -489,31 +547,97 @@
 </script>
 
 <style lang="less">
-	.setIcon{
+	.syData_head view {}
+
+	.syData_head {
+		font-weight: bold;
+	}
+
+	.inviteCode {
+		color: #FFDAD4;
+		display: flex;
+	}
+
+	.user_info .text {
+		display: flex;
+	}
+
+	.username {
+		font-size: 1rem;
+	}
+
+	.userType {
+		padding: 0upx 10upx;
+		height: 40upx;
+		line-height: 40upx;
+		background-color: #990000;
+		font-size: 0.5rem;
+		color: white;
+		border-radius: 10upx;
+	}
+
+	.uni-media-list-logo image {
+		border: 5upx solid #FF8768;
+		border-radius: 150upx;
+	}
+
+	.uni-media-list-logo {
+		width: 120upx;
+		height: 120upx;
+	}
+
+	.teamList {
+		text-decoration: underline;
+	}
+
+	.teamList,
+	.user_info {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.setIcon {
 		position: absolute;
 		padding: 20upx;
 		right: 0upx
 	}
-	.head{
+
+	.head {
 		align-items: center;
 		justify-content: center;
 		color: white;
 		background: #333;
-		height: 100upx;
+		height: 300upx;
 		text-align: center;
+		background: url(../../static/user/user_head.png);
+		padding: 40upx;
 	}
-	.head_title{
+
+	.head_title {
 		font-size: 32upx;
 	}
+
 	.detail-container {
 		height: 100vh;
 		width: 100%;
 		overflow-x: hidden;
 	}
-	.other .content img,
-	.other .content2 img {
-		width: 100upx;
-		height: 100upx;
+
+	.hyzx .content>view {
+		align-items: center;
+	}
+
+	.sy .content image {
+		width: 70upx;
+		height: 70upx;
+	}
+
+	.hyzx .content image,
+	.other .content image,
+	.other .content2 image {
+		width: 60upx;
+		height: 60upx;
 	}
 
 	.other .content view,
@@ -570,6 +694,7 @@
 	.syData .content {
 		width: 75%;
 		margin: auto;
+		font-weight: bold;
 	}
 
 	.syData .more {
@@ -579,7 +704,7 @@
 	.syData .title2 view {
 		flex: 1;
 		text-align: center;
-		color: #666;
+		color: #b9b9b9;
 	}
 
 	.syData .title2 {
@@ -620,11 +745,13 @@
 
 	.sy {
 		margin-top: 20upx;
+		padding: 20upx;
 		background-color: white;
 	}
 
 	.yj .yj1 text {
 		text-align: center;
+		font-size: 1rem;
 	}
 
 	.yj .yj1 {
@@ -634,20 +761,24 @@
 	.yj {
 		display: flex;
 		flex-direction: column;
-		background-color: #FFD591;
+		background-color: #fff;
 		border-radius: 20upx;
-		margin: -80px 20upx 20upx;
+		margin: -60upx 20upx 20upx;
 	}
 
 	.yj view {
 		display: flex;
 		flex-direction: row;
 		flex: 1;
-		color: #814608;
+		color: #990000;
+	}
+
+	.yj view text {
+		font-weight: bold;
 	}
 
 	.title {
-		padding: 0upx 20upx 10upx;
+		padding: 10upx 10upx;
 	}
 
 	.userInfo image {
@@ -673,7 +804,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 100upx;
+		height: 120upx;
 		text-align: center;
 	}
 </style>

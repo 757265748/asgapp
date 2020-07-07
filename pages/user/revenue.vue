@@ -401,7 +401,7 @@
 	}
 
 	.head {
-		background-color: #333;
+		background-color: #EA4D3E;
 		color: #fff;
 	}
 
